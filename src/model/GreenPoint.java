@@ -11,4 +11,9 @@ public class GreenPoint
     green_pool = 87;
     //something nigga
   }
+
+  public static void main(String[] args)
+  {
+    System.out.println("Kiss");
+  }
 }
