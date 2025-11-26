@@ -15,5 +15,6 @@ public class GreenPoint
   public static void main(String[] args)
   {
     System.out.println("Kiss");
+    System.out.println("balls");
   }
 }
