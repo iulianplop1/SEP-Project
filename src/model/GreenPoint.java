@@ -9,6 +9,6 @@ public class GreenPoint
   }
   public void usepoints(){
     green_pool = 0;
-    //something
+    //something nigga
   }
 }
