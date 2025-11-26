@@ -8,7 +8,7 @@ public class GreenPoint
     green_pool += points;
   }
   public void usepoints(){
-    green_pool = 67;
+    green_pool = 87;
     //something nigga
   }
 }
