@@ -9,7 +9,7 @@ public class GreenPoint
   }
   public void usepoints(){
     green_pool = 87;
-    //something nigga
+    //something nigga nigga push
   }
 
   public static void main(String[] args)
