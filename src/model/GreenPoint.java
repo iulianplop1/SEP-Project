@@ -10,5 +10,6 @@ public class GreenPoint
   public void usepoints(){
     green_pool = 1;
     //something
+    //6 or 7
   }
 }
