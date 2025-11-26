@@ -8,8 +8,8 @@ public class GreenPoint
     green_pool += points;
   }
   public void usepoints(){
-    green_pool = 0;
-    //something
+    green_pool = 87;
+    //something nigga nigga push
   }
 
   public static void main(String[] args)
