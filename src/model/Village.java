@@ -41,4 +41,20 @@ public class Village implements Serializable {
       tradeOffer.finish();
     }
   }
+
+  public int getAveragePoints(){
+    int sum = 0;
+    for(Villager villager : villagers){
+      sum += villager.getPoints();
+    }
+    return sum/villagers.size();
+  }
+
+  public void Reset(){
+    for (Villager villager : villagers) {
+      greenpoints += villager.getPoints();
+      villager.setPoints(0);
+    }
+    System.out.println(villagers);
+  }
 }

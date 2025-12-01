@@ -63,4 +63,9 @@ public class TradeOffer implements Serializable {
       seller.addPoints(this.points);
     }
   }
+
+  public TradeOffer copy(){
+    return new TradeOffer(cloverville, seller, tradename, points);
+  }
+  
 }

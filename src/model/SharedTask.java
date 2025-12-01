@@ -17,3 +17,5 @@ public class SharedTask implements Serializable
 
 
 }
+
+//Bátor here, the villager.isAboveAverage() now works if you need to check with that, village is now also connected to villager as well this way

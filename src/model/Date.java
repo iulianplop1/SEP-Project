@@ -6,33 +6,50 @@ public class Date {
   private int day;
   private int month;
   private int year;
+
   private int period;           //days
   private Date temp;
 
-  public Date() {
-    this.day = today().getDay();
-    this.month = today().getMonth();
-    this.year = today().getYear();
-  }
+  private Village cloverville;
 
-  public Date(int day, int month, int year) {
+  public Date(Village village) {
+    this.cloverville = village;
+    this.day = today(village).getDay();
+    this.month = today(village).getMonth();
+    this.year = today(village).getYear();
+  }
+  public Date(Village village, int day, int month, int year) {
+    this.cloverville = village;
     this.day = day;
     this.month = month;
     this.year = year;
   }
 
-  public Date(Date obj) {
-    this.day = obj.day;
-    this.month = obj.month;
-    this.year = obj.year;
+  public void setPeriod(int period)
+  {
+    this.period = period;
   }
 
-  public static Date today() {
+  public void checkDate(int day, int month, int year) {
+    temp = new Date(cloverville, day, month, year);
+    Date reset = temp.copy();
+    reset.nextDay(period);
+
+    if (today(cloverville).equals(reset)) {
+      cloverville.Reset();
+      System.out.println("today is the day of reset");
+    }
+    else{
+      System.out.println("reset will happen on: " + reset);
+    }
+  }
+
+  public static Date today(Village village) {
     LocalDate currentDate = LocalDate.now();
     int currentDay = currentDate.getDayOfMonth();
     int currentMonth = currentDate.getMonthValue();
     int currentYear = currentDate.getYear();
-    Date today = new Date(currentDay, currentMonth, currentYear);
+    Date today = new Date(village, currentDay, currentMonth, currentYear);
     return today;
   }
 
@@ -54,10 +71,10 @@ public class Date {
   public void setYear(int y) {
     this.year = y;
   }
-  public Date copy() {
-    return new Date(this.day, this.month, this.year);
-  }
 
+  public Date copy() {
+    return new Date(cloverville, day, month, year);
+  }
   public boolean equals(Object obj) {
     if (obj != null && this.getClass() == obj.getClass()) {
       Date other = (Date)obj;
@@ -66,37 +83,6 @@ public class Date {
       return false;
     }
   }
-
-  public boolean isBefore(Date date2) {
-    if (this.year < date2.year) {
-      return true;
-    } else if (this.year > date2.year) {
-      return false;
-    } else if (this.month < date2.month) {
-      return true;
-    } else if (this.month > date2.month) {
-      return false;
-    } else {
-      return this.day < date2.day;
-    }
-  }
-
-//  public void nextDay() {
-//    if (this.month == 12) {
-//      if (this.day < this.dayMonth()) {
-//        ++this.day;
-//      } else {
-//        this.day = 1;
-//        this.month = 1;
-//        ++this.year;
-//      }
-//    } else if (this.day < this.dayMonth()) {
-//      ++this.day;
-//    } else {
-//      this.day = 1;
-//      ++this.month;
-//    }
-//  }
 
   public void nextDay(int increment) {
     this.day += increment;
@@ -111,12 +97,6 @@ public class Date {
     }
   }
 
-//  public void nextDayEasy(int increment) {
-//    for(int i = 0; i < increment; ++i) {
-//      this.nextDay();
-//    }
-//  }
-
   public boolean isLeapYear() {
     if (this.year % 4 == 0) {
       if (this.year % 100 == 0) {
@@ -128,183 +108,13 @@ public class Date {
       return false;
     }
   }
-
-  public String dayofweek() {
-    int m;
-    int y;
-    if (this.month == 1) {
-      m = 13;
-      y = this.year - 1;
-    } else if (this.month == 2) {
-      m = 14;
-      y = this.year - 1;
-    } else {
-      m = this.month;
-      y = this.year;
-    }
-
-    int q = this.day;
-    int k = y % 100;
-    int j = y / 100;
-    int result = (q + 13 * (m + 1) / 5 + k + k / 4 + j / 4 + 5 * j) % 7;
-    switch (result) {
-      case 0 -> {
-        return "Saturday";
-      }
-      case 1 -> {
-        return "Sunday";
-      }
-      case 2 -> {
-        return "Monday";
-      }
-      case 3 -> {
-        return "Tuesday";
-      }
-      case 4 -> {
-        return "Wednesday";
-      }
-      case 5 -> {
-        return "Thursday";
-      }
-      case 6 -> {
-        return "Friday";
-      }
-      default -> {
-        return "get out";
-      }
-    }
-  }
-
   public int dayMonth() {
-    if (!this.isLeapYear()) {
-      switch (this.month) {
-        case 1 -> {
-          return 31;
-        }
-        case 2 -> {
-          return 28;
-        }
-        case 3 -> {
-          return 31;
-        }
-        case 4 -> {
-          return 30;
-        }
-        case 5 -> {
-          return 31;
-        }
-        case 6 -> {
-          return 30;
-        }
-        case 7 -> {
-          return 31;
-        }
-        case 8 -> {
-          return 31;
-        }
-        case 9 -> {
-          return 30;
-        }
-        case 10 -> {
-          return 31;
-        }
-        case 11 -> {
-          return 30;
-        }
-        case 12 -> {
-          return 31;
-        }
-        default -> {
-          return 0;
-        }
-      }
-    } else {
-      switch (this.month) {
-        case 1 -> {
-          return 31;
-        }
-        case 2 -> {
-          return 29;
-        }
-        case 3 -> {
-          return 31;
-        }
-        case 4 -> {
-          return 30;
-        }
-        case 5 -> {
-          return 31;
-        }
-        case 6 -> {
-          return 30;
-        }
-        case 7 -> {
-          return 31;
-        }
-        case 8 -> {
-          return 31;
-        }
-        case 9 -> {
-          return 30;
-        }
-        case 10 -> {
-          return 31;
-        }
-        case 11 -> {
-          return 30;
-        }
-        case 12 -> {
-          return 31;
-        }
-        default -> {
-          return 0;
-        }
-      }
-    }
-  }
-
-  public String getMonthName() {
-    switch (this.month) {
-      case 1 -> {
-        return "January";
-      }
-      case 2 -> {
-        return "February";
-      }
-      case 3 -> {
-        return "March";
-      }
-      case 4 -> {
-        return "April";
-      }
-      case 5 -> {
-        return "May";
-      }
-      case 6 -> {
-        return "June";
-      }
-      case 7 -> {
-        return "July";
-      }
-      case 8 -> {
-        return "August";
-      }
-      case 9 -> {
-        return "September";
-      }
-      case 10 -> {
-        return "October";
-      }
-      case 11 -> {
-        return "November";
-      }
-      case 12 -> {
-        return "December";
-      }
-      default -> {
-        return "Invalid month";
-      }
-    }
+    return switch (this.month) {
+      case 1, 3, 5, 7, 8, 10, 12 -> 31;
+      case 4, 6, 9, 11 -> 30;
+      case 2 -> this.isLeapYear() ? 29 : 28;
+      default -> 0;
+    };
   }
 
   public String toString() {
