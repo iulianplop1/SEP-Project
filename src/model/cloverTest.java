@@ -4,6 +4,7 @@ public class cloverTest
 {
   public static void main(String[] args)
   {
+    System.out.println("\nCLOVERVILLE");
     Village cloverville = new Village();
     Villager villager1= new Villager(cloverville, "Bátor", "Gábora", 104);
     Villager villager2 = new Villager(cloverville,"Mike", "Lorenzen", 105);
@@ -16,14 +17,14 @@ public class cloverTest
 
     System.out.println(cloverville);
 
-    TradeOffer trade1 = new TradeOffer(cloverville, villager4, "peanut butter jelly sandwich", 5);
+    TradeOffer trade1 = new TradeOffer(cloverville, villager4, "peanut butter jelly sandwich", 35);
     cloverville.addTradeOffer(trade1);
 
     System.out.println(cloverville);
 
     cloverville.finishTradeOffer(trade1, villager2);
     cloverville.removeVillager(villager3);
-    TradeOffer trade2 = new TradeOffer(cloverville, villager4, "world famous hungarian pálinka", 100);
+    TradeOffer trade2 = new TradeOffer(cloverville, villager4, "world famous hungarian pálinka", 67);
     cloverville.addTradeOffer(trade2);
     cloverville.finishTradeOffer(trade2, villager1);
 

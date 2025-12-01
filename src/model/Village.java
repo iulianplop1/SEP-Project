@@ -49,7 +49,7 @@ public class Village implements Serializable {
     for(Villager villager : villagers){
       sum += villager.getPoints();
     }
-    return sum/villagers.size();
+    return Math.round(sum/villagers.size());
   }
 
   public void Reset(){
@@ -61,6 +61,8 @@ public class Village implements Serializable {
   }
 
   public String toString(){
-    return "\nvillagers: " + villagers.toString() + "\ngreen points:" + greenpoints + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueofideas.toString() + "\n";
+    return "\nvillagers: " + villagers.toString() + "\ngreen points:" + greenpoints
+        + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueofideas.toString()
+        + "\naverage points:" + getAveragePoints() + "\n";
   }
 }
