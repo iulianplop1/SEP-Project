@@ -32,5 +32,9 @@ public class cloverTest
     cloverville.addTradeOffer(trade2);
     cloverville.finishTradeOffer(trade2);
 
+    System.out.println(villager1);
+    System.out.println(villager2);
+    System.out.println(villager3);
+    System.out.println(villager4);
   }
 }

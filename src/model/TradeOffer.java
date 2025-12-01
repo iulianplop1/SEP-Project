@@ -58,6 +58,7 @@ public class TradeOffer implements Serializable {
   public void finish() {
     if (buyer != null) {
       System.out.println(buyer + " bought for " + points + " points from " + seller + " this: " + tradename + " for: " + points);
+
       buyer.subtractPoints(this.points);
       seller.addPoints(this.points);
     }

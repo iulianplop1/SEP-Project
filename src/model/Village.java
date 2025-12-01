@@ -8,10 +8,13 @@ public class Village implements Serializable {
   private int greenpoints;
   private ArrayList<Villager> villagers;
   private ArrayList<TradeOffer> trades;
+  private ArrayList<GreenActivity> catalogueofideas;
 
   public Village() {
     this.villagers = new ArrayList<>();
     this.trades = new ArrayList<>();
+    this.catalogueofideas = new ArrayList<>();
+    greenpoints = 0;
   }
   public void addVillager(Villager villager) {
     villagers.add(villager);
@@ -19,7 +22,7 @@ public class Village implements Serializable {
   public void removeVillager(Villager villager) {
     villagers.remove(villager);
   }
-  public List<Villager> getVillagers() {
+  public ArrayList<Villager> getVillagers() {
     return villagers;
   }
 
