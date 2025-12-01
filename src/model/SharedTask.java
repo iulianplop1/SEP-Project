@@ -12,7 +12,7 @@ public class SharedTask implements Serializable
   public SharedTask(String taskName, int points) {
     this.taskName = taskName;
     this.points = points;
-    performers = new ArrayList<>();
+    performers = new ArrayList<>();//nigga
   }
 
 
