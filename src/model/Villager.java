@@ -13,6 +13,11 @@ public class Villager implements Serializable
     this.lastname = lastname;
     personalpoints = 0;
   }
+  public Villager(String firstname, String lastname,  int personalpoints){
+    this.firstname = firstname;
+    this.lastname = lastname;
+    this.personalpoints = personalpoints;
+  }
 
   public int getPoints(){
     return personalpoints;
@@ -58,5 +63,10 @@ public class Villager implements Serializable
     }
     Villager other = (Villager)obj;
     return other.firstname.equals(this.firstname) && other.lastname.equals(this.lastname) && other.personalpoints == this.personalpoints;
+  }
+
+  public String toString()
+  {
+    return firstname + " " + lastname + " - " +  personalpoints;
   }
 }
