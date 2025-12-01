@@ -65,6 +65,10 @@ public class Villager implements Serializable
     return other.firstname.equals(this.firstname) && other.lastname.equals(this.lastname) && other.personalpoints == this.personalpoints;
   }
 
+  public Villager copy(){
+    return new Villager(this.firstname, this.lastname, this.personalpoints);
+  }
+
   public String toString()
   {
     return firstname + " " + lastname + " - " +  personalpoints;

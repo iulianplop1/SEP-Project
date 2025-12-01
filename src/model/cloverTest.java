@@ -20,7 +20,7 @@ public class cloverTest
 
     TradeOffer trade1 = new TradeOffer(cloverville, villager4, "balls", 100);
     cloverville.addTradeOffer(trade1);
-    cloverville.finishTradeOffer(trade1);
+    cloverville.finishTradeOffer(trade1, villager2);
 
     System.out.println(villager1);
     System.out.println(villager2);
@@ -30,7 +30,7 @@ public class cloverTest
     cloverville.removeVillager(villager3);
     TradeOffer trade2 = new TradeOffer(cloverville, villager4, "balls", 100);
     cloverville.addTradeOffer(trade2);
-    cloverville.finishTradeOffer(trade2);
+    cloverville.finishTradeOffer(trade2, villager2);
 
     System.out.println(villager1);
     System.out.println(villager2);

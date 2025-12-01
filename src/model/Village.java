@@ -33,14 +33,12 @@ public class Village implements Serializable {
   public void removeTradeOffer(TradeOffer tradeOffer) {
     trades.remove(tradeOffer);
   }
-  public void finishTradeOffer(TradeOffer tradeOffer)
-  {
+  public void finishTradeOffer(TradeOffer tradeOffer, Villager buyer) {
     if(trades.contains(tradeOffer)){
       ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers();
       System.out.println(possiblebuyers);
-      tradeOffer.setBuyer(villagers.get(0));
+      tradeOffer.setBuyer(buyer);
       tradeOffer.finish();
-
     }
   }
 }
