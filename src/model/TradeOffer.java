@@ -11,7 +11,7 @@ public class TradeOffer implements Serializable {
   private Villager buyer;
   private ArrayList<Villager> possiblebuyers;
 
-  private final Village cloverville;  //final means it is assigned only once, but the elements can be changed
+  private Village cloverville;
 
   public TradeOffer(Village village, Villager seller, String tradename, int points) {
     this.cloverville = village;
@@ -41,7 +41,7 @@ public class TradeOffer implements Serializable {
     return seller;
   }
 
-  public List<Villager> showPossibleBuyers() {
+  public ArrayList<Villager> getPossibleBuyers() {
     possiblebuyers.clear();
     for (Villager villager : cloverville.getVillagers()) {
       if (villager.checkPoints(this.points)) {
@@ -55,7 +55,22 @@ public class TradeOffer implements Serializable {
     this.buyer = buyer;
   }
 
-  public void finish(Villager buyer) {
+  public void finish() {
+    if (buyer != null) {
+      System.out.println("TRADE OFFER HAPPENING --> " + buyer + " bought for [" + points + "] from " + seller + " -- " + tradename + " for [" + points + "]");
 
+      buyer.subtractPoints(this.points);
+      seller.addPoints(this.points);
+    }
   }
+
+  public TradeOffer copy(){
+    return new TradeOffer(cloverville, seller, tradename, points);
+  }
+
+  public String toString()
+  {
+    return tradename + " [" + points + "] by " + seller;
+  }
+
 }
