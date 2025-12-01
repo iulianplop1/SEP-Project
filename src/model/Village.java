@@ -29,16 +29,18 @@ public class Village implements Serializable {
   public void addTradeOffer(TradeOffer tradeOffer)
   {
     trades.add(tradeOffer);
+    System.out.println("TRADE OFFER ADDED --> " + tradeOffer);
+    ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers();
+    System.out.println("POSSIBLE BUYERS --> " + possiblebuyers);
   }
   public void removeTradeOffer(TradeOffer tradeOffer) {
     trades.remove(tradeOffer);
   }
   public void finishTradeOffer(TradeOffer tradeOffer, Villager buyer) {
     if(trades.contains(tradeOffer)){
-      ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers();
-      System.out.println(possiblebuyers);
       tradeOffer.setBuyer(buyer);
       tradeOffer.finish();
+      trades.remove(tradeOffer);
     }
   }
 
@@ -55,6 +57,10 @@ public class Village implements Serializable {
       greenpoints += villager.getPoints();
       villager.setPoints(0);
     }
-    System.out.println(villagers);
+    System.out.println("RESET HAPPENING --> " + villagers);
+  }
+
+  public String toString(){
+    return "\nvillagers: " + villagers.toString() + "\ngreen points:" + greenpoints + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueofideas.toString() + "\n";
   }
 }

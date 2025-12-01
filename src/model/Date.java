@@ -36,11 +36,11 @@ public class Date {
     reset.nextDay(period);
 
     if (today(cloverville).equals(reset)) {
+      System.out.println("TODAY IS THE DAY OF THE RESET");
       cloverville.Reset();
-      System.out.println("today is the day of reset");
     }
     else{
-      System.out.println("reset will happen on: " + reset);
+      System.out.println("RESET WILL HAPPEN ON: " + reset);
     }
     //idea: create an arraylist with the next x reset dates which would change everytime a new reset value is added --> nice for visibility
   }

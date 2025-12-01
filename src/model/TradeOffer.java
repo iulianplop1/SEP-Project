@@ -57,7 +57,7 @@ public class TradeOffer implements Serializable {
 
   public void finish() {
     if (buyer != null) {
-      System.out.println(buyer + " bought for " + points + " points from " + seller + " this: " + tradename + " for: " + points);
+      System.out.println("TRADE OFFER HAPPENING --> " + buyer + " bought for [" + points + "] from " + seller + " -- " + tradename + " for [" + points + "]");
 
       buyer.subtractPoints(this.points);
       seller.addPoints(this.points);
@@ -67,5 +67,10 @@ public class TradeOffer implements Serializable {
   public TradeOffer copy(){
     return new TradeOffer(cloverville, seller, tradename, points);
   }
-  
+
+  public String toString()
+  {
+    return tradename + " [" + points + "] by " + seller;
+  }
+
 }
