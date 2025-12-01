@@ -42,6 +42,7 @@ public class Date {
     else{
       System.out.println("reset will happen on: " + reset);
     }
+    //idea: create an arraylist with the next x reset dates which would change everytime a new reset value is added --> nice for visibility
   }
 
   public static Date today(Village village) {
