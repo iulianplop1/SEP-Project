@@ -7,15 +7,4 @@ public class GreenPoint
   public void addpoints(int points){
     green_pool += points;
   }
-  public void usepoints(){
-    green_pool = 87;
-    //something nigga nigga push
-  }
-
-  public static void main(String[] args)
-  {
-    System.out.println("Kiss");
-    System.out.println("balls");
-    System.out.println("i made a change");
-  }
 }
