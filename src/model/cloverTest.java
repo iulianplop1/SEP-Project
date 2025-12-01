@@ -5,7 +5,7 @@ public class cloverTest
   public static void main(String[] args)
   {
     Village cloverville = new Village();
-    Villager villager1 = new Villager("Bátor", "Gábora", 200);
+    Villager villager1= new Villager("Bátor", "Gábora", 200);
     Villager villager2 = new Villager("Mike", "Lorenzen", 10);
     Villager villager3 = new Villager("Arsenie", "Bilba", 100);
     Villager villager4 = new Villager("Iulian", "Plop", 90);
