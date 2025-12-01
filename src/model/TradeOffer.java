@@ -2,17 +2,19 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class TradeOffer implements Serializable
-{
+public class TradeOffer implements Serializable {
   private String tradename;
   private int points;
   private Villager seller;
   private Villager buyer;
   private ArrayList<Villager> possiblebuyers;
 
-  public TradeOffer(Villager seller, String tradename, int points)
-  {
+  private final Village cloverville;  //final means it is assigned only once, but the elements can be changed
+
+  public TradeOffer(Village village, Villager seller, String tradename, int points) {
+    this.cloverville = village;
     this.seller = seller;
     this.tradename = tradename;
     this.points = points;
@@ -20,57 +22,40 @@ public class TradeOffer implements Serializable
     this.possiblebuyers = new ArrayList<>();
   }
 
-  public void setTradeName(String tradename)
-  {
+  public void setTradeName(String tradename) {
     this.tradename = tradename;
   }
-
-  public void setPoints(int points)
-  {
+  public void setPoints(int points) {
     this.points = points;
   }
-
-  public void setSeller(Villager seller)
-  {
+  public void setSeller(Villager seller) {
     this.seller = seller;
   }
-
-  public String getTradename()
-  {
+  public String getTradename() {
     return tradename;
   }
-
-  public int getPoints()
-  {
+  public int getPoints() {
     return points;
   }
-
-  public Villager getSeller()
-  {
+  public Villager getSeller() {
     return seller;
   }
 
-  public ArrayList<Villager> showPossibleBuyers()
-  {
+  public List<Villager> showPossibleBuyers() {
     possiblebuyers.clear();
-    for (Villager villager : Village.getVillagers())
-    {
-      if (villager.checkPoints(this.points))
-      {
+    for (Villager villager : cloverville.getVillagers()) {
+      if (villager.checkPoints(this.points)) {
         possiblebuyers.add(villager);
       }
     }
     return possiblebuyers;
   }
 
-  public void setBuyer(Villager buyer){
+  public void setBuyer(Villager buyer) {
     this.buyer = buyer;
   }
-  public void finish(Villager buyer)
-  {
-    if (buyer.checkPoints(this.points))
-    {
-      this.buyer = buyer;
-    }
+
+  public void finish(Villager buyer) {
+
   }
 }
