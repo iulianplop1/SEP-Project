@@ -17,6 +17,7 @@ public class cloverTest
 
     System.out.println(cloverville);
 
+
     TradeOffer trade1 = new TradeOffer(villager4, "peanut butter jelly sandwich", 35);
     cloverville.addTradeOffer(trade1);
 
@@ -34,9 +35,10 @@ public class cloverTest
     int monthoftoday = Date.today().getMonth();
     int yearoftoday = Date.today().getYear();
     Date dater = new Date();
-    dater.setPeriod(0);
+    dater.setPeriod(7);
     dater.checkDate(cloverville, dayoftoday, monthoftoday, yearoftoday);
 
     System.out.println(cloverville);
+    System.out.println(dater);
   }
 }

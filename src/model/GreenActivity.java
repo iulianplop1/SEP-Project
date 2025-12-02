@@ -1,13 +1,16 @@
 package model;
 
-public class GreenActivity
+import java.io.Serializable;
+
+public class GreenActivity implements Serializable
 {
   private String activityName;
   private int points;
+
   public GreenActivity(String activityName, int points)
   {
-    this.activityName=activityName;
-    this.points=points;
+    this.activityName = activityName;
+    this.points = points;
   }
 
   public void setActivityName(String activityName)
@@ -29,18 +32,20 @@ public class GreenActivity
   {
     return activityName;
   }
+
   public boolean equals(Object obj)
   {
-    if(obj==null||getClass()!=obj.getClass())
+    if (obj == null || getClass() != obj.getClass())
       return false;
     GreenActivity other = (GreenActivity) obj;
-    return this.activityName.equals(other.activityName) &&
-        points==other.points;
+    return this.activityName.equals(other.activityName) && points == other.points;
   }
+
   public String toString()
   {
-    return "The activity "+activityName+" has "+points+ " points";
+    return "The activity " + activityName + " has " + points + " points";
   }
+
   public GreenActivity copy()
   {
     return new GreenActivity(activityName, points);

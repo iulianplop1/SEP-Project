@@ -1,6 +1,8 @@
 package model;
 
-public class GreenGoal
+import java.io.Serializable;
+
+public class GreenGoal implements Serializable
 {
   private int requiredPoints;
   private String goalName;
