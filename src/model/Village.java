@@ -73,7 +73,7 @@ public class Village implements Serializable {
 
       int revenue=sharedtask1.getPoints()/ sharedtask1.NrPerformers();
       for (int i = 0; i <sharedtask1.NrPerformers() ; i++) {
-          if (sharedtask1.getPerformer(i).isAboveAverage()==true){
+          if (sharedtask1.getPerformer(i).isAboveAverage(getAveragePoints())==true){
               sharedtask1.getPerformer(i).addPoints((int) Math.floor(revenue*1.2));
           }
           else {sharedtask1.getPerformer(i).addPoints(revenue);}
