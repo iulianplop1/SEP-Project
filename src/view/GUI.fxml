@@ -37,7 +37,15 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <ComboBox fx:id="ListVillagers" layoutY="2.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="ListVillagers" layoutX="212.0" layoutY="7.0" prefWidth="150.0" />
+                                    <TextField fx:id="LastName1" layoutX="108.0" layoutY="90.0" />
+                                    <Text layoutX="14.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
+                                    <TextField fx:id="FirstName1" layoutX="108.0" layoutY="50.0" />
+                                    <Text layoutX="14.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
+                                    <Button fx:id="UpdateVillager" layoutX="293.0" layoutY="50.0" mnemonicParsing="false" prefWidth="59.0" text="Update" />
+                                    <Button fx:id="RemoveVillager" layoutX="291.0" layoutY="125.0" mnemonicParsing="false" text="Remove" />
+                                    <TextField fx:id="LastName11" layoutX="108.0" layoutY="125.0" onAction="#PersonalPoints" />
+                                    <Text layoutX="14.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Points" />
                                  </children>
                               </AnchorPane>
                           </content>
