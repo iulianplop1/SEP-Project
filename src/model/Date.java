@@ -39,12 +39,12 @@ public class Date implements Serializable
 
     if (today().equals(reset))
     {
-      System.out.println("TODAY IS THE DAY OF THE RESET");
+      System.out.println("\nTODAY IS THE DAY OF THE RESET");
       cloverville.Reset();
     }
     else
     {
-      System.out.println("RESET WILL HAPPEN ON: " + reset);
+      System.out.println("\nRESET WILL HAPPEN ON: " + reset + "\n");
     }
     //idea: create an arraylist with the next x reset dates which would change everytime a new reset value is added --> nice for visibility
   }
