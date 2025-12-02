@@ -9,12 +9,16 @@ public class Village implements Serializable {
   private ArrayList<Villager> villagers;
   private ArrayList<TradeOffer> trades;
   private ArrayList<GreenActivity> catalogueofideas;
+  private ArrayList<SharedTask> sharedTasks = new ArrayList<>();
 
-  public Village() {
+
+
+    public Village() {
     this.villagers = new ArrayList<>();
     this.trades = new ArrayList<>();
     this.catalogueofideas = new ArrayList<>();
     greenpoints = 0;
+    this.sharedTasks = new ArrayList<>();
   }
   public void addVillager(Villager villager) {
     villagers.add(villager);
@@ -65,4 +69,21 @@ public class Village implements Serializable {
         + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueofideas.toString()
         + "\naverage points:" + getAveragePoints() + "\n";
   }
+    SharedTask sharedtask1 =new SharedTask("Ben Dover",67);
+
+    public void finishSharedTask(){
+      sharedTasks.add(sharedtask1);
+      int revenue=(int) Math.floor(sharedtask1.getPoints()/ sharedtask1.NrPerformers());
+      for (int i = 0; i <sharedtask1.NrPerformers() ; i++) {
+          sharedtask1.getPerformer(i).addPoints(revenue);
+      }
+
+      for (int i = 0; i <sharedTasks.size() ; i++) {
+            if (sharedTasks.get(i).equals(sharedtask1))
+                sharedTasks.remove(i);
+
+        }
+
+  }
+
 }
