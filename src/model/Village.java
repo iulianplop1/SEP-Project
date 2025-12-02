@@ -24,22 +24,7 @@ public class Village implements Serializable {
   {
     return villagers.size();
   }
-  public Villager getVillager(int index)
-  {
-    return villagers.get(index);
-  }
-  public Villager getVillagerFirstName()
-  {
-    return villagers.getFirst();
-  }
-  public Villager getVillagerLastName()
-  {
-    return villagers.getLast();
-  }
-  /*public Villager getVillagerPoints()
-  {
-    //return villagers.getPoints();
-  }*/
+
   public void addVillager(Villager villager) {
     villagers.add(villager);
   }

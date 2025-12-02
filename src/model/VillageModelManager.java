@@ -51,6 +51,27 @@ public class VillageModelManager
          System.out.println("IO Error writing to file");
       }
    }
+  public ArrayList<Villager> getVillagers(){
+    Village cloverville = getVillage();
+    return cloverville.getVillagers();
+  }
+  public void addVillager(Villager villager)
+  {
+    Village cloverville = getVillage();
+    ArrayList<Villager> villagers = cloverville.getVillagers();
+    villagers.add(villager);
+    saveVillage(cloverville);
+  }
+  public void removeVillager(Villager villager){
+    Village cloverville = getVillage();
+    ArrayList<Villager> villagers = cloverville.getVillagers();
+    if (villagers.contains(villager)){
+      villagers.remove(villager);
+    }
+    saveVillage(cloverville);
+  }
+
+
 
   public void changeVillagerPoints(Villager villager, int points)
    {
@@ -65,4 +86,6 @@ public class VillageModelManager
       }
       saveVillage(cloverville);
    }
+
+
  }
