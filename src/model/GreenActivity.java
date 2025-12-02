@@ -33,8 +33,7 @@ public class GreenActivity implements Serializable
     return activityName;
   }
 
-  public boolean equals(Object obj)
-  {
+  public boolean equals(Object obj) {
     if (obj == null || getClass() != obj.getClass())
       return false;
     GreenActivity other = (GreenActivity) obj;

@@ -35,10 +35,29 @@ public class cloverTest
     int monthoftoday = Date.today().getMonth();
     int yearoftoday = Date.today().getYear();
     Date dater = new Date();
-    dater.setPeriod(7);
+    dater.setPeriod(0);
     dater.checkDate(cloverville, dayoftoday, monthoftoday, yearoftoday);
 
     System.out.println(cloverville);
-    System.out.println(dater);
+
+    GreenActivity activity1 = new GreenActivity("cycling to work", 50);
+    GreenActivity activity2 = new GreenActivity("biodegradable kitchen waste", 40);
+
+    System.out.println(cloverville);
+
+    cloverville.editGreenActivity(activity1, activity2); //now both should be activity2
+
+    GreenGoal goal1 = new GreenGoal("pizza", 150);
+    GreenGoal goal2 = new GreenGoal("spaghetti", 200);
+    cloverville.addGreenGoal(goal1);
+
+    cloverville.editGreenActivity(activity1, activity2); //now both should be activity2
+
+    System.out.println(cloverville);
+
+    cloverville.finishGreenGoal(goal2);
+
+    System.out.println(cloverville);
+
   }
 }
