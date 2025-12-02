@@ -10,24 +10,14 @@ public class SharedTask implements Serializable {
     private Village village;
 
 
-    public SharedTask(Village village, String taskName, int points) {
-        this.village = village;
-        performers = new ArrayList<>();
-        this.taskName = taskName;
-        this.points=points;
-        int j = 0;
+  public SharedTask(Village village, String taskName, int points) {
+    this.performers = new ArrayList<>();
+    this.village = village;
+    this.taskName = taskName;
+    this.points=points;
+  }
 
-        for (int i = 0; i < village.getSharedTasks().size(); i++) {
-            if (village.getSharedTasks().get(i).getTaskName().equals(taskName)) {
-                j++;
-                this.points = village.getSharedTasks().get(i).getPoints();
-                break;
-            }
-        }
-        if (j == 0) {
-            village.getSharedTasks().add(this);
-        }
-    }
+
 
     public void setTaskName(String taskName) {
         this.taskName = taskName;
@@ -58,6 +48,10 @@ public class SharedTask implements Serializable {
         }
     }
 
+  public void resetPerformers()
+  {performers.removeAll(performers);
+  }
+
     /* public String printPerformers(){
         for (int i = 0; i < performers.size(); i++) {
             return performers.get(i);
@@ -71,7 +65,7 @@ public class SharedTask implements Serializable {
     }
 
     public String toString() {
-        return "task name is +" + taskName + " " + "points required are +" + points + "people who have completed it" + performers;
+        return "task name is " + taskName + "["+points + "]"+performers;
     }
 
 

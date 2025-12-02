@@ -60,12 +60,23 @@ public class cloverTest
     System.out.println(cloverville);
 
     SharedTask sharedtask1 = new SharedTask(cloverville, "cleaning grupperoom", 300);
+    cloverville.addSharedTask(sharedtask1);
     sharedtask1.addPerformer(villager1);
     sharedtask1.addPerformer(villager2);
 
     System.out.println(cloverville);
 
+
     cloverville.finishSharedTask(sharedtask1);
+
+    System.out.println(cloverville);
+
+
+    SharedTask sharedtask2 = new SharedTask(cloverville, "cleaning grupperoom", 5000);
+
+    sharedtask2.addPerformer(villager3);
+    cloverville.addSharedTask(sharedtask2);
+
 
     System.out.println(cloverville);
 

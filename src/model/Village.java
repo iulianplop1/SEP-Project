@@ -20,6 +20,26 @@ public class Village implements Serializable {
     this.sharedTasks = new ArrayList<>();
     greengoal = null;
   }
+  public int VillageSize()
+  {
+    return villagers.size();
+  }
+  public Villager getVillager(int index)
+  {
+    return villagers.get(index);
+  }
+  public Villager getVillagerFirstName()
+  {
+    return villagers.getFirst();
+  }
+  public Villager getVillagerLastName()
+  {
+    return villagers.getLast();
+  }
+  /*public Villager getVillagerPoints()
+  {
+    //return villagers.getPoints();
+  }*/
   public void addVillager(Villager villager) {
     villagers.add(villager);
   }
@@ -66,10 +86,11 @@ public class Village implements Serializable {
       greenpoints += villagers.get(i).getPoints();
       villagers.get(i).setPoints(0);
     }
-    System.out.println("RESET HAPPENING --> " + villagers);
+    System.out.println("RESET HAPPENING --> " + villagers + "\n");
   }
 
   public void addGreenActivity(GreenActivity greenactivity) {
+    System.out.println("GREEN ACTIVITY ADDED --> " + greenactivity);
     String name = greenactivity.getActivityName();
     int points = greenactivity.getPoints();
     if (!catalogueOfIdeas.contains(name)){
@@ -98,43 +119,58 @@ public class Village implements Serializable {
     greenpoints -= pointsOld;
     greenpoints += pointsNew;
 
-    System.out.println("GREEN ACTIVTY EDITED --> from " + nameOld + " to " + nameNew);
+    System.out.println("\nGREEN ACTIVTY EDITED --> from " + nameOld + " to " + nameNew + "\n");
   }
 
-  public ArrayList<SharedTask> getSharedTasks() {
-    return sharedTasks;
+  public void addSharedTask(SharedTask sharedtask)
+  {
+
+    for (SharedTask existingTask : sharedTasks) {
+      if (existingTask.getTaskName().equals(sharedtask.getTaskName())) {
+
+
+        existingTask.resetPerformers();
+
+        for (int i = 0; i < sharedtask.NrPerformers(); i++) {
+          existingTask.addPerformer(sharedtask.getPerformer(i));
+        }
+
+        existingTask.setPoints(sharedtask.getPoints());
+        System.out.println("UPDATED SHARED TASK --> " + existingTask);
+        return;
+      }
+    }
+
+    System.out.println("ADDING SHARED TASK --> " + sharedtask);
+    sharedTasks.add(sharedtask);
   }
   public void finishSharedTask(SharedTask sharedtask1){
     System.out.println("SHARED TASK HAPPENING --> " + sharedtask1);
-      int revenue = sharedtask1.getPoints() / sharedtask1.NrPerformers();
-      for (int i = 0; i <sharedtask1.NrPerformers() ; i++) {
-        if (!sharedtask1.getPerformer(i).isAboveAverage(getAveragePoints())){
-          sharedtask1.getPerformer(i).addPoints((int) Math.floor(revenue*1.2));
-          System.out.println(sharedtask1.getPerformer(i) + " recieved " + (int) Math.floor(revenue*1.2) + " points");
-        }
-        else {sharedtask1.getPerformer(i).addPoints(revenue);}
-        System.out.println(sharedtask1.getPerformer(i) + " recieved " + revenue + " points");
+    double revenue = sharedtask1.getPoints() / sharedtask1.NrPerformers();
+    for (int i = 0; i <sharedtask1.NrPerformers() ; i++) {
+      if (!sharedtask1.getPerformer(i).isAboveAverage(getAveragePoints())){
+        revenue = revenue * 1.2;
+        sharedtask1.getPerformer(i).addPoints((int) Math.floor(revenue));
+      }
+      else {sharedtask1.getPerformer(i).addPoints((int) revenue);}
 
-      }
-      for (int i = 0; i <sharedTasks.size() ; i++) {
-        if (sharedTasks.get(i).equals(sharedtask1))
-        {
-          sharedTasks.remove(i);
-        }
-      }
+      System.out.println(sharedtask1.getPerformer(i) + " recieved " + revenue + " points");
+
+    }
+
   }
 
   public void addGreenGoal(GreenGoal greengoal)
   {
     if (greengoal != null){
       this.greengoal = greengoal;
-      System.out.println("GREEN GOAL ADDED --> " + greengoal);
+      System.out.println("\nGREEN GOAL ADDED --> " + greengoal +"\n");
     }
   }
   public void finishGreenGoal(GreenGoal greengoalNew)
   {
     if (greengoalNew == null){
-      System.out.println("NEED A SECOND GOAL TO FINISH");
+      System.out.println("\nNEED A SECOND GOAL TO FINISH GREEN GOAL\n");
       return;
     }
     int required = greengoal.getRequiredPoints();
@@ -143,20 +179,19 @@ public class Village implements Serializable {
     {
       greenpoints = greenpoints-required;
       greengoal = greengoalNew;
-      System.out.println(" goal was finished required points: " + required + " where subtracted from the greenpoints, and a new goal was set: " + greengoalNew);
+      System.out.println("\nGOAL WAS FINISHED -->  required points: " + required + " where subtracted from the greenpoints, and a new goal was set: " + greengoalNew + "\n");
     }
     else
     {
-      System.out.println("not enough points");
+      System.out.println("\nNOT ENOUGH POINTS TO FINISH " + greengoal + "\n");
     }
   }
-
 
   public String toString(){
     return "\nvillagers: " + villagers.toString() + "\ngreen points:" + greenpoints
         + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueOfIdeas.toString()
-        + "\naverage points:" + getAveragePoints() + "\ngreen goal: " + greengoal
-        + "\nshared tasks: " + sharedTasks;
+        + "\nshared tasks: " + sharedTasks + "\naverage points:"
+        + getAveragePoints() + "\ngreen goal: " + greengoal + "\n";
   }
 
 }

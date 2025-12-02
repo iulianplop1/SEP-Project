@@ -1,22 +1,20 @@
 package model;
-
 import utils.MyFileHandler;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
-/*public class VillageModelManager
+public class VillageModelManager
 {
-  private String filename;
+  private String fileName;
   public VillageModelManager(String filename)
   {
-    this.filename = filename;
+    this.fileName = fileName;
   }
-  public Village getAllVillagers()
+  /*public Village getAllVillagers()
   {
-    Village villagerList=new Village();
+    Village village=new Village();
     try
       {
-         villagerList = (Village)MyFileHandler.readFromBinaryFile(fileName);
+         getvillagerList = (Village)MyFileHandler.readFromBinaryFile(fileName);
       }
       catch (FileNotFoundException e)
       {
@@ -47,20 +45,36 @@ import java.io.IOException;
          System.out.println("IO Error writing to file");
       }
    }
-   public void changeVillagerPoints(String firstName, String lastName, int points)
+  /* public void changeVillagerPoints(String firstName, String lastName, int points)
    {
-      Village villagerList = getAllVillagers();
+      Village village = getAllVillagers();
 
-      for (int i = 0; i < villagerList.size(); i++)
+      for (int i = 0; i < villagerList.getVillagers().size(); i++)
       {
-         Village villager = villagerList.get(i);
+         Village villager = villagerList.getVillagers().get(i);
 
-         if (villager.getFirstName().equals(firstName) && villager.getLastName().equals(lastName))
+         if (villager.getVillagerFirstName().equals(firstName) && villager.getVillagerLastName().equals(lastName))
          {
             villager.setPoints(points);
          }
       }
 
-      saveStudents(allStudents);
-   }
- }*/
+      saveVillagers(villagerList);
+
+
+      try
+      {
+         MyFileHandler.writeToBinaryFile("village.bin", villager);
+      }
+      catch (FileNotFoundException e)
+      {
+         System.out.println("Error opening file ");
+      }
+      catch (IOException e)
+      {
+         System.out.println("IO Error writing to file ");
+      }
+
+      System.out.println("Done");
+   } */
+ }
