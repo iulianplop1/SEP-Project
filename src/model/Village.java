@@ -105,12 +105,16 @@ public class Village implements Serializable {
     return sharedTasks;
   }
   public void finishSharedTask(SharedTask sharedtask1){
+    System.out.println("SHARED TASK HAPPENING --> " + sharedtask1);
       int revenue = sharedtask1.getPoints() / sharedtask1.NrPerformers();
       for (int i = 0; i <sharedtask1.NrPerformers() ; i++) {
         if (!sharedtask1.getPerformer(i).isAboveAverage(getAveragePoints())){
           sharedtask1.getPerformer(i).addPoints((int) Math.floor(revenue*1.2));
+          System.out.println(sharedtask1.getPerformer(i) + " recieved " + (int) Math.floor(revenue*1.2) + " points");
         }
         else {sharedtask1.getPerformer(i).addPoints(revenue);}
+        System.out.println(sharedtask1.getPerformer(i) + " recieved " + revenue + " points");
+
       }
       for (int i = 0; i <sharedTasks.size() ; i++) {
         if (sharedTasks.get(i).equals(sharedtask1))
@@ -151,7 +155,8 @@ public class Village implements Serializable {
   public String toString(){
     return "\nvillagers: " + villagers.toString() + "\ngreen points:" + greenpoints
         + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueOfIdeas.toString()
-        + "\naverage points:" + getAveragePoints() + "\ngreen goal: " + greengoal;
+        + "\naverage points:" + getAveragePoints() + "\ngreen goal: " + greengoal
+        + "\nshared tasks: " + sharedTasks;
   }
 
 }
