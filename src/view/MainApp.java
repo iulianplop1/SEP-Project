@@ -19,7 +19,7 @@ public class MainApp extends Application {
 
             Scene scene = new Scene(root);
 
-            primaryStage.setTitle("Village Model Manager - Shared Task Setup");
+            primaryStage.setTitle("CloverVille");
             primaryStage.setScene(scene);
             primaryStage.show();
 
