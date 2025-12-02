@@ -1,4 +1,4 @@
-package main;
+package view;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -14,9 +14,7 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
-
             loader.setLocation(getClass().getResource("/GUI.fxml"));
-
             Parent root = loader.load();
 
             Scene scene = new Scene(root);
