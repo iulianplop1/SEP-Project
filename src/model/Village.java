@@ -11,8 +11,6 @@ public class Village implements Serializable {
   private ArrayList<GreenActivity> catalogueofideas;
   private ArrayList<SharedTask> sharedTasks = new ArrayList<>();
 
-
-
     public Village() {
     this.villagers = new ArrayList<>();
     this.trades = new ArrayList<>();
@@ -34,7 +32,7 @@ public class Village implements Serializable {
   {
     trades.add(tradeOffer);
     System.out.println("TRADE OFFER ADDED --> " + tradeOffer);
-    ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers();
+    ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers(villagers);
     System.out.println("POSSIBLE BUYERS --> " + possiblebuyers);
   }
   public void removeTradeOffer(TradeOffer tradeOffer) {

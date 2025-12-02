@@ -8,17 +8,12 @@ public class Villager implements Serializable
   private String lastname;
   private int personalpoints;
 
-  private Village cloverville;
-
-
-  public Villager(Village village, String firstname, String lastname){
-    this.cloverville = village;
+  public Villager(String firstname, String lastname){
     this.firstname = firstname;
     this.lastname = lastname;
     personalpoints = 0;
   }
-  public Villager(Village village, String firstname, String lastname,  int personalpoints){
-    this.cloverville = village;
+  public Villager(String firstname, String lastname,  int personalpoints){
     this.firstname = firstname;
     this.lastname = lastname;
     this.personalpoints = personalpoints;
@@ -61,8 +56,8 @@ public class Villager implements Serializable
   public boolean checkPoints(int required){
     return personalpoints >= required;
   }
-  public boolean isAboveAverage(){
-    return personalpoints >= cloverville.getAveragePoints();
+  public boolean isAboveAverage(int averagepoints){
+    return personalpoints >= averagepoints;
   }
 
   public boolean equals(Object obj){
@@ -74,7 +69,7 @@ public class Villager implements Serializable
   }
 
   public Villager copy(){
-    return new Villager(cloverville, firstname, lastname, personalpoints);
+    return new Villager(firstname, lastname, personalpoints);
   }
 
   public String toString()

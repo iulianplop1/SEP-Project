@@ -10,16 +10,13 @@ public class Date {
   private int period;           //days
   private Date temp;
 
-  private Village cloverville;
 
-  public Date(Village village) {
-    this.cloverville = village;
-    this.day = today(village).getDay();
-    this.month = today(village).getMonth();
-    this.year = today(village).getYear();
+  public Date() {
+    this.day = today().getDay();
+    this.month = today().getMonth();
+    this.year = today().getYear();
   }
-  public Date(Village village, int day, int month, int year) {
-    this.cloverville = village;
+  public Date(int day, int month, int year) {
     this.day = day;
     this.month = month;
     this.year = year;
@@ -30,12 +27,12 @@ public class Date {
     this.period = period;
   }
 
-  public void checkDate(int day, int month, int year) {
-    temp = new Date(cloverville, day, month, year);
+  public void checkDate(Village cloverville, int day, int month, int year) {
+    temp = new Date(day, month, year);
     Date reset = temp.copy();
     reset.nextDay(period);
 
-    if (today(cloverville).equals(reset)) {
+    if (today().equals(reset)) {
       System.out.println("TODAY IS THE DAY OF THE RESET");
       cloverville.Reset();
     }
@@ -45,12 +42,12 @@ public class Date {
     //idea: create an arraylist with the next x reset dates which would change everytime a new reset value is added --> nice for visibility
   }
 
-  public static Date today(Village village) {
+  public static Date today() {
     LocalDate currentDate = LocalDate.now();
     int currentDay = currentDate.getDayOfMonth();
     int currentMonth = currentDate.getMonthValue();
     int currentYear = currentDate.getYear();
-    Date today = new Date(village, currentDay, currentMonth, currentYear);
+    Date today = new Date(currentDay, currentMonth, currentYear);
     return today;
   }
 
@@ -74,7 +71,7 @@ public class Date {
   }
 
   public Date copy() {
-    return new Date(cloverville, day, month, year);
+    return new Date(day, month, year);
   }
   public boolean equals(Object obj) {
     if (obj != null && this.getClass() == obj.getClass()) {
