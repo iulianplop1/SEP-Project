@@ -69,13 +69,16 @@ public class Village implements Serializable {
         + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueofideas.toString()
         + "\naverage points:" + getAveragePoints() + "\n";
   }
-    SharedTask sharedtask1 =new SharedTask("Ben Dover",67);
+    // SharedTask sharedtask1 =new SharedTask("Ben Dover",67);
 
-    public void finishSharedTask(){
-      sharedTasks.add(sharedtask1);
-      int revenue=(int) Math.floor(sharedtask1.getPoints()/ sharedtask1.NrPerformers());
+    public void finishSharedTask(SharedTask sharedtask1){
+
+      int revenue=sharedtask1.getPoints()/ sharedtask1.NrPerformers();
       for (int i = 0; i <sharedtask1.NrPerformers() ; i++) {
-          sharedtask1.getPerformer(i).addPoints(revenue);
+          if (sharedtask1.getPerformer(i).isAboveAverage()==true){
+              sharedtask1.getPerformer(i).addPoints((int) Math.floor(revenue*1.2));
+          }
+          else {sharedtask1.getPerformer(i).addPoints(revenue);}
       }
 
       for (int i = 0; i <sharedTasks.size() ; i++) {
