@@ -6,8 +6,8 @@ import model.Village;
 import model.VillageModelManager;
 import model.Villager;
 import javafx.scene.*;
+import javafx.event.*;
 
-import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
 public class Controller
@@ -84,7 +84,7 @@ public class Controller
 
   }
 
-  public void addVillager()
+  @FXML public void addVillager()
   {
     if (firstName.getText() != "" && lastName.getText() != "")
     {
@@ -96,7 +96,7 @@ public class Controller
     }
   }
 
-  public void handle(ActionEvent e)
+  @FXML public void editVillager(ActionEvent e)
   {
     Villager selectedVillager = (Villager)chooseVillagers.getValue();
 
@@ -119,9 +119,8 @@ public class Controller
         selectedVillager.setLastName(lastName1.getText());
         selectedVillager.setPoints(Integer.parseInt(personalPoints.getText()));
       }
+      loadVillagers();
     }
-
-    loadVillagers();
   }
 
 

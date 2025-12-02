@@ -36,12 +36,12 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
-                                    <ComboBox fx:id="chooseVillagers" layoutX="212.0" layoutY="7.0" onAction="#handle" prefWidth="150.0" />
+                                    <ComboBox fx:id="chooseVillagers" layoutX="212.0" layoutY="7.0" onAction="#editVillager" prefWidth="150.0" />
                                     <TextField fx:id="lastName1" layoutX="108.0" layoutY="90.0" />
                                     <Text layoutX="14.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Last Name" />
                                     <TextField fx:id="firstName1" layoutX="108.0" layoutY="50.0" />
                                     <Text layoutX="14.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="First Name" />
-                                    <Button fx:id="updateVillager" layoutX="293.0" layoutY="50.0" mnemonicParsing="false" onAction="#handle" prefWidth="59.0" text="Update" />
+                                    <Button fx:id="updateVillager" layoutX="293.0" layoutY="50.0" mnemonicParsing="false" onAction="#editVillager" prefWidth="59.0" text="Update" />
                                     <Button fx:id="removeVillager" layoutX="291.0" layoutY="125.0" mnemonicParsing="false" onAction="#removeVillager" text="Remove" />
                                     <TextField fx:id="personalPoints" layoutX="108.0" layoutY="125.0" />
                                     <Text layoutX="14.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Points" />
