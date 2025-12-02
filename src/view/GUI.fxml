@@ -1,46 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.Text?>
-<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/21"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="model.VillageModelManager"
-            prefHeight="450.0" prefWidth="700.0">
-    <VBox layoutX="10.0" layoutY="10.0" prefHeight="430.0" prefWidth="680.0" spacing="10">
-        <padding>
-            <Insets top="10.0" right="10.0" bottom="10.0" left="10.0"/>
-        </padding>
 
-        <GridPane hgap="10" vgap="10">
-            <columnConstraints>
-                <ColumnConstraints prefWidth="150" />
-                <ColumnConstraints prefWidth="200" />
-                <ColumnConstraints prefWidth="180" />
-            </columnConstraints>
-
-            <Label text="Task Name:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-            <TextField fx:id="taskNameField" GridPane.rowIndex="0" GridPane.columnIndex="1" promptText="e.g., Cleaning Group Room"/>
-
-            <Label text="Points:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-            <TextField fx:id="pointsField" GridPane.rowIndex="1" GridPane.columnIndex="1" promptText="e.g., 5000"/>
-
-            <Label text="Select Performer:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-            <ComboBox fx:id="performerComboBox" GridPane.rowIndex="2" GridPane.columnIndex="1" prefWidth="200.0"/>
-
-            <Button text="Add Performer" onAction="#handleAddPerformer" GridPane.rowIndex="2" GridPane.columnIndex="2"/>
-
-            <Label text="Current Performers:" GridPane.rowIndex="0" GridPane.columnIndex="3"/>
-            <ListView fx:id="performersListView" prefHeight="90.0" prefWidth="200.0" GridPane.rowIndex="1" GridPane.columnIndex="3" GridPane.rowSpan="2"/>
-        </GridPane>
-
-        <Button onAction="#handleSetSharedTask" text="SET / UPDATE SHARED TASK" prefWidth="300" />
-
-        <Separator/>
-
-        <Text text="Confirmation Output:"/>
-        <TextArea fx:id="confirmationArea" editable="false" prefHeight="200.0" wrapText="true"/>
-    </VBox>
-</AnchorPane>
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" />
