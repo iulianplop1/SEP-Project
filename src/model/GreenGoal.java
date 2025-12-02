@@ -41,7 +41,7 @@ public class GreenGoal implements Serializable
   }
   public String toString()
   {
-    return "goalname: "+goalName+" required points "+ requiredPoints;
+    return ""+goalName+" ["+ requiredPoints + "]";
   }
   public GreenGoal copy()
   {
