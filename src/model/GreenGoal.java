@@ -46,3 +46,4 @@ public class GreenGoal
     return new GreenGoal(goalName, requiredPoints);
   }
 }
+//lol
