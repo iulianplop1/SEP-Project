@@ -65,7 +65,7 @@ public class SharedTask implements Serializable {
     }
 
     public String toString() {
-        return "task name is " + taskName + "["+points + "]"+performers;
+        return "task name is " + taskName + "["+points + "] - "+performers;
     }
 
 

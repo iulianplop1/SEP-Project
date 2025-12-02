@@ -2,19 +2,23 @@ package model;
 import utils.MyFileHandler;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+
 public class VillageModelManager
 {
   private String fileName;
-  public VillageModelManager(String filename)
+
+  public VillageModelManager(String fileName)
   {
     this.fileName = fileName;
   }
-  /*public Village getAllVillagers()
+
+  public Village getVillage()
   {
     Village village=new Village();
     try
       {
-         getvillagerList = (Village)MyFileHandler.readFromBinaryFile(fileName);
+         village = (Village)MyFileHandler.readFromBinaryFile(fileName);
       }
       catch (FileNotFoundException e)
       {
@@ -28,13 +32,15 @@ public class VillageModelManager
       {
          System.out.println("Class Not Found");
       }
-      return villagerList;
+      return village;
   }
-  public void saveVillagers(Village villagerList)
+
+  public void saveVillage(Village village)
    {
       try
       {
-         MyFileHandler.writeToBinaryFile(fileName, villagerList);
+         MyFileHandler.writeToBinaryFile(fileName, village);
+        System.out.println("Done");
       }
       catch (FileNotFoundException e)
       {
@@ -45,36 +51,18 @@ public class VillageModelManager
          System.out.println("IO Error writing to file");
       }
    }
-  /* public void changeVillagerPoints(String firstName, String lastName, int points)
+
+  public void changeVillagerPoints(Villager villager, int points)
    {
-      Village village = getAllVillagers();
+      Village cloverville = getVillage();
+      ArrayList<Villager> villagers = cloverville.getVillagers();
 
-      for (int i = 0; i < villagerList.getVillagers().size(); i++)
+      for (int i = 0; i < villagers.size(); i++)
       {
-         Village villager = villagerList.getVillagers().get(i);
-
-         if (villager.getVillagerFirstName().equals(firstName) && villager.getVillagerLastName().equals(lastName))
-         {
-            villager.setPoints(points);
-         }
+        if (villagers.get(i)==villager){    //if we found our villager
+          villagers.get(i).setPoints(points);
+        }
       }
-
-      saveVillagers(villagerList);
-
-
-      try
-      {
-         MyFileHandler.writeToBinaryFile("village.bin", villager);
-      }
-      catch (FileNotFoundException e)
-      {
-         System.out.println("Error opening file ");
-      }
-      catch (IOException e)
-      {
-         System.out.println("IO Error writing to file ");
-      }
-
-      System.out.println("Done");
-   } */
+      saveVillage(cloverville);
+   }
  }
