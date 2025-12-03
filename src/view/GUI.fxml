@@ -90,7 +90,7 @@
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                        <TitledPane animated="false" layoutX="10.0" layoutY="123.0" text="Complete Shared Task">
+                        <TitledPane expanded="false" layoutX="10.0" layoutY="123.0" text="Complete Shared Task">
                            <content>
                               <AnchorPane prefHeight="148.0" prefWidth="409.0">
                                  <children>
@@ -111,7 +111,64 @@
       </Tab>
       <Tab text="Trades">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox layoutY="-1.0" prefHeight="348.0" prefWidth="361.0">
+                     <children>
+                        <TitledPane animated="false" expanded="false" text="Add Trade">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="359.0">
+                                 <children>
+                                    <ComboBox layoutX="165.0" layoutY="14.0" prefWidth="150.0" />
+                                    <TextField layoutX="166.0" layoutY="50.0" />
+                                    <TextField layoutX="166.0" layoutY="90.0" />
+                                    <Text layoutX="28.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Villager" />
+                                    <Text layoutX="28.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trade Name" />
+                                    <Text layoutX="28.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
+                                    <TextArea layoutX="164.0" layoutY="131.0" prefHeight="49.0" prefWidth="150.0" />
+                                    <Text layoutX="28.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trade Description" />
+                                    <Button layoutX="166.0" layoutY="197.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Add" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" expanded="false" text="Edit trade">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="286.0" prefWidth="359.0">
+                                 <children>
+                                    <ComboBox layoutX="173.0" layoutY="51.0" prefWidth="150.0" />
+                                    <TextField layoutX="173.0" layoutY="93.0" />
+                                    <TextField layoutX="173.0" layoutY="129.0" />
+                                    <TextArea layoutX="173.0" layoutY="165.0" prefHeight="49.0" prefWidth="150.0" />
+                                    <Text layoutX="14.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Villager" />
+                                    <Text layoutX="14.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trade Name" />
+                                    <Text layoutX="14.0" layoutY="146.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
+                                    <Text layoutX="14.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trade Description" />
+                                    <Button layoutX="175.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Update" />
+                                    <Button layoutX="16.0" layoutY="226.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Remove" />
+                                    <ComboBox layoutX="173.0" layoutY="14.0" prefWidth="150.0" />
+                                    <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Trade" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" expanded="false" text="Complete Trade">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="121.0" prefWidth="359.0">
+                                 <children>
+                                    <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Trade" wrappingWidth="64.634765625" />
+                                    <ComboBox layoutX="169.0" layoutY="9.0" prefWidth="150.0" />
+                                    <Text layoutX="14.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Buyer" wrappingWidth="79.30142211914062" />
+                                    <ComboBox layoutX="169.0" layoutY="43.0" prefWidth="150.0" />
+                                    <Button layoutX="171.0" layoutY="77.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Complete" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                     </children>
+                  </VBox>
+                  <TextArea layoutX="361.0" layoutY="-1.0" prefHeight="347.0" prefWidth="237.0" />
+               </children></AnchorPane>
          </content>
       </Tab>
       <Tab text="Green Points">
