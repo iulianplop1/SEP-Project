@@ -45,6 +45,7 @@
                                     <Button fx:id="removeVillager" layoutX="291.0" layoutY="125.0" mnemonicParsing="false" onAction="#removeVillager" text="Remove" />
                                     <TextField fx:id="personalPoints" layoutX="108.0" layoutY="125.0" />
                                     <Text layoutX="14.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Personal Points" />
+                                    <Text layoutX="14.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Villager" />
                                  </children>
                               </AnchorPane>
                           </content>
@@ -77,20 +78,21 @@
                         </TitledPane>
                         <TitledPane animated="false" expanded="false" text="Edit Shared Task">
                            <content>
-                              <AnchorPane>
+                              <AnchorPane prefHeight="139.0" prefWidth="418.0">
                                  <children>
-                                    <TextField layoutX="143.0" layoutY="50.0" />
-                                    <TextField layoutX="143.0" layoutY="82.0" />
-                                    <Text layoutX="33.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task Name" />
-                                    <Text layoutX="33.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points Required" />
+                                    <TextField layoutX="238.0" layoutY="37.0" />
+                                    <TextField layoutX="238.0" layoutY="74.0" />
+                                    <Text layoutX="33.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task Name" />
+                                    <Text layoutX="33.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points Required" />
                                     <ComboBox layoutX="238.0" layoutY="1.0" prefWidth="150.0" />
-                                    <Button fx:id="UpdateVillager1" layoutX="327.0" layoutY="43.0" mnemonicParsing="false" prefWidth="59.0" text="Update" />
-                                    <Button fx:id="RemoveVillager1" layoutX="326.0" layoutY="84.0" mnemonicParsing="false" text="Remove" />
+                                    <Text layoutX="33.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Shared Task" />
+                                    <Button fx:id="UpdateVillager1" layoutX="238.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Update" />
+                                    <Button fx:id="UpdateVillager11" layoutX="33.0" layoutY="116.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Remove" />
                                  </children>
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                        <TitledPane expanded="false" layoutX="10.0" layoutY="123.0" text="Complete Shared Task">
+                        <TitledPane layoutX="10.0" layoutY="123.0" text="Complete Shared Task">
                            <content>
                               <AnchorPane prefHeight="148.0" prefWidth="409.0">
                                  <children>
@@ -190,7 +192,7 @@
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <TitledPane animated="false" prefHeight="177.0" prefWidth="353.0" text="Edit Green Activity">
+                        <TitledPane animated="false" expanded="false" text="Edit Green Activity">
                           <content>
                             <AnchorPane prefHeight="156.0" prefWidth="351.0">
                                  <children>
@@ -208,7 +210,61 @@
                         </TitledPane>
                         <TitledPane animated="false" expanded="false" text="Complete Green Activity">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="351.0">
+                                 <children>
+                                    <ComboBox layoutX="187.0" layoutY="14.0" prefWidth="150.0" />
+                                    <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Green Activity" />
+                                    <Button layoutX="187.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Complete" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" expanded="false" text="Add Green Goal">
+                          <content>
+                            <AnchorPane>
+                                 <children>
+                                    <TextField layoutX="176.0" layoutY="14.0" />
+                                    <TextField layoutX="176.0" layoutY="55.0" />
+                                    <TextArea layoutX="176.0" layoutY="95.0" prefHeight="48.0" prefWidth="149.0" />
+                                    <Text layoutX="22.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Name" />
+                                    <Text layoutX="22.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
+                                    <Text layoutX="22.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Description" />
+                                    <Button layoutX="176.0" layoutY="154.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Add" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" expanded="false" text="Edit Green Goal">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="351.0">
+                                 <children>
+                                    <ComboBox layoutX="176.0" layoutY="14.0" prefWidth="150.0" />
+                                    <TextField layoutX="177.0" layoutY="48.0" />
+                                    <TextField layoutX="177.0" layoutY="83.0" />
+                                    <TextArea layoutX="178.0" layoutY="119.0" prefHeight="22.0" prefWidth="148.0" />
+                                    <Text layoutX="24.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Green Goal" />
+                                    <Text layoutX="24.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Name" />
+                                    <Text layoutX="24.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
+                                    <Text layoutX="24.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Description" />
+                                    <Button layoutX="178.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Update" />
+                                    <Button layoutX="12.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Remove" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane expanded="false" text="Complete Green Goal">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TextField layoutX="176.0" layoutY="14.0" />
+                                    <TextField layoutX="176.0" layoutY="58.0" />
+                                    <Text layoutX="21.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Active Green Goal" />
+                                    <Text layoutX="21.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
+                                    <TextField layoutX="176.0" layoutY="97.0" />
+                                    <Text layoutX="21.0" layoutY="114.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Village Green Points" />
+                                    <Button layoutX="178.0" layoutY="132.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Complete" />
+                                 </children>
+                              </AnchorPane>
                           </content>
                         </TitledPane>
                      </children>
@@ -216,6 +272,62 @@
                   <TextArea layoutX="353.0" prefHeight="345.0" prefWidth="247.0" />
                </children></AnchorPane>
          </content>
+      </Tab>
+      <Tab text="Settings">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <VBox prefHeight="351.0" prefWidth="600.0">
+                     <children>
+                        <TitledPane animated="false" text="Set Active Green Goal">
+                          <content>
+                            <AnchorPane>
+                                 <children>
+                                    <ComboBox layoutX="192.0" layoutY="14.0" prefWidth="150.0" />
+                                    <Text layoutX="23.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Green Goal" />
+                                    <Button layoutX="432.0" layoutY="13.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Save" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" text="Set Reset Period">
+                          <content>
+                            <AnchorPane>
+                                 <children>
+                                    <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set period(in days)" />
+                                    <TextField layoutX="191.0" layoutY="21.0" />
+                                    <Button layoutX="431.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Save" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" text="Reset Personal Points">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <Text layoutX="14.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Total unused personal points" />
+                                    <TextField layoutX="190.0" layoutY="12.0" />
+                                    <Button layoutX="432.0" layoutY="12.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Reset" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </TitledPane>
+                        <TitledPane animated="false" text="Set Village Description">
+                           <content>
+                              <AnchorPane>
+                                 <children>
+                                    <TextArea layoutX="188.0" layoutY="14.0" prefHeight="14.0" prefWidth="156.0" />
+                                    <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set Village Description" />
+                                    <Button layoutX="429.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Save" />
+                                 </children>
+                              </AnchorPane>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+        </content>
       </Tab>
    </tabs>
 </TabPane>
