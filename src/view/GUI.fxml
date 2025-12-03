@@ -120,19 +120,19 @@
                <children>
                   <VBox layoutY="-1.0" prefHeight="348.0" prefWidth="361.0">
                      <children>
-                        <TitledPane expanded="false" text="Add Trade">
+                        <TitledPane text="Add Trade">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="243.0" prefWidth="359.0">
                                  <children>
-                                    <ComboBox layoutX="165.0" layoutY="14.0" prefWidth="150.0" />
-                                    <TextField layoutX="166.0" layoutY="50.0" />
-                                    <TextField layoutX="166.0" layoutY="90.0" />
+                                    <ComboBox fx:id="chooseTradeSeller" layoutX="165.0" layoutY="14.0" prefWidth="150.0" />
+                                    <TextField fx:id="tradeName" layoutX="166.0" layoutY="50.0" />
+                                    <TextField fx:id="tradeRequiredPoints" layoutX="166.0" layoutY="90.0" />
                                     <Text layoutX="28.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Villager" />
                                     <Text layoutX="28.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trade Name" />
                                     <Text layoutX="28.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
-                                    <TextArea layoutX="164.0" layoutY="131.0" prefHeight="49.0" prefWidth="150.0" />
+                                    <TextArea fx:id="tradeDescription" layoutX="164.0" layoutY="131.0" prefHeight="49.0" prefWidth="150.0" />
                                     <Text layoutX="28.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trade Description" />
-                                    <Button layoutX="166.0" layoutY="197.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Add" />
+                                    <Button layoutX="166.0" layoutY="197.0" mnemonicParsing="false" onAction="#addTadeOffer" prefHeight="25.0" prefWidth="146.0" text="Add" />
                                  </children>
                               </AnchorPane>
                           </content>

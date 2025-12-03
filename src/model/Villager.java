@@ -74,6 +74,6 @@ public class Villager implements Serializable
 
   public String toString()
   {
-    return firstname + " " + lastname + "[" +  personalpoints + "]";
+    return firstname + " " + lastname + " [" +  personalpoints + "]";
   }
 }

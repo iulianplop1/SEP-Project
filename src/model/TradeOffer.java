@@ -9,14 +9,16 @@ public class TradeOffer implements Serializable {
   private int points;
   private Villager seller;
   private Villager buyer;
+  private String description;
   private ArrayList<Villager> possiblebuyers;
 
 
-  public TradeOffer(Villager seller, String tradename, int points) {
+  public TradeOffer(Villager seller, String tradename, int points, String description) {
     this.seller = seller;
     this.tradename = tradename;
     this.points = points;
     this.buyer = null;
+    this.description = description;
     this.possiblebuyers = new ArrayList<>();
   }
 
@@ -29,6 +31,9 @@ public class TradeOffer implements Serializable {
   public void setSeller(Villager seller) {
     this.seller = seller;
   }
+  public void setDescription(String description) {
+    this.description = description;
+  }
   public String getTradeName() {
     return tradename;
   }
@@ -37,6 +42,10 @@ public class TradeOffer implements Serializable {
   }
   public Villager getSeller() {
     return seller;
+  }
+  public String getDescription()
+  {
+    return description;
   }
 
   public ArrayList<Villager> getPossibleBuyers(ArrayList<Villager> villagers) {
@@ -63,7 +72,7 @@ public class TradeOffer implements Serializable {
   }
 
   public TradeOffer copy(){
-    return new TradeOffer(seller, tradename, points);
+    return new TradeOffer(seller, tradename, points, description);
   }
 
   public String toString()

@@ -94,9 +94,9 @@ public class cloverTest
     cloverville.addVillager(villager41);
     cloverville.addVillager(villager42);
 
-    TradeOffer trade1 = new TradeOffer(villager4, "peanut butter jelly sandwich", 35);
+    TradeOffer trade1 = new TradeOffer(villager4, "peanut butter jelly sandwich", 35, "i give you that");
     cloverville.addTradeOffer(trade1);
-    TradeOffer trade2 = new TradeOffer(villager4, "world famous hungarian pálinka", 67);
+    TradeOffer trade2 = new TradeOffer(villager4, "world famous hungarian pálinka", 67, "i give you that too");
     cloverville.addTradeOffer(trade2);
 
     int dayoftoday = Date.today().getDay();

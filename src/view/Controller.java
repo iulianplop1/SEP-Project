@@ -19,10 +19,9 @@ public class Controller
   @FXML private TextField firstName1;
   @FXML private TextField lastName1;
   @FXML private Button updateVillager;
-  @FXML private Button removeVillager;
-  @FXML private Button addVillager;
   @FXML private TextArea listVillagers;
   @FXML private ComboBox chooseVillagers;
+
   @FXML private TextField sharedTaskName;
   @FXML private TextField pointsGiven;
   @FXML private TextField sharedTaskName1;
@@ -48,6 +47,15 @@ public class Controller
   @FXML private Button removeGreenGoal;
 
   @FXML private TextArea listTrades;
+  @FXML private ComboBox chooseTradeSeller;
+  @FXML private TextField tradeName;
+  @FXML private TextField tradeRequiredPoints;
+  @FXML private TextArea tradeDescription;
+
+  @FXML ComboBox chooseTrade;
+  @FXML private TextField tradeNameEdit;
+  @FXML private TextField tradeRequiredPointsEdit;
+  @FXML private TextField tradeDescriptionEdit;
 
   private VillageModelManager manager = new VillageModelManager("village.bin");
 
@@ -57,6 +65,7 @@ public class Controller
     loadVillagers();
 
     loadTrades();
+    loadTradeSellerBox();
   }
 
   @FXML public void loadVillagers()
@@ -74,6 +83,23 @@ public class Controller
     }
 
     listVillagers.setEditable(false);
+  }
+
+  @FXML public void loadTrades()
+  {
+    ArrayList<TradeOffer> trades = manager.getTrades();
+
+    listTrades.clear();
+
+    for (TradeOffer trade : trades)
+    {
+      String line = "";
+      line += trade.getTradeName() + " for [" + trade.getPoints() + "]\n\tby "
+          + trade.getSeller() + "\n\t description: '" + trade.getDescription() + "'\n";
+      listTrades.appendText(line);
+    }
+
+    listTrades.setEditable(false);
   }
 
   @FXML public void loadVillagerBox()
@@ -95,7 +121,7 @@ public class Controller
       chooseVillagers.getSelectionModel()
           .select(0);              //show first villager in the box
 
-      selectedVillager = (Villager) chooseVillagers.getValue();          //this will be the villager to fill up the texboxes
+      selectedVillager = (Villager) chooseVillagers.getValue();          //this will be the villager to fill up the textboxes
     }
     else
     {
@@ -113,21 +139,28 @@ public class Controller
     }
   }
 
-  @FXML public void loadTrades()
+  @FXML public void loadTradeSellerBox()
   {
-    ArrayList<TradeOffer> trades = manager.getTrades();
+    chooseTradeSeller.getItems().clear();
 
-    listTrades.clear();
-
-    for (TradeOffer trade : trades)
+    ArrayList<Villager> villagers = manager.getVillagers();
+    for (Villager villager : villagers)
     {
-      String line = "";
-      line += trade.getTradeName() + " for [" + trade.getPoints() + "]\n\tby"
-          + trade.getSeller() + "\n";
-      listTrades.appendText(line);
+      chooseTradeSeller.getItems().add(villager);       //add villagers to box
     }
+    int currentIndex = chooseTradeSeller.getSelectionModel()
+        .getSelectedIndex();  //gets index of selected villager in the box
 
-    listTrades.setEditable(false);
+    if (currentIndex == -1 && chooseTradeSeller.getItems().size() > 0)
+    {   //no selection (no index) and there are villagers
+      chooseTradeSeller.getSelectionModel()
+          .select(0);              //show first villager in the box
+    }
+    else
+    {
+      chooseTradeSeller.getSelectionModel().select(
+          currentIndex);         //there is a selected villager (not -1 index)
+    }
   }
 
   @FXML public void addVillager()
@@ -186,31 +219,38 @@ public class Controller
     }
   }
 
+  @FXML void addTadeOffer()
+  {
+    Villager seller = (Villager) chooseTradeSeller.getValue();
+    String tradename = tradeName.getText();
+    int requiredpoints = Integer.parseInt(tradeRequiredPoints.getText());
+    String description = tradeDescription.getText();
+    TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints,
+        description);
+    manager.addTrade(trade);
+    loadTrades();
+    loadTradeSellerBox();
+  }
+
+  @FXML void editTadeOffer(ActionEvent e)
+  {
+    TradeOffer selectedTrade = (TradeOffer) chooseTrade.getValue();
+
+    if (e.getSource() == chooseTrade)
+    {
+      if (selectedTrade != null)
+      {
+        tradeNameEdit.setText(selectedTrade.getTradeName());
+        tradeRequiredPointsEdit.setText(String.valueOf(selectedTrade.getPoints()));
+        tradeDescriptionEdit.setText(selectedTrade.getDescription());
+      }
+    }
+  }
+
   public void setTotalCounter()
   {
     int number = manager.getVillagers().size();
     totalCounter.setText(Integer.toString(number));
-  }
-
-  public void intializeGreenGoal()
-  {
-    loadGreenGoalBox();
-    loadGreenGoal();
-  }
-
-  public void loadGreenGoal()
-  {
-    ArrayList<String> catalogueOfIdeas = manager.getcatalogueOfIdeas();
-
-    for (String greengoal : catalogueOfIdeas)
-    {
-      String line = "";
-      line += greengoal.getgreenGoalName() + " " + greengoal.getgreenRequiredPoints() + " - "
-          + greengoal.getgreenDescription() + "\n";
-      listCatalogueOfIdeas.appendText(line);
-    }
-
-    listCatalogueOfIdeas.setEditable(false);
   }
 }
 
