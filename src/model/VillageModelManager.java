@@ -37,7 +37,7 @@ public class VillageModelManager
       try
       {
          MyFileHandler.writeToBinaryFile(fileName, village);
-        System.out.println("Done");
+        System.out.println("writte to " +  fileName);
       }
       catch (FileNotFoundException e)
       {
@@ -60,78 +60,56 @@ public class VillageModelManager
 
   public void addVillager(Villager villager) {
     Village cloverville = getVillage();
-    ArrayList<Villager> villagers = cloverville.getVillagers();
-    villagers.add(villager);
+    cloverville.addVillager(villager);
     saveVillage(cloverville);
   }
   public void removeVillager(Villager villager){
     Village cloverville = getVillage();
     ArrayList<Villager> villagers = cloverville.getVillagers();
-
-    for(int i=0;i<villagers.size();i++){
-      if(villagers.get(i).equals(villager)){
-        villagers.remove(villagers.get(i));
-      }
-    }
-
+    cloverville.removeVillager(villager);
     saveVillage(cloverville);
   }
   public void changeVillager(Villager old, Villager villager) {
-    String first = villager.getFirstname();
-    String last = villager.getLastname();
-    int points = villager.getPoints();
     Village cloverville = getVillage();
-    ArrayList<Villager> villagers = cloverville.getVillagers();
-    for (int i = 0; i < villagers.size(); i++)
-    {
-      if (villagers.get(i).equals(old))
-      {
-        villagers.get(i).setFirstName(first);
-        villagers.get(i).setLastName(last);
-        villagers.get(i).setPoints(points);
-      }
-    }
+    cloverville.changeVillager(old, villager);
     saveVillage(cloverville);
   }
 
   public void addTrade(TradeOffer trade){
     Village cloverville = getVillage();
-    ArrayList<TradeOffer> trades = cloverville.getTrades();
-    trades.add(trade);
+    cloverville.addTradeOffer(trade);
     saveVillage(cloverville);
   }
-
-  public void removeTrade(TradeOffer trade)
-  {
+  public void removeTrade(TradeOffer trade) {
+    if (trade == null){
+      throw new IllegalArgumentException("trade offer is null");
+    }
     Village cloverville = getVillage();
     ArrayList<TradeOffer> trades = cloverville.getTrades();
-    for(TradeOffer t:trades){
-      if (t.equals(trade)){
-        trades.remove(t);
-        System.out.println(t + " removed");
-      }
-    }
+    cloverville.removeTradeOffer(trade);
     saveVillage(cloverville);
   }
-
   public void changeTrade(TradeOffer old, TradeOffer trade){
-    String name = trade.getTradeName();
-    Villager seller = trade.getSeller();
-    int points = trade.getPoints();
-    String description = trade.getDescription();
-    Village cloverville = getVillage();
-    ArrayList<TradeOffer> trades = cloverville.getTrades();
-    for (int i = 0; i < trades.size(); i++)
-    {
-      if (trades.get(i).equals(old))
-      {
-        trades.get(i).setTradeName(name);
-        trades.get(i).setSeller(seller);
-        trades.get(i).setPoints(points);
-        trades.get(i).setDescription(description);
-      }
+    if(old == null || trade == null){
+      throw new IllegalArgumentException("old trade or new trade is null");
     }
-    saveVillage(cloverville);
+    else{
+      Village cloverville = getVillage();
+      cloverville.editTradeOffer(old, trade);
+      saveVillage(cloverville);
+    }
+  }
+
+  public void finishTrade(TradeOffer trade, Villager buyer) {
+    if (trade == null || buyer == null){
+      throw new IllegalArgumentException("Trade or buyer is null");
+    }
+    else{
+      Village cloverville = getVillage();
+      cloverville.finishTradeOffer(trade, buyer);
+      System.out.println("finished tradeoffer");
+      saveVillage(cloverville);
+    }
   }
 
  }

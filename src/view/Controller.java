@@ -54,11 +54,14 @@ public class Controller
 
   @FXML ComboBox chooseTrade;
   @FXML ComboBox chooseTradeSellerEdit;
+  @FXML ComboBox chooseTradeFinish;
+  @FXML ComboBox chooseTradeBuyer;
   @FXML private TextField tradeNameEdit;
   @FXML private TextField tradeRequiredPointsEdit;
   @FXML private TextArea tradeDescriptionEdit;
   @FXML private Button removeTrade;
   @FXML private Button updateTrade;
+  @FXML private Button finishTrade;
 
   private VillageModelManager manager = new VillageModelManager("village.bin");
 
@@ -71,10 +74,10 @@ public class Controller
     loadTradeSellerBox();
     loadTradesBox();
     loadTradeSellerEditBox();
+    loadTradeFinal();
   }
 
-  @FXML public void loadVillagers()
-  {
+  @FXML public void loadVillagers() {
     ArrayList<Villager> villagers = manager.getVillagers();
 
     listVillagers.clear();
@@ -89,9 +92,7 @@ public class Controller
 
     listVillagers.setEditable(false);
   }
-
-  @FXML public void loadTrades()
-  {
+  @FXML public void loadTrades() {
     ArrayList<TradeOffer> trades = manager.getTrades();
 
     listTrades.clear();
@@ -99,16 +100,14 @@ public class Controller
     for (TradeOffer trade : trades)
     {
       String line = "";
-      line += trade.getTradeName() + " for [" + trade.getPoints() + "]\n\tby "
-          + trade.getSeller() + "\n\t description: '" + trade.getDescription() + "'\n";
+      line += "[" + trade.getPoints() + "] " + trade.getTradeName() + "\n\t'"
+          + trade.getDescription() + "'\n\t by " + trade.getSeller() + "\n";
       listTrades.appendText(line);
     }
 
     listTrades.setEditable(false);
   }
-
-  @FXML public void loadVillagerBox()
-  {
+  @FXML public void loadVillagerBox() {
     chooseVillagers.getItems().clear();
 
     ArrayList<Villager> villagers = manager.getVillagers();
@@ -141,9 +140,7 @@ public class Controller
       personalPoints.setText(String.valueOf(selectedVillager.getPoints()));
     }
   }
-
-  @FXML public void loadTradeSellerBox()
-  {
+  @FXML public void loadTradeSellerBox() {
     chooseTradeSeller.getItems().clear();
 
     ArrayList<Villager> villagers = manager.getVillagers();
@@ -164,9 +161,7 @@ public class Controller
           currentIndex);         //there is a selected villager (not -1 index)
     }
   }
-
-  @FXML public void loadTradeSellerEditBox()
-  {
+  @FXML public void loadTradeSellerEditBox() {
     chooseTradeSellerEdit.getItems().clear();
 
     ArrayList<Villager> villagers = manager.getVillagers();
@@ -187,9 +182,7 @@ public class Controller
           currentIndex);         //there is a selected villager (not -1 index)
     }
   }
-
-  @FXML public void loadTradesBox()
-  {
+  @FXML public void loadTradesBox() {
     chooseTrade.getItems().clear();
 
     ArrayList<TradeOffer> trades = manager.getTrades();
@@ -222,9 +215,57 @@ public class Controller
       tradeDescriptionEdit.setText(selectedTrade.getDescription());
     }
   }
+  @FXML public void loadTradeFinal() {
+    chooseTradeFinish.getItems().clear();
 
-  @FXML public void addVillager()
-  {
+    TradeOffer updatebuyerbox = null;
+    ArrayList<TradeOffer> trades = manager.getTrades();
+    for (TradeOffer t : trades)
+    {
+      chooseTradeFinish.getItems().add(t);
+    }
+    int currentIndex = chooseTradeFinish.getSelectionModel().getSelectedIndex();
+
+    if (currentIndex == -1 && chooseTradeFinish.getItems().size() > 0) {
+      chooseTradeFinish.getSelectionModel()
+          .select(0);
+      updatebuyerbox = (TradeOffer)chooseTradeFinish.getValue();
+    }
+    else {
+      chooseTradeFinish.getSelectionModel().select(
+          currentIndex);
+      updatebuyerbox = (TradeOffer)chooseTradeFinish.getValue();
+    }
+    if (updatebuyerbox != null){
+      loadBuyerBox(updatebuyerbox);
+    }
+  }
+  @FXML public void loadBuyerBox(TradeOffer trade) {
+    chooseTradeBuyer.getItems().clear();
+
+    ArrayList<Villager> villagers = manager.getVillagers();
+    ArrayList<Villager> possiblebuyers = trade.getPossibleBuyers(villagers);
+    for (Villager buyer : possiblebuyers){
+      if (buyer.checkPoints(trade.getPoints()) && !buyer.equals(trade.getSeller())){
+        chooseTradeBuyer.getItems().add(buyer);
+      }
+    }
+    int currentIndex = chooseTradeBuyer.getSelectionModel().getSelectedIndex();
+
+    if (currentIndex == -1 && chooseTradeBuyer.getItems().size() > 0) {
+      chooseTradeBuyer.getSelectionModel()
+          .select(0);
+    }
+    else {
+      chooseTradeBuyer.getSelectionModel().select(
+          currentIndex);
+    }
+  }
+
+
+
+
+  @FXML public void addVillager() {
     if (firstName.getText() != "" && lastName.getText() != "")
     {
       String first = firstName.getText();
@@ -232,13 +273,10 @@ public class Controller
       Villager villager = new Villager(first, last);
       manager.addVillager(villager);
 
-      loadVillagers();
-      loadVillagerBox();
+      initialize();
     }
   }
-
-  @FXML public void editVillager(ActionEvent e)
-  {
+  @FXML public void editVillager(ActionEvent e) {
     Villager selectedVillager = (Villager) chooseVillagers.getValue();
     // When a villager is selected in the ComboBox
     if (e.getSource() == chooseVillagers)
@@ -259,13 +297,11 @@ public class Controller
             lastName1.getText(), Integer.parseInt(personalPoints.getText()));
         manager.changeVillager(selectedVillager, newVillager);
       }
-      loadVillagers();
-      loadVillagerBox();
+      initialize();
     }
   }
 
-  public void removeVillager()
-  {
+  public void removeVillager() {
     if (firstName1.getText() != "" && lastName1.getText() != "")
     {
       String first = firstName1.getText();
@@ -274,27 +310,22 @@ public class Controller
       Villager villager = new Villager(first, last, points);
       manager.removeVillager(villager);
 
-      loadVillagers();
-      loadVillagerBox();
+      initialize();
     }
   }
 
-  @FXML void addTadeOffer()
-  {
+  @FXML void addTadeOffer() {
     Villager seller = (Villager) chooseTradeSeller.getValue();
     String tradename = tradeName.getText();
     int requiredpoints = Integer.parseInt(tradeRequiredPoints.getText());
     String description = tradeDescription.getText();
-    TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints,
-        description);
+    TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints, description);
+    System.out.println("ADDING TRADE --> " + trade);
     manager.addTrade(trade);
-    loadTrades();
-    loadTradeSellerBox();
-    loadVillagerBox();
-  }
 
-  @FXML void editTradeOffer(ActionEvent e)
-  {
+    initialize();
+  }
+  @FXML void editTradeOffer(ActionEvent e) {
     TradeOffer selectedTrade = (TradeOffer) chooseTrade.getValue();
 
     if (e.getSource() == chooseTrade)
@@ -307,21 +338,46 @@ public class Controller
         tradeDescriptionEdit.setText(selectedTrade.getDescription());
       }
     }
-    else if (e.getSource() == removeTrade)
+    else if (e.getSource() == removeTrade || e.getSource()==updateTrade)
     {
       Villager editedSeller = (Villager) chooseTradeSellerEdit.getValue();
       String editedTradeName = tradeNameEdit.getText();
       int editedPoints = Integer.parseInt(tradeRequiredPointsEdit.getText());
       String editedDescription = tradeDescriptionEdit.getText();
-      TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
-      manager.removeTrade(toRemove);
+      if(e.getSource()==removeTrade){
+        TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
+        manager.removeTrade(toRemove);
+      }
+      else if(e.getSource()==updateTrade){
+        TradeOffer newTrade = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
+        manager.changeTrade(selectedTrade, newTrade);
+      }
 
-      loadTrades();
-      loadTradeSellerBox();
-      loadTradesBox();
-      loadTradeSellerEditBox();
+      initialize();
     }
   }
+  @FXML void finishTradeOffer(ActionEvent e) {
+    TradeOffer selectedTrade = (TradeOffer) chooseTradeFinish.getValue();
+    Villager finalbuyer = (Villager) chooseTradeBuyer.getValue();
+
+    if (e.getSource() == chooseTradeFinish)
+    {
+      if (selectedTrade != null)
+      {
+        loadBuyerBox(selectedTrade);
+      }
+    }
+    if(e.getSource() == chooseTradeBuyer){
+      finalbuyer = (Villager) chooseTradeBuyer.getValue();
+    }
+    if (e.getSource()==finishTrade && finalbuyer != null)
+    {
+      manager.finishTrade(selectedTrade, finalbuyer);
+
+      initialize();
+    }
+  }
+
 
   public void setTotalCounter()
   {

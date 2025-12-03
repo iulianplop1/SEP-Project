@@ -94,10 +94,39 @@ public class cloverTest
     cloverville.addVillager(villager41);
     cloverville.addVillager(villager42);
 
-    TradeOffer trade1 = new TradeOffer(villager4, "peanut butter jelly sandwich", 35, "i give you that");
+    TradeOffer trade1 = new TradeOffer(villager4, "peanut butter jelly sandwich", 35, "yum yum");
+    TradeOffer trade2 = new TradeOffer(villager3, "world famous hungarian pálinka", 67, "brought from home");
+    TradeOffer trade3 = new TradeOffer(villager3, "carrots", 35, "collected from the field");
+    TradeOffer trade4 = new TradeOffer(villager3, "pears", 67, "a bit ripe");
+    TradeOffer trade5 = new TradeOffer(villager1, "freshly baked bread", 25, "just made this morning");
+    TradeOffer trade6 = new TradeOffer(villager1, "homemade wooden spoon", 40, "crafted with care");
+    TradeOffer trade7 = new TradeOffer(villager3, "basket of apples", 30, "picked from the village orchard");
+    TradeOffer trade8 = new TradeOffer(villager3, "hand-knitted scarf", 55, "keeps you warm in winter");
+    TradeOffer trade9 = new TradeOffer(villager2, "jar of organic honey", 45, "harvested from local hives");
+    TradeOffer trade10 = new TradeOffer(villager4, "warm wool mittens", 38, "handmade for cold winters");
+    TradeOffer trade11 = new TradeOffer(villager1, "vintage pocket watch", 90, "passed down from family");
+    TradeOffer trade12 = new TradeOffer(villager2, "bundle of firewood", 28, "perfectly dried");
+    TradeOffer trade13 = new TradeOffer(villager3, "herbal healing tea", 33, "made from rare mountain herbs");
+    TradeOffer trade14 = new TradeOffer(villager4, "leather-bound notebook", 50, "great for journaling");
+    TradeOffer trade15 = new TradeOffer(villager1, "set of gardening tools", 70, "includes gloves, trowel, etc.");
+    TradeOffer trade16 = new TradeOffer(villager2, "handcrafted clay mug", 22, "fired in my home kiln");
+
     cloverville.addTradeOffer(trade1);
-    TradeOffer trade2 = new TradeOffer(villager4, "world famous hungarian pálinka", 67, "i give you that too");
     cloverville.addTradeOffer(trade2);
+    cloverville.addTradeOffer(trade3);
+    cloverville.addTradeOffer(trade4);
+    cloverville.addTradeOffer(trade5);
+    cloverville.addTradeOffer(trade6);
+    cloverville.addTradeOffer(trade7);
+    cloverville.addTradeOffer(trade8);
+    cloverville.addTradeOffer(trade9);
+    cloverville.addTradeOffer(trade10);
+    cloverville.addTradeOffer(trade11);
+    cloverville.addTradeOffer(trade12);
+    cloverville.addTradeOffer(trade13);
+    cloverville.addTradeOffer(trade14);
+    cloverville.addTradeOffer(trade15);
+    cloverville.addTradeOffer(trade16);
 
     int dayoftoday = Date.today().getDay();
     int monthoftoday = Date.today().getMonth();
@@ -112,7 +141,7 @@ public class cloverTest
 
 
     GreenGoal goal1 = new GreenGoal("pizza", 150);
-    //cloverville.addGreenGoal(goal1);
+    cloverville.addGreenGoal(goal1);
 
     SharedTask sharedtask1 = new SharedTask(cloverville, "cleaning grupperoom", 300);
     cloverville.addSharedTask(sharedtask1);

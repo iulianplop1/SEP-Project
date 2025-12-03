@@ -25,13 +25,38 @@ public class Village implements Serializable {
     return villagers.size();
   }
 
-
-
   public void addVillager(Villager villager) {
-    villagers.add(villager);
+    boolean in = false;
+    for(Villager v : villagers){
+      if (v.equals(villager)) {
+        in = true;
+      }
+    } if (!in) {
+      villagers.add(villager);
+    }
   }
   public void removeVillager(Villager villager) {
-    villagers.remove(villager);
+    boolean in = false;
+    for(Villager v : villagers){
+      if (v.equals(villager)) {
+        in = true;
+      }
+    } if (in) {
+      villagers.remove(villager);
+    }
+  }
+  public void changeVillager(Villager old, Villager villager) {
+    String first = villager.getFirstname();
+    String last = villager.getLastname();
+    int points = villager.getPoints();;
+    for(Villager v : villagers){
+      if (v.equals(old))
+      {
+        v.setFirstName(first);
+        v.setLastName(last);
+        v.setPoints(points);
+      }
+    }
   }
 
   public ArrayList<Villager> getVillagers() {
@@ -42,25 +67,67 @@ public class Village implements Serializable {
   }
 
   public void addTradeOffer(TradeOffer tradeOffer) {
-    trades.add(tradeOffer);
-    System.out.println("TRADE OFFER ADDED --> " + tradeOffer);
-    ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers(villagers);
-    System.out.println("POSSIBLE BUYERS --> " + possiblebuyers);
+    boolean in = false;
+    for(TradeOffer t : trades){
+      if (t.equals(tradeOffer))
+        in = true;
+    }
+    if(!in){
+      trades.add(tradeOffer);
+      System.out.println("TRADE OFFER ADDED --> " + tradeOffer);
+      ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers(villagers);
+      System.out.println("POSSIBLE BUYERS --> " + possiblebuyers);
+    }
+    else{
+      System.out.println("already in list");
+    }
+
   }
   public void removeTradeOffer(TradeOffer tradeOffer) {
     trades.remove(tradeOffer);
   }
-  public void editTradeOffer(TradeOffer tradeofferOld, TradeOffer tradeofferNew) {
-    if(trades.contains(tradeofferOld)){
-      removeTradeOffer(tradeofferOld);
-      addTradeOffer(tradeofferNew);
+  public void editTradeOffer(TradeOffer old, TradeOffer trade) {
+    String name = trade.getTradeName();
+    Villager seller = trade.getSeller();
+    int points = trade.getPoints();
+    String description = trade.getDescription();
+
+    for(TradeOffer t : trades){
+      if (t.equals(old))
+      {
+        t.setTradeName(name);
+        t.setSeller(seller);
+        t.setPoints(points);
+        t.setDescription(description);
+      }
     }
   }
   public void finishTradeOffer(TradeOffer tradeOffer, Villager buyer) {
-    if(trades.contains(tradeOffer)){
-      tradeOffer.setBuyer(buyer);
-      tradeOffer.finish();
-      trades.remove(tradeOffer);
+    TradeOffer target = null;
+    Villager sellerVillager = tradeOffer.getSeller();
+
+    for (TradeOffer t : trades) {
+      if (t.equals(tradeOffer)) {
+        target = t;
+        break;
+      }
+    }
+    if (target != null) {
+      trades.remove(target);
+      System.out.println("TRADE OFFER FINISHED --> " + target + " " + buyer);
+    }
+
+    for (Villager v : villagers) {
+      if (v.equals(buyer)) {
+        System.out.println(v);
+        v.subtractPoints(tradeOffer.getPoints());
+        System.out.println(tradeOffer.getPoints() + " subtracted from " + v);
+      }
+      if (v.equals(sellerVillager)) {
+        System.out.println(v);
+        v.addPoints(tradeOffer.getPoints());
+        System.out.println(tradeOffer.getPoints() + " added to " + v);
+      }
     }
   }
 
