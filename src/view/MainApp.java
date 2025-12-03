@@ -15,9 +15,10 @@ public class MainApp extends Application {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/view/GUI.fxml"));
-            Parent root = loader.load();
 
+            Parent root = loader.load();
             Scene scene = new Scene(root);
+
 
             primaryStage.setTitle("CloverVille");
             primaryStage.setScene(scene);
