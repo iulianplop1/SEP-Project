@@ -92,15 +92,18 @@
                               </AnchorPane>
                            </content>
                         </TitledPane>
-                        <TitledPane expanded="false" layoutX="10.0" layoutY="123.0" text="Complete Shared Task">
+                        <TitledPane layoutX="10.0" layoutY="123.0" text="Complete Shared Task">
                            <content>
-                              <AnchorPane prefHeight="148.0" prefWidth="409.0">
+                              <AnchorPane prefHeight="211.0" prefWidth="407.0">
                                  <children>
-                                    <ComboBox layoutY="2.0" prefHeight="26.0" prefWidth="124.0" />
-                                    <ComboBox layoutX="124.0" layoutY="2.0" prefHeight="26.0" prefWidth="124.0" />
-                                    <TextArea layoutX="248.0" layoutY="2.0" prefHeight="99.0" prefWidth="151.0" />
-                                    <Button layoutX="250.0" layoutY="108.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" text="Complete" />
-                                    <Button layoutX="138.0" layoutY="108.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="97.0" text="Add" />
+                                    <ComboBox layoutX="261.0" layoutY="18.0" prefHeight="26.0" prefWidth="124.0" />
+                                    <ComboBox layoutX="261.0" layoutY="55.0" prefHeight="26.0" prefWidth="124.0" />
+                                    <TextArea layoutX="260.0" layoutY="91.0" prefHeight="57.0" prefWidth="125.0" />
+                                    <Button layoutX="260.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="Add" />
+                                    <Text layoutX="27.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Shared Task" />
+                                    <Text layoutX="27.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Participants" />
+                                    <Text layoutX="27.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Villagers" />
+                                    <Button layoutX="27.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="Complete" />
                                  </children>
                               </AnchorPane>
                            </content>
@@ -252,7 +255,7 @@
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <TitledPane expanded="false" text="Complete Green Goal">
+                        <TitledPane text="Complete Green Goal">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
