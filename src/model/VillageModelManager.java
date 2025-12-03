@@ -65,8 +65,31 @@ public class VillageModelManager
   public void removeVillager(Villager villager){
     Village cloverville = getVillage();
     ArrayList<Villager> villagers = cloverville.getVillagers();
-    if (villagers.contains(villager)){
-      villagers.remove(villager);
+
+    for(int i=0;i<villagers.size();i++){
+      if(villagers.get(i).equals(villager)){
+        villagers.remove(villagers.get(i));
+      }
+    }
+
+    saveVillage(cloverville);
+  }
+
+  public void changeVillager(Villager old, Villager villager)
+  {
+    String first = villager.getFirstname();
+    String last = villager.getLastname();
+    int points = villager.getPoints();
+    Village cloverville = getVillage();
+    ArrayList<Villager> villagers = cloverville.getVillagers();
+    for (int i = 0; i < villagers.size(); i++)
+    {
+      if (villagers.get(i).equals(old))
+      {
+        villagers.get(i).setFirstName(first);
+        villagers.get(i).setLastName(last);
+        villagers.get(i).setPoints(points);
+      }
     }
     saveVillage(cloverville);
   }

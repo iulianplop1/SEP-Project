@@ -35,19 +35,32 @@ public class Controller
   @FXML private Button completeButton;
   @FXML private ComboBox chooseSharedtask1;
   @FXML private ComboBox chooseSharedTask2;
+  @FXML private TextField greenGoalName;
+  @FXML private TextField greenRequiredPoints;
+  @FXML private TextField greenDiscription;
+  @FXML private Button addGreenGoal;
+  @FXML private ComboBox chooseGreenGoal;
+  @FXML private TextField greenGoalName1;
+  @FXML private TextField greenRequiredPoints1;
+  @FXML private TextField greenDiscription1;
+  @FXML private Button upDateGreenGoal;
+  @FXML private Button removeGreenGoal;
 
 
   private VillageModelManager manager = new VillageModelManager("village.bin");
 
   public void initialize()
   {
-    loadVillagers();
     loadVillagerBox();
+    loadVillagers();
+
   }
 
   @FXML public void loadVillagers()
   {
     ArrayList<Villager> villagers = manager.getVillagers();
+
+    listVillagers.clear();
 
     for (Villager villager : villagers)
     {
@@ -62,25 +75,35 @@ public class Controller
 
   @FXML public void loadVillagerBox()
   {
-    int currentIndex = chooseVillagers.getSelectionModel().getSelectedIndex();
     chooseVillagers.getItems().clear();
+
+    int currentIndex = chooseVillagers.getSelectionModel().getSelectedIndex();  //gets index of selected
 
     ArrayList<Villager> villagers = manager.getVillagers();
     for (Villager villager : villagers)
     {
-      String line = "";
-      line += villager.getFirstname() + " " + villager.getLastname() + " - "
-          + villager.getPoints() + "\n";
-
       chooseVillagers.getItems().add(villager);
     }
 
+    Villager selectedVillager = null;
+
     if (currentIndex == -1 && chooseVillagers.getItems().size() > 0){
       chooseVillagers.getSelectionModel().select(0);
+
+      selectedVillager = (Villager)chooseVillagers.getValue();
     }
     else{
       chooseVillagers.getSelectionModel().select(currentIndex);
+
+      selectedVillager = (Villager)chooseVillagers.getValue();
     }
+
+    if (selectedVillager != null) {
+      firstName1.setText(selectedVillager.getFirstname());
+      lastName1.setText(selectedVillager.getLastname());
+      personalPoints.setText(String.valueOf(selectedVillager.getPoints()));
+    }
+
 
   }
 
@@ -92,7 +115,9 @@ public class Controller
       String last = lastName.getText();
       Villager villager = new Villager(first, last);
       manager.addVillager(villager);
+
       loadVillagers();
+      loadVillagerBox();
     }
   }
 
@@ -115,14 +140,13 @@ public class Controller
     else if (e.getSource() == updateVillager)
     {
       if (selectedVillager != null) {
-        selectedVillager.setFirstName(firstName1.getText());
-        selectedVillager.setLastName(lastName1.getText());
-        selectedVillager.setPoints(Integer.parseInt(personalPoints.getText()));
+        Villager newVillager = new Villager(firstName1.getText(), lastName1.getText(), Integer.parseInt(personalPoints.getText()));
+        manager.changeVillager(selectedVillager, newVillager);
       }
       loadVillagers();
+      loadVillagerBox();
     }
   }
-
 
   public void removeVillager()
   {
@@ -130,9 +154,12 @@ public class Controller
     {
       String first = firstName1.getText();
       String last = lastName1.getText();
-      Villager villager = new Villager(first, last);
+      int  points = Integer.parseInt(personalPoints.getText());
+      Villager villager = new Villager(first, last, points);
       manager.removeVillager(villager);
+
       loadVillagers();
+      loadVillagerBox();
     }
   }
 
@@ -142,4 +169,5 @@ public class Controller
     totalCounter.setText(Integer.toString(number));
   }
 }
+
 
