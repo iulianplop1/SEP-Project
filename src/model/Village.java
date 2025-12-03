@@ -10,7 +10,7 @@ public class Village implements Serializable {
   private ArrayList<TradeOffer> trades;
   private ArrayList<SharedTask> sharedTasks;
   private ArrayList<String> catalogueOfIdeas;
-  private GreenGoal greengoal;
+  private ArrayList<GreenGoal> goals;
 
   public Village() {
     this.villagers = new ArrayList<>();
@@ -18,11 +18,21 @@ public class Village implements Serializable {
     this.catalogueOfIdeas = new ArrayList<>();
     greenpoints = 0;
     this.sharedTasks = new ArrayList<>();
-    greengoal = null;
+    this.goals = new ArrayList<>();
   }
   public int VillageSize()
   {
     return villagers.size();
+  }
+
+  public void addGoal(GreenGoal goal)
+  {
+    this.goals.add(goal);
+  }
+
+  public void removeGoal(GreenGoal goal)
+  {
+    this.goals.remove(goal);
   }
 
   public void addVillager(Villager villager) {
@@ -162,7 +172,7 @@ public class Village implements Serializable {
       System.out.println("\nNEED A SECOND GOAL TO FINISH GREEN GOAL\n");
       return;
     }
-    int required = greengoal.getRequiredPoints();
+    int required = goal.getRequiredPoints();
     //subtract the greenpoints from the goal if enough.//
     if (greenpoints>=required)
     {

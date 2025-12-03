@@ -118,15 +118,17 @@ public class VillageModelManager
     String name = trade.getTradeName();
     Villager seller = trade.getSeller();
     int points = trade.getPoints();
+    String description = trade.getDescription();
     Village cloverville = getVillage();
-    ArrayList<TradeOffer> villagers = cloverville.getVillagers();
-    for (int i = 0; i < villagers.size(); i++)
+    ArrayList<TradeOffer> trades = cloverville.getTrades();
+    for (int i = 0; i < trades.size(); i++)
     {
-      if (villagers.get(i).equals(old))
+      if (trades.get(i).equals(old))
       {
-        villagers.get(i).setFirstName(first);
-        villagers.get(i).setLastName(last);
-        villagers.get(i).setPoints(points);
+        trades.get(i).setTradeName(name);
+        trades.get(i).setSeller(seller);
+        trades.get(i).setPoints(points);
+        trades.get(i).setDescription(description);
       }
     }
     saveVillage(cloverville);
