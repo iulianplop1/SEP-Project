@@ -172,7 +172,7 @@
                         </TitledPane>
                      </children>
                   </VBox>
-                  <TextArea layoutX="361.0" layoutY="-1.0" prefHeight="347.0" prefWidth="237.0" />
+                  <TextArea fx:id="listTrades" layoutX="361.0" layoutY="-1.0" prefHeight="347.0" prefWidth="237.0" />
                </children></AnchorPane>
          </content>
       </Tab>

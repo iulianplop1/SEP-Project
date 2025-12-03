@@ -2,12 +2,13 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import model.TradeOffer;
 import model.Village;
 import model.VillageModelManager;
 import model.Villager;
 import javafx.scene.*;
 import javafx.event.*;
-
+import model.GreenGoal;
 import java.util.ArrayList;
 
 public class Controller
@@ -46,6 +47,7 @@ public class Controller
   @FXML private Button upDateGreenGoal;
   @FXML private Button removeGreenGoal;
 
+  @FXML private TextArea listTrades;
 
   private VillageModelManager manager = new VillageModelManager("village.bin");
 
@@ -54,6 +56,7 @@ public class Controller
     loadVillagerBox();
     loadVillagers();
 
+    loadTrades();
   }
 
   @FXML public void loadVillagers()
@@ -77,34 +80,54 @@ public class Controller
   {
     chooseVillagers.getItems().clear();
 
-    int currentIndex = chooseVillagers.getSelectionModel().getSelectedIndex();  //gets index of selected
-
     ArrayList<Villager> villagers = manager.getVillagers();
     for (Villager villager : villagers)
     {
-      chooseVillagers.getItems().add(villager);
+      chooseVillagers.getItems().add(villager);       //add villagers to box
     }
+    int currentIndex = chooseVillagers.getSelectionModel()
+        .getSelectedIndex();  //gets index of selected villager in the box
 
     Villager selectedVillager = null;
 
-    if (currentIndex == -1 && chooseVillagers.getItems().size() > 0){
-      chooseVillagers.getSelectionModel().select(0);
+    if (currentIndex == -1 && chooseVillagers.getItems().size() > 0)
+    {   //no selection (no index) and there are villagers
+      chooseVillagers.getSelectionModel()
+          .select(0);              //show first villager in the box
 
-      selectedVillager = (Villager)chooseVillagers.getValue();
+      selectedVillager = (Villager) chooseVillagers.getValue();          //this will be the villager to fill up the texboxes
     }
-    else{
-      chooseVillagers.getSelectionModel().select(currentIndex);
+    else
+    {
+      chooseVillagers.getSelectionModel().select(
+          currentIndex);         //there is a selected villager (not -1 index)
 
-      selectedVillager = (Villager)chooseVillagers.getValue();
+      selectedVillager = (Villager) chooseVillagers.getValue();           //this wil be the villager to fill up the textboxes
     }
 
-    if (selectedVillager != null) {
+    if (selectedVillager != null)
+    {                                   //filling up textboxes
       firstName1.setText(selectedVillager.getFirstname());
       lastName1.setText(selectedVillager.getLastname());
       personalPoints.setText(String.valueOf(selectedVillager.getPoints()));
     }
+  }
 
+  @FXML public void loadTrades()
+  {
+    ArrayList<TradeOffer> trades = manager.getTrades();
 
+    listTrades.clear();
+
+    for (TradeOffer trade : trades)
+    {
+      String line = "";
+      line += trade.getTradeName() + " for [" + trade.getPoints() + "]\n\tby"
+          + trade.getSeller() + "\n";
+      listTrades.appendText(line);
+    }
+
+    listTrades.setEditable(false);
   }
 
   @FXML public void addVillager()
@@ -123,24 +146,24 @@ public class Controller
 
   @FXML public void editVillager(ActionEvent e)
   {
-    Villager selectedVillager = (Villager)chooseVillagers.getValue();
-
+    Villager selectedVillager = (Villager) chooseVillagers.getValue();
     // When a villager is selected in the ComboBox
     if (e.getSource() == chooseVillagers)
     {
-
-      if (selectedVillager != null) {
+      if (selectedVillager != null)
+      {
         firstName1.setText(selectedVillager.getFirstname());
         lastName1.setText(selectedVillager.getLastname());
         personalPoints.setText(String.valueOf(selectedVillager.getPoints()));
       }
     }
-
     // When the Update button is clicked
     else if (e.getSource() == updateVillager)
     {
-      if (selectedVillager != null) {
-        Villager newVillager = new Villager(firstName1.getText(), lastName1.getText(), Integer.parseInt(personalPoints.getText()));
+      if (selectedVillager != null)
+      {
+        Villager newVillager = new Villager(firstName1.getText(),
+            lastName1.getText(), Integer.parseInt(personalPoints.getText()));
         manager.changeVillager(selectedVillager, newVillager);
       }
       loadVillagers();
@@ -154,7 +177,7 @@ public class Controller
     {
       String first = firstName1.getText();
       String last = lastName1.getText();
-      int  points = Integer.parseInt(personalPoints.getText());
+      int points = Integer.parseInt(personalPoints.getText());
       Villager villager = new Villager(first, last, points);
       manager.removeVillager(villager);
 
@@ -168,6 +191,26 @@ public class Controller
     int number = manager.getVillagers().size();
     totalCounter.setText(Integer.toString(number));
   }
-}
 
+  public void intializeGreenGoal()
+  {
+    loadGreenGoalBox();
+    loadGreenGoal();
+  }
+
+  public void loadGreenGoal()
+  {
+    ArrayList<String> catalogueOfIdeas = manager.getcatalogueOfIdeas();
+
+    for (String greengoal : catalogueOfIdeas)
+    {
+      String line = "";
+      line += greengoal.getgreenGoalName() + " " + greengoal.getgreenRequiredPoints() + " - "
+          + greengoal.getgreenDescription() + "\n";
+      listCatalogueOfIdeas.appendText(line);
+    }
+
+    listCatalogueOfIdeas.setEditable(false);
+  }
+}
 

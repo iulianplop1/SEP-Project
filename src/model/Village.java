@@ -31,8 +31,12 @@ public class Village implements Serializable {
   public void removeVillager(Villager villager) {
     villagers.remove(villager);
   }
+
   public ArrayList<Villager> getVillagers() {
     return villagers;
+  }
+  public ArrayList<TradeOffer> getTrades() {
+    return trades;
   }
 
   public void addTradeOffer(TradeOffer tradeOffer) {
