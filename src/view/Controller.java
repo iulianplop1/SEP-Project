@@ -317,6 +317,9 @@ public class Controller
       manager.removeTrade(toRemove);
 
       loadTrades();
+      loadTradeSellerBox();
+      loadTradesBox();
+      loadTradeSellerEditBox();
     }
   }
 

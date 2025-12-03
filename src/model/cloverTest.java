@@ -112,7 +112,7 @@ public class cloverTest
 
 
     GreenGoal goal1 = new GreenGoal("pizza", 150);
-    cloverville.addGreenGoal(goal1);
+    //cloverville.addGreenGoal(goal1);
 
     SharedTask sharedtask1 = new SharedTask(cloverville, "cleaning grupperoom", 300);
     cloverville.addSharedTask(sharedtask1);
