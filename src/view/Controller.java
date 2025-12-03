@@ -53,9 +53,12 @@ public class Controller
   @FXML private TextArea tradeDescription;
 
   @FXML ComboBox chooseTrade;
+  @FXML ComboBox chooseTradeSellerEdit;
   @FXML private TextField tradeNameEdit;
   @FXML private TextField tradeRequiredPointsEdit;
-  @FXML private TextField tradeDescriptionEdit;
+  @FXML private TextArea tradeDescriptionEdit;
+  @FXML private Button removeTrade;
+  @FXML private Button updateTrade;
 
   private VillageModelManager manager = new VillageModelManager("village.bin");
 
@@ -66,6 +69,8 @@ public class Controller
 
     loadTrades();
     loadTradeSellerBox();
+    loadTradesBox();
+    loadTradeSellerEditBox();
   }
 
   @FXML public void loadVillagers()
@@ -111,15 +116,13 @@ public class Controller
     {
       chooseVillagers.getItems().add(villager);       //add villagers to box
     }
-    int currentIndex = chooseVillagers.getSelectionModel()
-        .getSelectedIndex();  //gets index of selected villager in the box
+    int currentIndex = chooseVillagers.getSelectionModel().getSelectedIndex();  //gets index of selected villager in the box
 
     Villager selectedVillager = null;
 
     if (currentIndex == -1 && chooseVillagers.getItems().size() > 0)
     {   //no selection (no index) and there are villagers
-      chooseVillagers.getSelectionModel()
-          .select(0);              //show first villager in the box
+      chooseVillagers.getSelectionModel().select(0);              //show first villager in the box
 
       selectedVillager = (Villager) chooseVillagers.getValue();          //this will be the villager to fill up the textboxes
     }
@@ -148,8 +151,7 @@ public class Controller
     {
       chooseTradeSeller.getItems().add(villager);       //add villagers to box
     }
-    int currentIndex = chooseTradeSeller.getSelectionModel()
-        .getSelectedIndex();  //gets index of selected villager in the box
+    int currentIndex = chooseTradeSeller.getSelectionModel().getSelectedIndex();  //gets index of selected villager in the box
 
     if (currentIndex == -1 && chooseTradeSeller.getItems().size() > 0)
     {   //no selection (no index) and there are villagers
@@ -160,6 +162,64 @@ public class Controller
     {
       chooseTradeSeller.getSelectionModel().select(
           currentIndex);         //there is a selected villager (not -1 index)
+    }
+  }
+
+  @FXML public void loadTradeSellerEditBox()
+  {
+    chooseTradeSellerEdit.getItems().clear();
+
+    ArrayList<Villager> villagers = manager.getVillagers();
+    for (Villager villager : villagers)
+    {
+      chooseTradeSellerEdit.getItems().add(villager);       //add villagers to box
+    }
+    int currentIndex = chooseTradeSellerEdit.getSelectionModel().getSelectedIndex();  //gets index of selected villager in the box
+
+    if (currentIndex == -1 && chooseTradeSellerEdit.getItems().size() > 0)
+    {   //no selection (no index) and there are villagers
+      chooseTradeSellerEdit.getSelectionModel()
+          .select(0);              //show first villager in the box
+    }
+    else
+    {
+      chooseTradeSellerEdit.getSelectionModel().select(
+          currentIndex);         //there is a selected villager (not -1 index)
+    }
+  }
+
+  @FXML public void loadTradesBox()
+  {
+    chooseTrade.getItems().clear();
+
+    ArrayList<TradeOffer> trades = manager.getTrades();
+    for (TradeOffer trade : trades)
+    {
+      chooseTrade.getItems().add(trade);       //add trades to box
+    }
+    int currentIndex = chooseTrade.getSelectionModel().getSelectedIndex();  //gets index of selected trade in the box
+
+    TradeOffer selectedTrade = null;
+
+    if (currentIndex == -1 && chooseTrade.getItems().size() > 0)
+    {   //no selection (no index) and there are villagers
+      chooseTrade.getSelectionModel().select(0);              //show first trade in the box
+
+      selectedTrade = (TradeOffer) chooseTrade.getValue();
+    }
+    else
+    {
+      chooseTrade.getSelectionModel().select(currentIndex);         //there is a selected trade (not -1 index)
+
+      selectedTrade = (TradeOffer) chooseTrade.getValue();
+    }
+
+    if (selectedTrade != null)
+    {
+      chooseTradeSellerEdit.setValue(selectedTrade.getSeller());
+      tradeNameEdit.setText(selectedTrade.getTradeName());
+      tradeRequiredPointsEdit.setText(String.valueOf(selectedTrade.getPoints()));
+      tradeDescriptionEdit.setText(selectedTrade.getDescription());
     }
   }
 
@@ -230,9 +290,10 @@ public class Controller
     manager.addTrade(trade);
     loadTrades();
     loadTradeSellerBox();
+    loadVillagerBox();
   }
 
-  @FXML void editTadeOffer(ActionEvent e)
+  @FXML void editTradeOffer(ActionEvent e)
   {
     TradeOffer selectedTrade = (TradeOffer) chooseTrade.getValue();
 
@@ -240,10 +301,22 @@ public class Controller
     {
       if (selectedTrade != null)
       {
+        chooseTradeSellerEdit.setValue(selectedTrade.getSeller());
         tradeNameEdit.setText(selectedTrade.getTradeName());
         tradeRequiredPointsEdit.setText(String.valueOf(selectedTrade.getPoints()));
         tradeDescriptionEdit.setText(selectedTrade.getDescription());
       }
+    }
+    else if (e.getSource() == removeTrade)
+    {
+      Villager editedSeller = (Villager) chooseTradeSellerEdit.getValue();
+      String editedTradeName = tradeNameEdit.getText();
+      int editedPoints = Integer.parseInt(tradeRequiredPointsEdit.getText());
+      String editedDescription = tradeDescriptionEdit.getText();
+      TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
+      manager.removeTrade(toRemove);
+
+      loadTrades();
     }
   }
 

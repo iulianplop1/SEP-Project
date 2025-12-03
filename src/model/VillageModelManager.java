@@ -101,4 +101,35 @@ public class VillageModelManager
     saveVillage(cloverville);
   }
 
+  public void removeTrade(TradeOffer trade)
+  {
+    Village cloverville = getVillage();
+    ArrayList<TradeOffer> trades = cloverville.getTrades();
+    for(TradeOffer t:trades){
+      if (t.equals(trade)){
+        trades.remove(t);
+        System.out.println(t + " removed");
+      }
+    }
+    saveVillage(cloverville);
+  }
+
+  public void changeTrade(TradeOffer old, TradeOffer trade){
+    String name = trade.getTradeName();
+    Villager seller = trade.getSeller();
+    int points = trade.getPoints();
+    Village cloverville = getVillage();
+    ArrayList<TradeOffer> villagers = cloverville.getVillagers();
+    for (int i = 0; i < villagers.size(); i++)
+    {
+      if (villagers.get(i).equals(old))
+      {
+        villagers.get(i).setFirstName(first);
+        villagers.get(i).setLastName(last);
+        villagers.get(i).setPoints(points);
+      }
+    }
+    saveVillage(cloverville);
+  }
+
  }

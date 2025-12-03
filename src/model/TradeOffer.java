@@ -77,7 +77,13 @@ public class TradeOffer implements Serializable {
 
   public String toString()
   {
-    return tradename + " [" + points + "] by " + seller;
+    return tradename + " [" + points + "] by " + seller + " '" + description + "'";
   }
 
+  @Override public boolean equals(Object obj)
+  {
+    if(obj == null || obj.getClass() != this.getClass()){return false;}
+    TradeOffer other = (TradeOffer)obj;
+    return other.tradename.equals(this.tradename) && other.points == this.points  && other.seller.equals(this.seller) && other.description.equals(this.description);
+  }
 }
