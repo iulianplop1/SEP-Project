@@ -99,7 +99,6 @@ public class VillageModelManager
       saveVillage(cloverville);
     }
   }
-
   public void finishTrade(TradeOffer trade, Villager buyer) {
     if (trade == null || buyer == null){
       throw new IllegalArgumentException("Trade or buyer is null");
@@ -112,4 +111,14 @@ public class VillageModelManager
     }
   }
 
+  public void addResetDay(int days){
+    Village cloverville = getVillage();
+    cloverville.addResetPeriod(days);
+    saveVillage(cloverville);
+  }
+  public void resetNow(){
+    Village cloverville = getVillage();
+    cloverville.resetnow();
+    saveVillage(cloverville);
+  }
  }

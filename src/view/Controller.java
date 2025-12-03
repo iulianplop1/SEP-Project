@@ -63,10 +63,17 @@ public class Controller
   @FXML private Button updateTrade;
   @FXML private Button finishTrade;
 
+  @FXML private TextField resetDay;
+  @FXML private TextField resetDayEdit;
+
   private VillageModelManager manager = new VillageModelManager("village.bin");
 
   public void initialize()
   {
+    everything();
+    loadResetDay();
+  }
+  public void everything(){
     loadVillagerBox();
     loadVillagers();
 
@@ -262,8 +269,33 @@ public class Controller
     }
   }
 
+  @FXML public void loadResetDay(){
+    resetDay.clear();
+    Village cloverville =  manager.getVillage();
+    int daystil = cloverville.checkReset();
+    if (daystil == -1){
+      resetDay.setText("N/A");
+    }
+    else{
+      resetDay.setText(String.valueOf(daystil));
+    }
+    manager.saveVillage(cloverville);
+    everything();
+  }
+  @FXML public void saveResetDay() {
+    int days = Integer.parseInt(resetDayEdit.getText());
+    manager.addResetDay(days);
+    initialize();
+  }
+  @FXML public void resetNow() {
+    manager.resetNow();
+    initialize();
+  }
 
-
+  public void setTotalCounter() {
+    int number = manager.getVillagers().size();
+    totalCounter.setText(Integer.toString(number));
+  }
 
   @FXML public void addVillager() {
     if (firstName.getText() != "" && lastName.getText() != "")
@@ -300,7 +332,6 @@ public class Controller
       initialize();
     }
   }
-
   public void removeVillager() {
     if (firstName1.getText() != "" && lastName1.getText() != "")
     {
@@ -379,10 +410,6 @@ public class Controller
   }
 
 
-  public void setTotalCounter()
-  {
-    int number = manager.getVillagers().size();
-    totalCounter.setText(Integer.toString(number));
-  }
+
 }
 

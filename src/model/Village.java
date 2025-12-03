@@ -11,6 +11,7 @@ public class Village implements Serializable {
   private ArrayList<SharedTask> sharedTasks;
   private ArrayList<String> catalogueOfIdeas;
   private GreenGoal greengoal;
+  private int period;
 
   public Village() {
     this.villagers = new ArrayList<>();
@@ -19,10 +20,7 @@ public class Village implements Serializable {
     greenpoints = 0;
     this.sharedTasks = new ArrayList<>();
     this.greengoal = null;
-  }
-  public int VillageSize()
-  {
-    return villagers.size();
+    period = 10;
   }
 
   public void addVillager(Villager villager) {
@@ -139,13 +137,42 @@ public class Village implements Serializable {
     return Math.round(sum/villagers.size());
   }
 
-  public void Reset(){
+  public void addResetPeriod(int period) {
+    this.period = period;
+    System.out.println("PERIOD CHANGED --> " + period);
+  }
+  public int checkReset(){
+    Date today = Date.today();
+    Date reset = today.copy();
+    reset.nextDay(period);        //reset day found
+
+    if (today.equals(reset)) {
+      System.out.println("\nTODAY IS THE DAY OF THE RESET");
+      resetnow();
+
+      return -1;        //returns -1 if reset happened
+    }
+    else{
+      System.out.println("RESET ON ----------- " + reset);
+      int counter = 0;
+      Date today1 = Date.today();
+      while(!today1.equals(reset)){
+        today1.nextDay(1);
+        counter++;
+      }
+      return counter;       //returns days until reset if it did not happen
+    }
+  }
+  public void resetnow(){
     for(int i = 0; i < villagers.size(); i++){
       greenpoints += villagers.get(i).getPoints();
       villagers.get(i).setPoints(0);
     }
-    System.out.println("RESET HAPPENING --> " + villagers + "\n");
+    System.out.println("GREENPOINTS: " + greenpoints);
   }
+
+
+
 
   public void addGreenActivity(GreenActivity greenactivity) {
     System.out.println("GREEN ACTIVITY ADDED --> " + greenactivity);

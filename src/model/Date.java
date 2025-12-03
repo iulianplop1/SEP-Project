@@ -9,48 +9,18 @@ public class Date implements Serializable
   private int month;
   private int year;
 
-  private int period;           //days
-  private Date temp;
-
-  public Date()
-  {
+  public Date() {
     this.day = today().getDay();
     this.month = today().getMonth();
     this.year = today().getYear();
   }
-
-  public Date(int day, int month, int year)
-  {
+  public Date(int day, int month, int year) {
     this.day = day;
     this.month = month;
     this.year = year;
   }
 
-  public void setPeriod(int period)
-  {
-    this.period = period;
-  }
-
-  public void checkDate(Village cloverville, int day, int month, int year)
-  {
-    temp = new Date(day, month, year);
-    Date reset = temp.copy();
-    reset.nextDay(period);
-
-    if (today().equals(reset))
-    {
-      System.out.println("\nTODAY IS THE DAY OF THE RESET");
-      cloverville.Reset();
-    }
-    else
-    {
-      System.out.println("\nRESET WILL HAPPEN ON: " + reset + "\n");
-    }
-    //idea: create an arraylist with the next x reset dates which would change everytime a new reset value is added --> nice for visibility
-  }
-
-  public static Date today()
-  {
+  public static Date today() {
     LocalDate currentDate = LocalDate.now();
     int currentDay = currentDate.getDayOfMonth();
     int currentMonth = currentDate.getMonthValue();
@@ -63,52 +33,28 @@ public class Date implements Serializable
   {
     return this.day;
   }
-
   public int getMonth()
   {
     return this.month;
   }
-
   public int getYear()
   {
     return this.year;
   }
-
   public void setDay(int d)
   {
     this.day = d;
   }
-
   public void setMonth(int m)
   {
     this.month = m;
   }
-
   public void setYear(int y)
   {
     this.year = y;
   }
 
-  public Date copy()
-  {
-    return new Date(day, month, year);
-  }
-
-  public boolean equals(Object obj)
-  {
-    if (obj != null && this.getClass() == obj.getClass())
-    {
-      Date other = (Date) obj;
-      return this.day == other.day && this.month == other.month && this.year == other.year;
-    }
-    else
-    {
-      return false;
-    }
-  }
-
-  public void nextDay(int increment)
-  {
+  public void nextDay(int increment) {
     this.day += increment;
     while (this.day > this.dayMonth())
     {
@@ -125,8 +71,7 @@ public class Date implements Serializable
     }
   }
 
-  public boolean isLeapYear()
-  {
+  public boolean isLeapYear() {
     if (this.year % 4 == 0)
     {
       if (this.year % 100 == 0)
@@ -143,9 +88,7 @@ public class Date implements Serializable
       return false;
     }
   }
-
-  public int dayMonth()
-  {
+  public int dayMonth() {
     return switch (this.month)
     {
       case 1, 3, 5, 7, 8, 10, 12 -> 31;
@@ -155,8 +98,22 @@ public class Date implements Serializable
     };
   }
 
-  public String toString()
+  public Date copy()
   {
+    return new Date(day, month, year);
+  }
+  public boolean equals(Object obj) {
+    if (obj != null && this.getClass() == obj.getClass())
+    {
+      Date other = (Date) obj;
+      return this.day == other.day && this.month == other.month && this.year == other.year;
+    }
+    else
+    {
+      return false;
+    }
+  }
+  public String toString() {
     return this.day + "/" + this.month + "/" + this.year;
   }
 }
