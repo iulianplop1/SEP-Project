@@ -74,7 +74,10 @@ public class VillageModelManager
     cloverville.changeVillager(old, villager);
     saveVillage(cloverville);
   }
-
+  public ArrayList<GreenGoal> getGoals() {
+    Village cloverville = getVillage();
+    return cloverville.getGoals();
+  }
   public void addTrade(TradeOffer trade){
     Village cloverville = getVillage();
     cloverville.addTradeOffer(trade);
@@ -140,6 +143,39 @@ public class VillageModelManager
     saveVillage(cloverville);
   }
 
+  public void changeGreenGoal(GreenGoal old, GreenGoal goal)
+  {
+    String goalName = goal.getGoalName();
+    String greenDescription = goal.getGreenDescription();
+    int greenrequiredPoints = goal.getRequiredPoints();
+    Village cloverville = getVillage();
+    ArrayList<GreenGoal> goals = cloverville.getGoals();
+    for (int i = 0; i < goals.size(); i++)
+    {
+      if (goals.get(i).equals(old))
+      {
+        goals.get(i).setGoalName(goalName);
+        goals.get(i).setGreenDescription(greenDescription);
+        goals.get(i).setRequiredPoints(greenrequiredPoints);
+      }
+    }
+    saveVillage(cloverville);
+  }
+  public void addGoal(GreenGoal goal)
+  {
+    Village cloverville = getVillage();
+    ArrayList<GreenGoal> goals = cloverville.getGoals();
+    goals.add(goal);
+    saveVillage(cloverville);
+  }
+
+  public void removeGoal(GreenGoal goal)
+  {
+    Village cloverville = getVillage();
+    ArrayList<GreenGoal> goals = cloverville.getGoals();
+    goals.remove(goal);
+    saveVillage(cloverville);
+  }
   public void changeGreenActivity(GreenActivity old, GreenActivity greenActivity) {
     String name = greenActivity.getActivityName();
     int points = greenActivity.getPoints();

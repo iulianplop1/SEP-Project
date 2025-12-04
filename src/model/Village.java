@@ -11,7 +11,7 @@ public class Village implements Serializable {
   private ArrayList<SharedTask> sharedTasks;
   private ArrayList<String> catalogueOfIdeas;
   private ArrayList<GreenActivity> greenActivities;
-  private GreenGoal greengoal;
+  private ArrayList<GreenGoal> goals;
   private int period;
 
   public Village() {
@@ -20,7 +20,7 @@ public class Village implements Serializable {
     this.catalogueOfIdeas = new ArrayList<>();
     greenpoints = 0;
     this.sharedTasks = new ArrayList<>();
-    this.greengoal = null;
+    this.goals = new ArrayList<>();
     period = 10;
     this.greenActivities=new ArrayList<>();
   }
@@ -177,6 +177,7 @@ public class Village implements Serializable {
     System.out.println("GREENPOINTS: " + greenpoints);
   }
 
+
   public ArrayList<GreenActivity> getGreenActivities()
   {
     return greenActivities;
@@ -252,31 +253,44 @@ public class Village implements Serializable {
     }
 
   }
+  public ArrayList<GreenGoal> getGoals()
+  {
+    return goals;
+  }
 
   public void addGreenGoal(GreenGoal greengoal)
   {
-    if (greengoal != null){
-      this.greengoal = greengoal;
-      System.out.println("\nGREEN GOAL ADDED --> " + greengoal +"\n");
+    if (greengoal != null)
+    {
+
+      System.out.println("\nGREEN GOAL ADDED --> " + greengoal + "\n");
     }
   }
   public void finishGreenGoal(GreenGoal greengoalNew)
   {
-    if (greengoalNew == null){
+    if (greengoalNew == null)
+    {
       System.out.println("\nNEED A SECOND GOAL TO FINISH GREEN GOAL\n");
       return;
     }
-    int required = greengoal.getRequiredPoints();
-    //subtract the greenpoints from the goal if enough.//
-    if (greenpoints>=required)
+    for (int i = 0; i < goals.size(); i++)
     {
-      greenpoints = greenpoints-required;
-      greengoal = greengoalNew;
-      System.out.println("\nGOAL WAS FINISHED -->  required points: " + required + " where subtracted from the greenpoints, and a new goal was set: " + greengoalNew + "\n");
-    }
-    else
-    {
-      System.out.println("\nNOT ENOUGH POINTS TO FINISH " + greengoal + "\n");
+      int required = goals.get(i).getRequiredPoints();
+
+      //subtract the greenpoints from the goal if enough.//
+      if (greenpoints >= goals.get(i).getRequiredPoints())
+      {
+        greenpoints = greenpoints - required;
+        goals.get(i++);
+        System.out.println(
+            "\nGOAL WAS FINISHED -->  required points: " + required
+                + " where subtracted from the greenpoints, and a new goal was set: "
+                + greengoalNew + "\n");
+      }
+      else
+      {
+        System.out.println("\nNOT ENOUGH POINTS TO FINISH " + goals + "\n");
+      }
     }
   }
 
@@ -284,6 +298,6 @@ public class Village implements Serializable {
     return "\nvillagers: " + villagers.toString() + "\ngreen points:" + greenpoints
         + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueOfIdeas.toString()
         + "\nshared tasks: " + sharedTasks + "\naverage points:"
-        + getAveragePoints() + "\ngreen goal: " + greengoal + "\n";
+        + getAveragePoints() + "\ngreen goal: " + goals + "\n";
   }
 }

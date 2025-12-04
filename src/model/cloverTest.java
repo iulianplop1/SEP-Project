@@ -134,9 +134,32 @@ public class cloverTest
 
     GreenActivity activity1 = new GreenActivity("cycling to work", 50);
     GreenActivity activity2 = new GreenActivity("biodegradable kitchen waste", 40);
+    cloverville.addGreenActivity(activity1);
+    cloverville.addGreenActivity(activity2);
+    GreenActivity activity3 = new GreenActivity("planting trees", 30);
+    GreenActivity activity4 = new GreenActivity("using public transport", 20);
+    GreenActivity activity5 = new GreenActivity("recycling plastic bottles", 25);
+    GreenActivity activity6 = new GreenActivity("composting garden waste", 35);
+    GreenActivity activity7 = new GreenActivity("installing solar panels", 100);
+    GreenActivity activity8 = new GreenActivity("reducing water usage", 15);
+    GreenActivity activity9 = new GreenActivity("carpooling to work", 40);
+    GreenActivity activity10 = new GreenActivity("avoiding single-use plastics", 30);
+    GreenActivity activity11 = new GreenActivity("buying local produce", 20);
+    GreenActivity activity12 = new GreenActivity("participating in clean-up drives", 50);
+
+    cloverville.addGreenActivity(activity3);
+    cloverville.addGreenActivity(activity4);
+    cloverville.addGreenActivity(activity5);
+    cloverville.addGreenActivity(activity6);
+    cloverville.addGreenActivity(activity7);
+    cloverville.addGreenActivity(activity8);
+    cloverville.addGreenActivity(activity9);
+    cloverville.addGreenActivity(activity10);
+    cloverville.addGreenActivity(activity11);
+    cloverville.addGreenActivity(activity12);
 
 
-    GreenGoal goal1 = new GreenGoal("pizza", 150);
+    GreenGoal goal1 = new GreenGoal("pizza", 150, "ballin");
     cloverville.addGreenGoal(goal1);
 
     SharedTask sharedtask1 = new SharedTask(cloverville, "cleaning grupperoom", 300);

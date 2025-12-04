@@ -6,6 +6,7 @@ public class GreenGoal implements Serializable
 {
   private int requiredPoints;
   private String goalName;
+  private String greenDescriptions;
 
   public int getRequiredPoints()
   {
@@ -25,10 +26,19 @@ public class GreenGoal implements Serializable
   {
     this.goalName = goalName;
   }
-  public GreenGoal(String goalName, int requiredPoints)
+  public String getGreenDescription()
+  {
+    return greenDescriptions;
+  }
+  public void setGreenDescription(String greenDescription)
+  {
+    this.greenDescriptions = greenDescriptions;
+  }
+  public GreenGoal(String goalName, int requiredPoints, String greenDescription)
   {
     this.goalName = goalName;
     this.requiredPoints = requiredPoints;
+    this.greenDescriptions = greenDescriptions;
   }
 
   public boolean equals(Object obj)
@@ -41,11 +51,11 @@ public class GreenGoal implements Serializable
   }
   public String toString()
   {
-    return ""+goalName+" ["+ requiredPoints + "]";
+    return ""+goalName+" ["+ requiredPoints + "]" + greenDescriptions;
   }
   public GreenGoal copy()
   {
-    return new GreenGoal(goalName, requiredPoints);
+    return new GreenGoal(goalName, requiredPoints, greenDescriptions);
   }
 }
 //lol

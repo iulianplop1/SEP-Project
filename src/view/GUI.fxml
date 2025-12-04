@@ -195,7 +195,7 @@
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <TitledPane text="Edit Green Activity">
+                        <TitledPane expanded="false" text="Edit Green Activity">
                           <content>
                             <AnchorPane prefHeight="156.0" prefWidth="351.0">
                                  <children>
@@ -211,7 +211,7 @@
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <TitledPane text="Complete Green Activity">
+                        <TitledPane expanded="false" text="Complete Green Activity">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="351.0">
                                  <children>
@@ -226,38 +226,38 @@
                           <content>
                             <AnchorPane>
                                  <children>
-                                    <TextField layoutX="176.0" layoutY="14.0" />
-                                    <TextField layoutX="176.0" layoutY="55.0" />
-                                    <TextArea layoutX="176.0" layoutY="95.0" prefHeight="48.0" prefWidth="149.0" />
+                                    <TextField fx:id="greenGoalName" layoutX="176.0" layoutY="14.0" />
+                                    <TextField fx:id="greenRequiredPoints" layoutX="176.0" layoutY="55.0" />
+                                    <TextArea fx:id="greenDescription" layoutX="176.0" layoutY="95.0" prefHeight="48.0" prefWidth="149.0" />
                                     <Text layoutX="22.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Name" />
                                     <Text layoutX="22.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
                                     <Text layoutX="22.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Description" />
-                                    <Button layoutX="176.0" layoutY="154.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Add" />
+                                    <Button fx:id="addGreenGoal" layoutX="176.0" layoutY="154.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Add" />
                                  </children>
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <TitledPane expanded="false" text="Edit Green Goal">
+                        <TitledPane text="Edit Green Goal">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="351.0">
                                  <children>
-                                    <ComboBox layoutX="176.0" layoutY="14.0" prefWidth="150.0" />
-                                    <TextField layoutX="177.0" layoutY="48.0" />
-                                    <TextField layoutX="177.0" layoutY="83.0" />
-                                    <TextArea layoutX="178.0" layoutY="119.0" prefHeight="22.0" prefWidth="148.0" />
+                                    <ComboBox fx:id="chooseGreenGoal" layoutX="176.0" layoutY="14.0" prefWidth="150.0" />
+                                    <TextField fx:id="greenGoalName1" layoutX="177.0" layoutY="48.0" />
+                                    <TextField fx:id="greenRequiredPoints1" layoutX="177.0" layoutY="83.0" />
+                                    <TextArea fx:id="greenDescription1" layoutX="178.0" layoutY="119.0" prefHeight="22.0" prefWidth="148.0" />
                                     <Text layoutX="24.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Green Goal" />
                                     <Text layoutX="24.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Name" />
                                     <Text layoutX="24.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
                                     <Text layoutX="24.0" layoutY="143.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Description" />
-                                    <Button layoutX="178.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Update" />
-                                    <Button layoutX="12.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Remove" />
+                                    <Button fx:id="upDateGreenGoal" layoutX="178.0" layoutY="164.0" mnemonicParsing="false" onAction="#editGreenGoal" prefHeight="25.0" prefWidth="146.0" text="Update" />
+                                    <Button fx:id="removeGreenGoal" layoutX="12.0" layoutY="164.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="146.0" text="Remove" />
                                  </children>
                               </AnchorPane>
                           </content>
                         </TitledPane>
                         <TitledPane expanded="false" text="Complete Green Goal">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="196.0" prefWidth="358.0">
                                  <children>
                                     <TextField layoutX="176.0" layoutY="14.0" />
                                     <TextField layoutX="176.0" layoutY="58.0" />
@@ -272,7 +272,8 @@
                         </TitledPane>
                      </children>
                   </VBox>
-                  <TextArea fx:id="listGreenActivity" layoutX="353.0" prefHeight="345.0" prefWidth="247.0" />
+                  <TextArea fx:id="listGreenActivity" layoutX="359.0" prefHeight="165.0" prefWidth="241.0" />
+                  <TextArea fx:id="listGreenGoals" layoutX="359.0" layoutY="165.0" prefHeight="179.0" prefWidth="241.0" />
                </children></AnchorPane>
          </content>
       </Tab>

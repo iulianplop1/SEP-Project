@@ -32,16 +32,18 @@ public class Controller
   @FXML private Button completeButton;
   @FXML private ComboBox chooseSharedtask1;
   @FXML private ComboBox chooseSharedTask2;
+
   @FXML private TextField greenGoalName;
   @FXML private TextField greenRequiredPoints;
-  @FXML private TextField greenDiscription;
+  @FXML private TextArea greenDescription;
   @FXML private Button addGreenGoal;
   @FXML private ComboBox chooseGreenGoal;
   @FXML private TextField greenGoalName1;
   @FXML private TextField greenRequiredPoints1;
-  @FXML private TextField greenDiscription1;
+  @FXML private TextArea greenDescription1;
   @FXML private Button upDateGreenGoal;
   @FXML private Button removeGreenGoal;
+  @FXML private TextArea listGreenGoals;
 
   @FXML private TextArea listTrades;
   @FXML private ComboBox chooseTradeSeller;
@@ -72,10 +74,11 @@ public class Controller
   @FXML private ComboBox chooseGreenActivity1;
   @FXML private Button completeGreenActivity;
 
-  Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
   @FXML private TextField resetDay;
   @FXML private TextField resetDayEdit;
+
+  Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
   private VillageModelManager manager = new VillageModelManager("village.bin");
 
@@ -97,8 +100,56 @@ public class Controller
     loadGreenActivity();
     loadGreenActivityBox();
     loadGreenActivityBox1();
+
+    loadGoals();
+    loadGoalsBox();
   }
 
+  @FXML public void loadGoals() {
+    listGreenGoals.clear();
+
+    ArrayList<GreenGoal> goals = manager.getGoals();
+    for (GreenGoal greengoal : goals)
+    {
+      String line = "";
+      line += greengoal.getGoalName() + " " + "-" + greengoal.getRequiredPoints() + "\n";
+      listGreenGoals.appendText(line);
+    }
+    listGreenGoals.setEditable(false);
+  }
+  @FXML public void loadGoalsBox()
+  {
+    chooseGreenGoal.getItems().clear();
+    ArrayList<GreenGoal> goals = manager.getGoals();
+    for (GreenGoal greengoal : goals)
+    {
+      chooseGreenGoal.getItems().add(greengoal);
+    }
+    int currentIndex = chooseGreenGoal.getSelectionModel().getSelectedIndex();  //gets index of selected villager in the box
+
+    GreenGoal selectedGreenGoal = null;
+
+    if (currentIndex == -1 && chooseGreenGoal.getItems().size() > 0)
+    {   //no selection (no index) and there are villagers
+      chooseGreenGoal.getSelectionModel().select(0);              //show first villager in the box
+
+      selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();          //this will be the villager to fill up the textboxes
+    }
+    else
+    {
+      chooseGreenGoal.getSelectionModel().select(
+          currentIndex);         //there is a selected villager (not -1 index)
+
+      selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();           //this wil be the villager to fill up the textboxes
+    }
+
+    if (selectedGreenGoal != null)
+    {                                   //filling up textboxes
+      greenGoalName1.setText(selectedGreenGoal.getGoalName());
+      greenDescription1.setText(selectedGreenGoal.getGreenDescription());
+      greenRequiredPoints1.setText(String.valueOf(selectedGreenGoal.getRequiredPoints()));
+    }
+  }
   @FXML public void loadVillagers() {
     ArrayList<Villager> villagers = manager.getVillagers();
 
@@ -307,7 +358,17 @@ public class Controller
     initialize();
   }
 
-
+  @FXML public void addGreenGoal()
+  {
+    String GoalName = greenGoalName.getText();
+    int RequiredPoints = Integer.parseInt(greenRequiredPoints.getText());
+    String greenDescriptions = greenDescription.getText();
+    GreenGoal greengoal = new GreenGoal(GoalName, RequiredPoints, greenDescriptions);
+    manager.addGoal(greengoal);
+    loadTrades();
+    loadTradeSellerBox();
+    loadVillagerBox();
+  }
   @FXML public void addVillager() {
     if (firstName.getText() != "" && lastName.getText() != "")
     {
@@ -343,7 +404,6 @@ public class Controller
       initialize();
     }
   }
-
   public void removeVillager() {
     if (firstName1.getText() != "" && lastName1.getText() != "")
     {
@@ -354,6 +414,29 @@ public class Controller
       manager.removeVillager(villager);
 
       initialize();
+    }
+  }
+  @FXML public void editGreenGoal(ActionEvent e)
+  {
+    GreenGoal selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();
+    if (e.getSource() == chooseGreenGoal)
+    {
+      if (selectedGreenGoal != null)
+        greenGoalName1.setText(selectedGreenGoal.getGoalName());
+      greenRequiredPoints1.setText(
+          String.valueOf(selectedGreenGoal.getRequiredPoints()));
+      greenDescription1.setText(selectedGreenGoal.getGreenDescription());
+    }
+    // When the Update button is clicked
+    else if (e.getSource() == upDateGreenGoal)
+    {
+      if (selectedGreenGoal != null)
+      {
+        GreenGoal newGoal = new GreenGoal(greenGoalName1.getText(), Integer.parseInt(greenRequiredPoints.getText()), greenDescription1.getText());
+        manager.changeGreenGoal(selectedGreenGoal, newGoal);
+      }
+      loadVillagers();
+      loadVillagerBox();
     }
   }
 
@@ -368,6 +451,7 @@ public class Controller
 
     initialize();
   }
+
   @FXML void editTradeOffer(ActionEvent e) {
     TradeOffer selectedTrade = (TradeOffer) chooseTrade.getValue();
 
@@ -422,14 +506,12 @@ public class Controller
   }
 
 
-  public void setTotalCounter()
-  {
+  public void setTotalCounter() {
     int number = manager.getVillagers().size();
     totalCounter.setText(Integer.toString(number));
   }
 
-  @FXML public void addGreenActivity()
-  {
+  @FXML public void addGreenActivity() {
     String name = greenActivityName.getText();
     String pointsText = greenActivityPoints.getText();
 
@@ -475,8 +557,7 @@ public class Controller
     }
 
   }
-  @FXML public void loadGreenActivity()
-  {
+  @FXML public void loadGreenActivity() {
     ArrayList<GreenActivity> greenActivities = manager.getActivities();
 
     listGreenActivity.clear();
@@ -490,8 +571,7 @@ public class Controller
 
     listGreenActivity.setEditable(false);
   }
-  @FXML public void loadGreenActivityBox1()
-  {
+  @FXML public void loadGreenActivityBox1() {
     int currentIndex = chooseGreenActivity1.getSelectionModel()
         .getSelectedIndex();
     chooseGreenActivity1.getItems().clear();
