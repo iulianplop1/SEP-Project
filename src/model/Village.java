@@ -12,6 +12,7 @@ public class Village implements Serializable {
   private ArrayList<String> catalogueOfIdeas;
   private ArrayList<GreenActivity> greenActivities;
   private GreenGoal greengoal;
+  private int period;
 
   public Village() {
     this.villagers = new ArrayList<>();
@@ -20,6 +21,7 @@ public class Village implements Serializable {
     greenpoints = 0;
     this.sharedTasks = new ArrayList<>();
     this.greengoal = null;
+    period = 10;
     this.greenActivities=new ArrayList<>();
   }
   public int VillageSize()
@@ -151,7 +153,6 @@ public class Village implements Serializable {
 
   public void addGreenActivity(GreenActivity greenactivity) {
     System.out.println("GREEN ACTIVITY ADDED --> " + greenactivity);
-    greenActivities.add(greenactivity);
     String name = greenactivity.getActivityName();
     int points = greenactivity.getPoints();
     if (!catalogueOfIdeas.contains(name)){
@@ -167,7 +168,6 @@ public class Village implements Serializable {
     }
     greenpoints -= points;
   }
-
   public void editGreenActivity(GreenActivity greenactivityOld,  GreenActivity greenactivityNew) {
     String nameOld = greenactivityOld.getActivityName();
     String nameNew = greenactivityNew.getActivityName();
@@ -182,11 +182,6 @@ public class Village implements Serializable {
     greenpoints += pointsNew;
 
     System.out.println("\nGREEN ACTIVTY EDITED --> from " + nameOld + " to " + nameNew + "\n");
-  }
-
-  public ArrayList<GreenActivity> getGreenActivities()
-  {
-    return greenActivities;
   }
 
   public void addSharedTask(SharedTask sharedtask)

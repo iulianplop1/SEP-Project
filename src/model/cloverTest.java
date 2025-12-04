@@ -128,12 +128,8 @@ public class cloverTest
     cloverville.addTradeOffer(trade15);
     cloverville.addTradeOffer(trade16);
 
-    int dayoftoday = Date.today().getDay();
-    int monthoftoday = Date.today().getMonth();
-    int yearoftoday = Date.today().getYear();
-    Date dater = new Date();
-    dater.setPeriod(8);
-    dater.checkDate(cloverville, dayoftoday, monthoftoday, yearoftoday);
+    cloverville.addResetPeriod(7);
+    cloverville.checkReset();
 
 
     GreenActivity activity1 = new GreenActivity("cycling to work", 50);

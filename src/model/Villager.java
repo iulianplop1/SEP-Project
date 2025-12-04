@@ -65,7 +65,7 @@ public class Villager implements Serializable
       return false;
     }
     Villager other = (Villager)obj;
-    return other.firstname.equals(firstname) && other.lastname.equals(lastname) && other.personalpoints == personalpoints;
+    return other.firstname.equals(firstname) && other.lastname.equals(lastname);
   }
 
   public Villager copy(){
@@ -74,6 +74,6 @@ public class Villager implements Serializable
 
   public String toString()
   {
-    return firstname + " " + lastname + " [" +  personalpoints + "]";
+    return "[" +  personalpoints + "] " +firstname + " " + lastname;
   }
 }
