@@ -134,8 +134,6 @@ public class cloverTest
 
     GreenActivity activity1 = new GreenActivity("cycling to work", 50);
     GreenActivity activity2 = new GreenActivity("biodegradable kitchen waste", 40);
-    cloverville.addGreenActivity(activity1);
-    cloverville.addGreenActivity(activity2);
     GreenActivity activity3 = new GreenActivity("planting trees", 30);
     GreenActivity activity4 = new GreenActivity("using public transport", 20);
     GreenActivity activity5 = new GreenActivity("recycling plastic bottles", 25);
@@ -147,6 +145,8 @@ public class cloverTest
     GreenActivity activity11 = new GreenActivity("buying local produce", 20);
     GreenActivity activity12 = new GreenActivity("participating in clean-up drives", 50);
 
+    cloverville.addGreenActivity(activity1);
+    cloverville.addGreenActivity(activity2);
     cloverville.addGreenActivity(activity3);
     cloverville.addGreenActivity(activity4);
     cloverville.addGreenActivity(activity5);
@@ -172,6 +172,8 @@ public class cloverTest
     sharedtask2.addPerformer(villager3);
 
     System.out.println(cloverville);
+
+    cloverville.setDescription("Cloverville is an eco-community, anyone is welcome tho (except Arsenie)");
 
     VillageModelManager manage = new VillageModelManager("village.bin");
     manage.saveVillage(cloverville);

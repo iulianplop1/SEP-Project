@@ -38,7 +38,7 @@ public class GreenGoal implements Serializable
   {
     this.goalName = goalName;
     this.requiredPoints = requiredPoints;
-    this.greenDescriptions = greenDescriptions;
+    this.greenDescriptions = greenDescription;
   }
 
   public boolean equals(Object obj)
@@ -51,7 +51,7 @@ public class GreenGoal implements Serializable
   }
   public String toString()
   {
-    return ""+goalName+" ["+ requiredPoints + "]" + greenDescriptions;
+    return goalName+" ["+ requiredPoints + "] '" + greenDescriptions + "'";
   }
   public GreenGoal copy()
   {

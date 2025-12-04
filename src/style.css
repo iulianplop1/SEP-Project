@@ -1,0 +1,28 @@
+.root{
+  -fx-background: rgb(204, 213, 207);
+}
+
+#numberOfVillagers, #greenPointNumber, #numberOfSharedTasks, #numberOfTrades, #dateOfReset, #nextGreenGoal{
+  -fx-background-color: transparent;
+
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+
+  -fx-border-color: transparent;
+  -fx-border-width: 0;
+
+  -fx-font-weight: bold;
+}
+
+#descriptionVillage{
+  -fx-background-color: transparent;
+  -fx-control-inner-background: transparent;
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+
+  -fx-text-fill: black;
+  -fx-font-weight: bold;
+
+  -fx-border-color: transparent;
+  -fx-border-width: 0;
+}

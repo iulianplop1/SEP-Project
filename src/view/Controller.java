@@ -362,11 +362,11 @@ public class Controller
     ArrayList<Villager> villagers = manager.getVillagers();
 
     numberOfVillagers.setText(String.valueOf(villagers.size()));
-
     greenPointNumber.setText(String.valueOf(cloverville.getGreenpoints()));
-
-    descriptionVillage.setText(cloverville.getDescription());
-
+    descriptionVillage.setText("'" + cloverville.getDescription() + "'");
+    nextGreenGoal.setText(cloverville.getGoals().get(0).toString());
+    numberOfSharedTasks.setText(String.valueOf(cloverville.getSharedTasks().size()));
+    numberOfTrades.setText(String.valueOf(cloverville.getTrades().size()));
   }
 
   @FXML public void loadResetDay(){
@@ -912,10 +912,33 @@ public class Controller
     loadSelectedPerformers();
   }
 
-  public void completeSharedTask(){
-    SharedTask selectedTask = (SharedTask) completeSharedTasks.getSelectionModel().getSelectedItem();
+  @FXML
+  public void completeSharedTask() {
+    SharedTask selectedTask = (SharedTask) completeSharedTasks
+        .getSelectionModel()
+        .getSelectedItem();
+    if (selectedTask == null) return;
 
+    Village village = manager.getVillage();
+    ArrayList<SharedTask> tasks = village.getSharedTasks();
+
+    int indexTask = tasks.indexOf(selectedTask); // uses SharedTask.equals(...)
+
+    SharedTask task = tasks.get(indexTask);
+
+    village.finishSharedTask(task);
+    manager.saveVillage(village);
+
+
+//    loadVillagers();
+//    loadVillagerBox();
+//    loadSharedTasks();
+//    loadSelectedPerformers();
+//    loadInfoPage();
+
+    initialize();
   }
+
 
 }
 

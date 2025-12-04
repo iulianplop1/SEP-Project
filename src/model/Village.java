@@ -234,7 +234,7 @@ public class Village implements Serializable {
     if (!catalogueOfIdeas.contains(name)){
       catalogueOfIdeas.add(name);
     }
-    greenpoints += points;
+    //greenpoints += points;
   }
   public void removeGreenActivity(GreenActivity greenactivity) {
     String name = greenactivity.getActivityName();

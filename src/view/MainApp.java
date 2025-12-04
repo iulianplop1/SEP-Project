@@ -19,6 +19,7 @@ public class MainApp extends Application {
             Parent root = loader.load();
             Scene scene = new Scene(root);
 
+            scene.getStylesheets().add("style.css");
 
             primaryStage.setTitle("CloverVille");
             primaryStage.setScene(scene);
