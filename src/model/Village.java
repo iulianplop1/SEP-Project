@@ -70,6 +70,7 @@ public class Village implements Serializable {
     return trades;
   }
 
+
   public void addTradeOffer(TradeOffer tradeOffer) {
     boolean in = false;
     for(TradeOffer t : trades){
@@ -177,6 +178,17 @@ public class Village implements Serializable {
     System.out.println("GREENPOINTS: " + greenpoints);
   }
 
+  public void addGreenGoal(GreenGoal goal){
+    boolean in = false;
+    for(GreenGoal g : goals){
+      if (g.equals(goal)) {
+        in = true;
+      }
+    } if (!in) {
+      goals.add(goal);
+    }
+    System.out.println("\nGREEN GOAL ADDED --> " + goal + "\n");
+  }
 
   public ArrayList<GreenActivity> getGreenActivities()
   {
@@ -218,7 +230,6 @@ public class Village implements Serializable {
 
   public void addSharedTask(SharedTask sharedtask)
   {
-
     for (SharedTask existingTask : sharedTasks) {
       if (existingTask.getTaskName().equals(sharedtask.getTaskName())) {
 
@@ -258,14 +269,7 @@ public class Village implements Serializable {
     return goals;
   }
 
-  public void addGreenGoal(GreenGoal greengoal)
-  {
-    if (greengoal != null)
-    {
 
-      System.out.println("\nGREEN GOAL ADDED --> " + greengoal + "\n");
-    }
-  }
   public void finishGreenGoal(GreenGoal greengoalNew)
   {
     if (greengoalNew == null)
@@ -299,5 +303,9 @@ public class Village implements Serializable {
         + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueOfIdeas.toString()
         + "\nshared tasks: " + sharedTasks + "\naverage points:"
         + getAveragePoints() + "\ngreen goal: " + goals + "\n";
+  }
+
+  public ArrayList<SharedTask> getSharedTasks() {
+    return sharedTasks;
   }
 }
