@@ -2,7 +2,7 @@
   -fx-background: rgb(204, 213, 207);
 }
 
-#numberOfVillagers, #greenPointNumber, #numberOfSharedTasks, #numberOfTrades, #dateOfReset, #nextGreenGoal{
+#numberOfVillagers, #greenPointNumber, #numberOfSharedTasks, #numberOfTrades, #dateOfReset, #nextGreenGoal, #resetDay {
   -fx-background-color: transparent;
 
   -fx-background-insets: 0;
@@ -25,4 +25,10 @@
 
   -fx-border-color: transparent;
   -fx-border-width: 0;
+}
+
+#resetNowButton{
+  -fx-background-color: #f69c9c;
+  -fx-text-fill: black;
+  -fx-font-weight: bold;
 }

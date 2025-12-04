@@ -360,6 +360,8 @@ public class Controller
   @FXML public void loadInfoPage(){
     Village cloverville = manager.getVillage();
     ArrayList<Villager> villagers = manager.getVillagers();
+    Date reset =  new Date();
+    reset.nextDay(cloverville.checkReset());
 
     numberOfVillagers.setText(String.valueOf(villagers.size()));
     greenPointNumber.setText(String.valueOf(cloverville.getGreenpoints()));
@@ -367,6 +369,7 @@ public class Controller
     nextGreenGoal.setText(cloverville.getGoals().get(0).toString());
     numberOfSharedTasks.setText(String.valueOf(cloverville.getSharedTasks().size()));
     numberOfTrades.setText(String.valueOf(cloverville.getTrades().size()));
+    dateOfReset.setText(reset.toString());
   }
 
   @FXML public void loadResetDay(){
