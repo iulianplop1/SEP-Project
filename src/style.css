@@ -2,6 +2,15 @@
   -fx-background: rgb(204, 213, 207);
 }
 
+.titled-pane{
+  -fx-padding: 1;                  /* optional nicer padding */
+}
+.titled-pane > .title {
+  -fx-background-color: #77a178;   /* your title background */
+  -fx-text-fill: black;            /* text color */
+  -fx-font-weight: bold;           /* bold text */
+}
+
 #numberOfVillagers, #greenPointNumber, #numberOfSharedTasks, #numberOfTrades, #dateOfReset, #nextGreenGoal, #resetDay {
   -fx-background-color: transparent;
 
