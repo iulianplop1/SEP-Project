@@ -162,7 +162,7 @@ public class VillageModelManager
     return cloverville.getGreenActivities();
   }
 
-  /*public void addResetDay(int days){
+  public void addResetDay(int days){
     Village cloverville = getVillage();
     cloverville.addResetPeriod(days);
     saveVillage(cloverville);
@@ -171,5 +171,5 @@ public class VillageModelManager
     Village cloverville = getVillage();
     cloverville.resetnow();
     saveVillage(cloverville);
-  }*/
+  }
  }
