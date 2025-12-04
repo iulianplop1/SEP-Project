@@ -151,8 +151,13 @@ public class Village implements Serializable {
     System.out.println("RESET HAPPENING --> " + villagers + "\n");
   }
 
+  public ArrayList<GreenActivity> getGreenActivities()
+  {
+    return greenActivities;
+  }
   public void addGreenActivity(GreenActivity greenactivity) {
     System.out.println("GREEN ACTIVITY ADDED --> " + greenactivity);
+    greenActivities.add(greenactivity);
     String name = greenactivity.getActivityName();
     int points = greenactivity.getPoints();
     if (!catalogueOfIdeas.contains(name)){

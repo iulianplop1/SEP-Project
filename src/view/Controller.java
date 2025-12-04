@@ -2,13 +2,10 @@ package view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import model.TradeOffer;
-import model.Village;
-import model.VillageModelManager;
-import model.Villager;
+import model.*;
 import javafx.scene.*;
 import javafx.event.*;
-import model.GreenGoal;
+
 import java.util.ArrayList;
 
 public class Controller
@@ -87,11 +84,17 @@ public class Controller
     loadVillagerBox();
     loadVillagers();
 
+
+
     loadTrades();
     loadTradeSellerBox();
     loadTradesBox();
     loadTradeSellerEditBox();
     loadTradeFinal();
+
+    loadGreenActivity();
+    loadGreenActivityBox();
+    loadGreenActivityBox1();
   }
 
   @FXML public void loadVillagers() {
@@ -400,6 +403,215 @@ public class Controller
   {
     int number = manager.getVillagers().size();
     totalCounter.setText(Integer.toString(number));
+  }
+
+  @FXML public void addGreenActivity()
+  {
+    String name = greenActivityName.getText();
+    String pointsText = greenActivityPoints.getText();
+
+    if (!name.isEmpty() && !pointsText.isEmpty()) {
+      try {
+        if (!name.matches("[a-zA-Z ]+"))
+        {
+          throw new IllegalArgumentException("Name must contain only letters!");
+        }
+        int points = Integer.parseInt(pointsText);
+        GreenActivity greenActivity = new GreenActivity(name, points);
+        manager.addGreenActivity(greenActivity);
+        loadGreenActivity();
+        loadGreenActivityBox();
+        loadGreenActivityBox1();
+
+      }
+      catch (NumberFormatException e) {
+        System.out.println("Points must be a NUMBER!");
+
+
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText("Points must be a NUMBER!");
+        alert.showAndWait();
+      }
+      catch (IllegalArgumentException e) {
+
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(e.getMessage()); // "Name must contain only letters!"
+        alert.showAndWait();
+      }
+    }
+    else
+    {
+      System.out.println("Fields cannot be empty");
+
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.setContentText("Fields cannot be empty!");
+      alert.showAndWait();
+    }
+
+  }
+  @FXML public void loadGreenActivity()
+  {
+    ArrayList<GreenActivity> greenActivities = manager.getActivities();
+
+    listGreenActivity.clear();
+
+    for (GreenActivity greenActivity : greenActivities)
+    {
+      String line = "";
+      line += greenActivity.getActivityName() + " " + greenActivity.getPoints()+"\n";
+      listGreenActivity.appendText(line);
+    }
+
+    listGreenActivity.setEditable(false);
+  }
+  @FXML public void loadGreenActivityBox1()
+  {
+    int currentIndex = chooseGreenActivity1.getSelectionModel()
+        .getSelectedIndex();
+    chooseGreenActivity1.getItems().clear();
+
+    ArrayList<GreenActivity> greenActivities = manager.getActivities();
+    for (GreenActivity greenActivity : greenActivities)
+    {
+      String line = "";
+      line += greenActivity.getActivityName() + " " + greenActivity.getPoints()
+          + "\n";
+
+      chooseGreenActivity1.getItems().add(greenActivity);
+    }
+
+    if (currentIndex == -1 && chooseGreenActivity1.getItems().size() > 0)
+    {
+      chooseGreenActivity1.getSelectionModel().select(0);
+    }
+    else
+    {
+      chooseGreenActivity1.getSelectionModel().select(currentIndex);
+    }
+  }
+  @FXML public void loadGreenActivityBox()
+  {
+    chooseGreenActivity.getItems().clear();
+
+    ArrayList<GreenActivity> greenActivities = manager.getActivities();
+    for (GreenActivity greenActivity: greenActivities)
+    {
+      String line = "";
+      line += greenActivity.getActivityName() + " " + greenActivity.getPoints()+ "\n";
+
+      chooseGreenActivity.getItems().add(greenActivity);      //add villagers to box
+    }
+    int currentIndex = chooseGreenActivity.getSelectionModel().getSelectedIndex();  //gets index of selected villager in the box
+
+    GreenActivity selectedGreenActivity = null;
+
+    if (currentIndex == -1 && chooseGreenActivity.getItems().size() > 0)
+    {   //no selection (no index) and there are villagers
+      chooseGreenActivity.getSelectionModel().select(0);              //show first villager in the box
+
+      selectedGreenActivity = (GreenActivity) chooseGreenActivity.getValue();          //this will be the villager to fill up the textboxes
+    }
+    else
+    {
+      chooseGreenActivity.getSelectionModel().select(
+          currentIndex);         //there is a selected villager (not -1 index)
+
+      selectedGreenActivity = (GreenActivity) chooseGreenActivity.getValue();           //this wil be the villager to fill up the textboxes
+    }
+
+    if (selectedGreenActivity != null)
+    {                                   //filling up textboxes
+      greenActivityName1.setText(selectedGreenActivity.getActivityName());
+      greenActivityPoints1.setText(String.valueOf(selectedGreenActivity.getPoints()));
+    }
+  }
+
+  @FXML public void editGreenActivity(ActionEvent e)
+  {
+    GreenActivity selectedGreenActivity = (GreenActivity) chooseGreenActivity.getValue();
+
+    // When a villager is selected in the ComboBox
+    if (e.getSource() == chooseGreenActivity)
+    {
+
+      if (selectedGreenActivity != null) {
+        greenActivityName1.setText(selectedGreenActivity.getActivityName());
+        greenActivityPoints1.setText(String.valueOf(selectedGreenActivity.getPoints()) );
+      }
+    }
+
+    // When the Update button is clicked
+    else if (e.getSource() == updateGreenActivity)
+    {
+      if (selectedGreenActivity!= null)
+      {
+        //selectedGreenActivity.setActivityName(greenActivityName.getText());
+        //selectedGreenActivity.setPoints(Integer.parseInt(greenActivityPoints.getText()));
+
+        try
+        {
+          if (!greenActivityName1.getText().matches("[a-zA-Z ]+"))
+          {
+            throw new IllegalArgumentException("Name must contain only letters!");
+          }
+          int points = Integer.parseInt(greenActivityPoints1.getText());
+          GreenActivity newGreenActivity = new GreenActivity(greenActivityName1.getText(), Integer.parseInt(greenActivityPoints1.getText()));
+          manager.changeGreenActivity(selectedGreenActivity,newGreenActivity);
+
+        }
+        catch (NumberFormatException event) {
+          System.out.println("Points must be a NUMBER!");
+
+
+          alert.setHeaderText(null);
+          alert.setTitle("Error");
+          alert.setContentText("Points must be a NUMBER!");
+          alert.showAndWait();
+        }
+        catch (IllegalArgumentException event) {
+
+          alert.setHeaderText(null);
+          alert.setTitle("Error");
+          alert.setContentText(event.getMessage()); // "Name must contain only letters!"
+          alert.showAndWait();
+        }
+      }
+      else
+      {
+        System.out.println("Fields cannot be empty");
+
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText("Fields cannot be empty!");
+        alert.showAndWait();
+      }
+      loadGreenActivity();
+      loadGreenActivityBox();
+      loadGreenActivityBox1();
+    }
+  }
+  public void removeGreenActivity()
+  {
+    if (greenActivityName.getText() != "" && greenActivityPoints.getText() != "")
+    {
+      String name = greenActivityName1.getText();
+      int points = Integer.parseInt(greenActivityPoints1.getText());
+      GreenActivity greenActivity = new GreenActivity(name,points);
+      manager.removeGreenActivity(greenActivity);
+
+      loadGreenActivity();
+      loadGreenActivityBox();
+      loadGreenActivityBox1();
+    }
+  }
+
+
+  public void completeGreenActivity()
+  {
+
   }
 }
 

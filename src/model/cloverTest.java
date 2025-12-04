@@ -128,8 +128,8 @@ public class cloverTest
     cloverville.addTradeOffer(trade15);
     cloverville.addTradeOffer(trade16);
 
-    cloverville.addResetPeriod(7);
-    cloverville.checkReset();
+    //cloverville.addResetPeriod(7);
+    //cloverville.checkReset();
 
 
     GreenActivity activity1 = new GreenActivity("cycling to work", 50);
