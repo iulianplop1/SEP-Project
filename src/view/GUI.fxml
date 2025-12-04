@@ -54,7 +54,7 @@
                             </children>
                         </VBox>
                         <TextArea fx:id="listVillagers" layoutX="378.0" layoutY="36.0" prefHeight="309.0" prefWidth="222.0" />
-                        <TextField fx:id="totalCounter" layoutX="378.0" layoutY="2.0" onAction="#setTotalCounter" prefHeight="36.0" prefWidth="221.0" />
+                        <TextField layoutX="378.0" layoutY="2.0" prefHeight="36.0" prefWidth="221.0" />
                     </children></AnchorPane>
             </content>
         </Tab>
@@ -82,11 +82,11 @@
                                     <content>
                                         <AnchorPane prefHeight="139.0" prefWidth="418.0">
                                             <children>
-                                                <TextField fx:id="sharedTaskName1" layoutX="238.0" layoutY="37.0" />
+                                                <TextField fx:id="sharedTaskName1" layoutX="238.0" layoutY="37.0" onAction="#updateSelectedTask" />
                                                 <TextField fx:id="pointsRequired1" layoutX="238.0" layoutY="74.0" />
                                                 <Text layoutX="33.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task Name" />
                                                 <Text layoutX="33.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points Required" />
-                                                <ComboBox fx:id="availableSharedTasks" layoutX="238.0" layoutY="1.0" onAction="#updateSharedTask" prefWidth="150.0" />
+                                                <ComboBox fx:id="availableSharedTasks" layoutX="238.0" layoutY="1.0" onAction="#updateSelectedTask" prefWidth="150.0" />
                                                 <Text layoutX="33.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Shared Task" />
                                                 <Button fx:id="updateSharedTaskButton" layoutX="238.0" layoutY="116.0" mnemonicParsing="false" onAction="#updateSharedTask" prefHeight="25.0" prefWidth="148.0" text="Update" />
                                                 <Button fx:id="removeSharedTask" layoutX="33.0" layoutY="116.0" mnemonicParsing="false" onAction="#removeSharedTask" prefHeight="25.0" prefWidth="148.0" text="Remove" />
@@ -94,25 +94,24 @@
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
-                                <TitledPane layoutX="10.0" layoutY="123.0" text="Complete Shared Task">
+                                <TitledPane layoutX="10.0" layoutY="123.0" prefHeight="286.0" prefWidth="421.0" text="Complete Shared Task">
                                     <content>
                                         <AnchorPane prefHeight="211.0" prefWidth="407.0">
                                             <children>
-                                                <ComboBox fx:id="completeSharedTasks" layoutX="261.0" layoutY="18.0" onAction="#updateSelectedTask" prefHeight="26.0" prefWidth="124.0" />
-                                                <ComboBox fx:id="completeVillagersList" layoutX="261.0" layoutY="55.0" prefHeight="26.0" prefWidth="124.0" />
-                                                <Button fx:id="addSelectedVillager" layoutX="260.0" layoutY="165.0" mnemonicParsing="false" onAction="#addPerformer" prefHeight="26.0" prefWidth="125.0" text="Add" />
+                                                <ComboBox fx:id="completeSharedTasks" layoutX="261.0" layoutY="18.0" onAction="#startCompletingSharedTask" prefHeight="26.0" prefWidth="146.0" />                                                <ComboBox fx:id="completeVillagersList" layoutX="261.0" layoutY="55.0" prefHeight="26.0" prefWidth="145.0" />
+                                                <Button fx:id="addSelectedVillager" layoutX="263.0" layoutY="217.0" mnemonicParsing="false" onAction="#addPerformer" prefHeight="26.0" prefWidth="141.0" text="Add" />
                                                 <Text layoutX="27.0" layoutY="36.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Shared Task" />
                                                 <Text layoutX="27.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Participants" />
-                                                <Text layoutX="27.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Villagers" />
-                                                <Button layoutX="27.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="125.0" text="Complete" />
-                                    <ListView fx:id="selectedVillagers" layoutX="261.0" layoutY="94.0" prefHeight="60.0" prefWidth="124.0" />
+                                                <Text layoutX="29.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Villagers" />
+                                                <Button layoutX="30.0" layoutY="217.0" mnemonicParsing="false" onAction="#completeSharedTask" prefHeight="26.0" prefWidth="125.0" text="Complete" />
+                                    <ListView fx:id="selectedVillagers" layoutX="261.0" layoutY="94.0" prefHeight="109.0" prefWidth="144.0" />
                                             </children>
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
                             </children>
                         </VBox>
-                        <TextArea layoutX="399.0" prefHeight="344.0" prefWidth="200.0" />
+                  <ListView fx:id="listSharedTasks" layoutX="421.0" layoutY="8.0" prefHeight="342.0" prefWidth="183.0" />
                     </children></AnchorPane>
             </content>
         </Tab>
@@ -318,9 +317,9 @@
                                     <content>
                                         <AnchorPane>
                                             <children>
-                                                <TextArea layoutX="188.0" layoutY="14.0" prefHeight="14.0" prefWidth="156.0" />
+                                                <TextArea fx:id="villageDescription" layoutX="188.0" layoutY="14.0" prefHeight="14.0" prefWidth="156.0" />
                                                 <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set Village Description" />
-                                                <Button layoutX="429.0" layoutY="21.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="152.0" text="Save" />
+                                                <Button layoutX="429.0" layoutY="21.0" mnemonicParsing="false" onAction="#setVillageDescription" prefHeight="25.0" prefWidth="152.0" text="Save" />
                                             </children>
                                         </AnchorPane>
                                     </content>
@@ -331,5 +330,27 @@
                 </AnchorPane>
             </content>
         </Tab>
+      <Tab text="Info">
+        <content>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="number of villagers:" />
+                  <TextField fx:id="numberOfVillagers" editable="false" layoutX="129.0" layoutY="10.0" prefHeight="26.0" prefWidth="48.0" />
+                  <Text layoutX="15.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="village description: " />
+                  <TextArea fx:id="descriptionVillage" editable="false" layoutX="129.0" layoutY="63.0" prefHeight="44.0" prefWidth="455.0" />
+                  <Text layoutX="300.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="green points:" />
+                  <TextField fx:id="greenPointNumber" editable="false" layoutX="387.0" layoutY="10.0" prefHeight="26.0" prefWidth="73.0" />
+                  <Text layoutX="15.0" layoutY="156.0" strokeType="OUTSIDE" strokeWidth="0.0" text="next green goal:" />
+                  <TextField fx:id="nextGreenGoal" editable="false" layoutX="129.0" layoutY="139.0" prefHeight="26.0" prefWidth="221.0" />
+                  <Text layoutX="15.0" layoutY="218.0" strokeType="OUTSIDE" strokeWidth="0.0" text="number of shared tasks:" />
+                  <TextField fx:id="numberOfSharedTasks" editable="false" layoutX="160.0" layoutY="200.0" prefHeight="26.0" prefWidth="61.0" />
+                  <Text layoutX="14.0" layoutY="272.0" strokeType="OUTSIDE" strokeWidth="0.0" text="number of trades:" />
+                  <TextField fx:id="numberOfTrades" editable="false" layoutX="129.0" layoutY="254.0" prefHeight="26.0" prefWidth="61.0" />
+                  <Text layoutX="15.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date of reset:" />
+                  <TextField fx:id="dateOfReset" editable="false" layoutX="102.0" layoutY="303.0" prefHeight="26.0" prefWidth="103.0" />
+               </children>
+            </AnchorPane>
+        </content>
+      </Tab>
     </tabs>
 </TabPane>

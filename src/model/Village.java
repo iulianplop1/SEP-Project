@@ -13,6 +13,7 @@ public class Village implements Serializable {
   private ArrayList<GreenActivity> greenActivities;
   private ArrayList<GreenGoal> goals;
   private int period;
+  private String description;
 
   public Village() {
     this.villagers = new ArrayList<>();
@@ -27,6 +28,10 @@ public class Village implements Serializable {
   public int VillageSize()
   {
     return villagers.size();
+  }
+
+  public int getGreenpoints(){
+    return greenpoints;
   }
 
   public void addVillager(Villager villager) {
@@ -46,9 +51,26 @@ public class Village implements Serializable {
         in = true;
       }
     } if (in) {
+      removeTradesWithVillager(villager);
       villagers.remove(villager);
     }
   }
+  private void removeTradesWithVillager(Villager villager) {
+    ArrayList<TradeOffer> toRemove = new ArrayList<>();
+    for (TradeOffer t : trades)
+    {
+      Villager tradeseller = t.getSeller();
+      if (tradeseller.equals(villager))
+      {
+        toRemove.add(t);
+      }
+    }
+    for (TradeOffer t : toRemove)
+    {
+      trades.remove(t);
+    }
+  }
+
   public void changeVillager(Villager old, Villager villager) {
     String first = villager.getFirstname();
     String last = villager.getLastname();
@@ -62,6 +84,16 @@ public class Village implements Serializable {
       }
     }
   }
+
+  public void setDescription(String description) {
+    this.description = description;
+    System.out.println("DESCRIPTION SET --> " + description);
+  }
+  public String getDescription()
+  {
+    return description;
+  }
+
 
   public ArrayList<Villager> getVillagers() {
     return villagers;

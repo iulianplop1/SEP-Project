@@ -105,6 +105,12 @@ public class VillageModelManager
     saveVillage(cloverville);
   }
 
+  public void setVillageDescription(String description){
+    Village cloverville = getVillage();
+    cloverville.setDescription(description);
+    saveVillage(cloverville);
+  }
+
 
   public ArrayList<TradeOffer> getTrades() {
     Village cloverville = getVillage();
