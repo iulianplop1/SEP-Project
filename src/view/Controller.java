@@ -81,10 +81,12 @@ public class Controller
 
   public void initialize()
   {
+    everything();
+    loadResetDay();
+  }
+  public void everything(){
     loadVillagerBox();
     loadVillagers();
-
-
 
     loadTrades();
     loadTradeSellerBox();
@@ -282,7 +284,28 @@ public class Controller
     }
   }
 
-
+  @FXML public void loadResetDay(){
+    resetDay.clear();
+    Village cloverville =  manager.getVillage();
+    int daystil = cloverville.checkReset();
+    if (daystil == -1){
+      resetDay.setText("N/A");
+    }
+    else{
+      resetDay.setText(String.valueOf(daystil));
+    }
+    manager.saveVillage(cloverville);
+    everything();
+  }
+  @FXML public void saveResetDay() {
+    int days = Integer.parseInt(resetDayEdit.getText());
+    manager.addResetDay(days);
+    initialize();
+  }
+  @FXML public void resetNow() {
+    manager.resetNow();
+    initialize();
+  }
 
 
   @FXML public void addVillager() {

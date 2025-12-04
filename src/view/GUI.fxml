@@ -299,11 +299,11 @@
                                  <children>
                                     <Text layoutX="14.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Set period (in days)" />
                                     <TextField fx:id="resetDayEdit" layoutX="135.0" layoutY="21.0" prefHeight="26.0" prefWidth="65.0" />
-                                    <Button layoutX="287.0" layoutY="20.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="52.0" text="Save" />
+                                    <Button layoutX="287.0" layoutY="20.0" mnemonicParsing="false" onAction="#saveResetDay" prefHeight="26.0" prefWidth="52.0" text="Save" />
                                     <Text layoutX="436.0" layoutY="39.0" strokeType="OUTSIDE" strokeWidth="0.0" text="next reset in " />
                                     <TextField fx:id="resetDay" editable="false" layoutX="511.0" layoutY="22.0" prefHeight="26.0" prefWidth="29.0" />
                                     <Text layoutX="549.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="days" />
-                                    <Button layoutX="474.0" layoutY="73.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="103.0" text="RESET NOW" textFill="#f20909" />
+                                    <Button layoutX="474.0" layoutY="73.0" mnemonicParsing="false" onAction="#resetNow" prefHeight="31.0" prefWidth="103.0" text="RESET NOW" textFill="#f20909" />
                                  </children>
                               </AnchorPane>
                           </content>
