@@ -111,5 +111,56 @@ public class VillageModelManager
       saveVillage(cloverville);
     }
   }
+  public void addGreenActivity(GreenActivity greenActivity)
+  {
+    System.out.println("Manager: adding activity: " + greenActivity);
+
+    Village cloverville = getVillage();
+    System.out.println("Village = " + cloverville);
+
+    ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
+    System.out.println("Green activities list = " + greenActivities);
+
+    greenActivities.add(greenActivity);
+    System.out.println("Added to list.");
+
+    saveVillage(cloverville);
+    System.out.println("Village saved.");
+    System.out.println(getVillage());
+  }
+  public void removeGreenActivity(GreenActivity greenActivity){
+    Village cloverville = getVillage();
+    ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
+
+    for(int i=0;i<greenActivities.size();i++){
+      if(greenActivities.get(i).equals(greenActivity)){
+        greenActivities.remove(greenActivities.get(i));
+      }
+    }
+
+    saveVillage(cloverville);
+  }
+
+  public void changeGreenActivity(GreenActivity old, GreenActivity greenActivity) {
+    String name = greenActivity.getActivityName();
+    int points = greenActivity.getPoints();
+    Village cloverville = getVillage();
+    ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
+    for (int i = 0; i < greenActivities.size(); i++)
+    {
+      if (greenActivities.get(i).equals(old))
+      {
+        greenActivities.get(i).setActivityName(name);
+        greenActivities.get(i).setPoints(points);
+      }
+    }
+    saveVillage(cloverville);
+  }
+
+  public ArrayList<GreenActivity> getActivities()
+  {
+    Village cloverville= getVillage();
+    return cloverville.getGreenActivities();
+  }
 
  }

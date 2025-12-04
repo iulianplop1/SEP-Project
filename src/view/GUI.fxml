@@ -186,11 +186,11 @@
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="123.0" prefWidth="351.0">
                                  <children>
-                                    <TextField layoutX="176.0" layoutY="14.0" />
-                                    <TextField layoutX="176.0" layoutY="53.0" />
+                                    <TextField fx:id="greenActivityName" layoutX="176.0" layoutY="14.0" />
+                                    <TextField fx:id="greenActivityPoints" layoutX="176.0" layoutY="53.0" />
                                     <Text layoutX="28.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Activity Name" />
                                     <Text layoutX="28.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Activity Points" />
-                                    <Button layoutX="184.0" layoutY="91.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="134.0" text="Add" />
+                                    <Button fx:id="addGreenActivity" layoutX="184.0" layoutY="91.0" mnemonicParsing="false" onAction="#addGreenActivity" prefHeight="25.0" prefWidth="134.0" text="Add" />
                                  </children>
                               </AnchorPane>
                           </content>
@@ -199,25 +199,25 @@
                           <content>
                             <AnchorPane prefHeight="156.0" prefWidth="351.0">
                                  <children>
-                                    <ComboBox layoutX="176.0" layoutY="14.0" prefWidth="150.0" />
-                                    <TextField layoutX="177.0" layoutY="51.0" />
-                                    <TextField layoutX="177.0" layoutY="88.0" />
+                                    <ComboBox fx:id="chooseGreenActivity" layoutX="176.0" layoutY="14.0" prefWidth="150.0" />
+                                    <TextField fx:id="greenActivityName1" layoutX="177.0" layoutY="51.0" />
+                                    <TextField fx:id="greenActivityPoints1" layoutX="177.0" layoutY="88.0" />
                                     <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Green Activity" />
                                     <Text layoutX="14.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Activity Name" />
                                     <Text layoutX="14.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Activity Points" />
-                                    <Button layoutX="177.0" layoutY="125.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="149.0" text="Update" />
-                                    <Button layoutX="14.0" layoutY="125.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="149.0" text="Remove" />
+                                    <Button fx:id="updateGreenActivity" layoutX="177.0" layoutY="125.0" mnemonicParsing="false" onAction="#editGreenActivity" prefHeight="16.0" prefWidth="149.0" text="Update" />
+                                    <Button fx:id="removeGreenActivity" layoutX="14.0" layoutY="125.0" mnemonicParsing="false" onAction="#removeGreenActivity" prefHeight="16.0" prefWidth="149.0" text="Remove" />
                                  </children>
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <TitledPane expanded="false" text="Complete Green Activity">
+                        <TitledPane text="Complete Green Activity">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="91.0" prefWidth="351.0">
                                  <children>
-                                    <ComboBox layoutX="187.0" layoutY="14.0" prefWidth="150.0" />
+                                    <ComboBox fx:id="chooseGreenActivity1" layoutX="187.0" layoutY="14.0" prefWidth="150.0" />
                                     <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Green Activity" />
-                                    <Button layoutX="187.0" layoutY="53.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Complete" />
+                                    <Button fx:id="completeGreenActivity" layoutX="187.0" layoutY="53.0" mnemonicParsing="false" onAction="#completeGreenActivity" prefHeight="25.0" prefWidth="149.0" text="Complete" />
                                  </children>
                               </AnchorPane>
                           </content>
@@ -255,7 +255,7 @@
                               </AnchorPane>
                           </content>
                         </TitledPane>
-                        <TitledPane text="Complete Green Goal">
+                        <TitledPane expanded="false" text="Complete Green Goal">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
@@ -272,7 +272,7 @@
                         </TitledPane>
                      </children>
                   </VBox>
-                  <TextArea layoutX="353.0" prefHeight="345.0" prefWidth="247.0" />
+                  <TextArea fx:id="listGreenActivity" layoutX="353.0" prefHeight="345.0" prefWidth="247.0" />
                </children></AnchorPane>
          </content>
       </Tab>
