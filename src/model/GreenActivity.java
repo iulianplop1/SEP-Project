@@ -42,9 +42,8 @@ public class GreenActivity implements Serializable
 
   public String toString()
   {
-    return "The activity " + activityName + " has " + points + " points";
+    return activityName + " " +points + " points";
   }
-
   public GreenActivity copy()
   {
     return new GreenActivity(activityName, points);

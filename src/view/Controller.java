@@ -36,6 +36,8 @@ public class Controller
   @FXML private Button upDateGreenGoal;
   @FXML private Button removeGreenGoal;
   @FXML private TextArea listGreenGoals;
+  @FXML private ComboBox chooseGreenGoal2;
+  @FXML private ComboBox chooseGreenGoal3;
 
   @FXML private TextArea listTrades;
   @FXML private ComboBox chooseTradeSeller;
@@ -103,6 +105,7 @@ public class Controller
 
   public void initialize()
   {
+    manager.loadGreenActivityListJson();
     everything();
     loadResetDay();
   }
@@ -122,6 +125,8 @@ public class Controller
 
     loadGoals();
     loadGoalsBox();
+    loadGoalBox1();
+    loadGoalBox2();
 
     loadSharedTasks();
 
@@ -183,6 +188,52 @@ public class Controller
             String.valueOf(selectedGreenGoal.getRequiredPoints()));
 
       }
+    }
+  }
+  @FXML public void loadGoalBox1() {
+    int greenbox1 = chooseGreenGoal2.getSelectionModel().getSelectedIndex();
+    chooseGreenGoal2.getItems().clear();
+
+    ArrayList<GreenGoal> goals = manager.getGoals();
+    for (GreenGoal greengoal : goals)
+    {
+      String line = "";
+      line +=
+          greengoal.getGoalName() + " " + greengoal.getRequiredPoints() + "\n";
+
+      chooseGreenGoal2.getItems().add(greengoal);
+    }
+
+    if (greenbox1 == -1 && chooseGreenGoal2.getItems().size() > 0)
+    {
+      chooseGreenGoal.getSelectionModel().select(0);
+    }
+    else
+    {
+      chooseGreenActivity1.getSelectionModel().select(greenbox1);
+    }
+  }
+  @FXML public void loadGoalBox2() {
+    int greenbox2 = chooseGreenGoal3.getSelectionModel().getSelectedIndex();
+    chooseGreenGoal3.getItems().clear();
+
+    ArrayList<GreenGoal> goals = manager.getGoals();
+    for (GreenGoal greengoal : goals)
+    {
+      String line = "";
+      line +=
+          greengoal.getGoalName() + " " + greengoal.getRequiredPoints() + "\n";
+
+      chooseGreenGoal3.getItems().add(greengoal);
+    }
+
+    if (greenbox2 == -1 && chooseGreenGoal3.getItems().size() > 0)
+    {
+      chooseGreenGoal.getSelectionModel().select(0);
+    }
+    else
+    {
+      chooseGreenGoal3.getSelectionModel().select(greenbox2);
     }
   }
   @FXML public void loadVillagers() {
@@ -369,7 +420,6 @@ public class Controller
           currentIndex);
     }
   }
-
   @FXML public void loadInfoPage(){
     Village cloverville = manager.getVillage();
     ArrayList<Villager> villagers = manager.getVillagers();
@@ -379,278 +429,14 @@ public class Controller
     numberOfVillagers.setText(String.valueOf(villagers.size()));
     greenPointNumber.setText(String.valueOf(cloverville.getGreenpoints()));
     descriptionVillage.setText("'" + cloverville.getDescription() + "'");
-    //nextGreenGoal.setText(cloverville.getGoals().get(0).toString());
+
+    nextGreenGoal.setText(cloverville.getGoals().get(0).toString());
+
     numberOfSharedTasks.setText(String.valueOf(cloverville.getSharedTasks().size()));
     numberOfTrades.setText(String.valueOf(cloverville.getTrades().size()));
     dateOfReset.setText(reset.toString());
   }
 
-  @FXML public void loadResetDay(){
-    resetDay.clear();
-    Village cloverville =  manager.getVillage();
-    int daystil = cloverville.checkReset();
-    if (daystil == -1){
-      resetDay.setText("N/A");
-    }
-    else{
-      resetDay.setText(String.valueOf(daystil));
-    }
-    manager.saveVillage(cloverville);
-    everything();
-  }
-  @FXML public void saveResetDay() {
-    int days = Integer.parseInt(resetDayEdit.getText());
-    manager.addResetDay(days);
-    initialize();
-  }
-  @FXML public void resetNow() {
-    manager.resetNow();
-    initialize();
-  }
-
-  @FXML public void addGreenGoal() {
-    String GoalName = greenGoalName.getText();
-    int RequiredPoints = Integer.parseInt(greenRequiredPoints.getText());
-    String greenDescriptions = greenDescription.getText();
-    GreenGoal greengoal = new GreenGoal(GoalName, RequiredPoints, greenDescriptions);
-    manager.addGoal(greengoal);
-    initialize();
-  }
-  public void removeGreenGoal() {
-    if (greenGoalName1.getText() != "" && greenRequiredPoints1.getText() != "" && greenDescription1.getText() != "")
-    {
-      String goalName1 = greenGoalName1.getText();
-      String greenDescription1 = greenDescription.getText();
-      int greenrequiredPoints1 = Integer.parseInt(greenRequiredPoints1.getText());
-      GreenGoal greengoal = new GreenGoal(goalName1, greenrequiredPoints1, greenDescription1);
-      manager.removeGreenGoal(greengoal);
-
-      initialize();
-    }
-  }
-
-  @FXML public void addVillager() {
-    String first = firstName.getText();
-    String last = lastName.getText();
-
-    if (!firstName.getText().equals("") && !lastName.getText().equals(""))
-    {
-      Villager villager = new Villager(first, last);
-      manager.addVillager(villager);
-
-      initialize();
-    }
-    else {
-      showAlert("Please enter first name and last name");
-    }
-  }
-  @FXML public void editVillager(ActionEvent e) {
-    Villager selectedVillager = (Villager) chooseVillagers.getValue();
-    // When a villager is selected in the ComboBox
-    if (e.getSource() == chooseVillagers)
-    {
-      if (selectedVillager != null)
-      {
-        firstName1.setText(selectedVillager.getFirstname());
-        lastName1.setText(selectedVillager.getLastname());
-        personalPoints.setText(String.valueOf(selectedVillager.getPoints()));
-      }
-    }
-    // When the Update button is clicked
-    else if (e.getSource() == updateVillager)
-    {
-      if (selectedVillager != null)
-      {
-        try{
-          if (!firstName.getText().equals("") && !lastName.getText().equals(""))
-          {
-            Villager newVillager = new Villager(firstName1.getText(),
-                lastName1.getText(), Integer.parseInt(personalPoints.getText()));
-            manager.changeVillager(selectedVillager, newVillager);
-          }
-          else {
-            showAlert("Please enter first name and last name");
-          }
-        }
-        catch (NumberFormatException event) {
-          showAlert("Points must be a NUMBER!");
-        }
-        catch (IllegalArgumentException event) {
-          showAlert(event.getMessage());
-        }
-      }
-      initialize();
-    }
-  }
-  @FXML public void removeVillager() {
-    try{
-      String first = firstName1.getText();
-      String last = lastName1.getText();
-      int points = Integer.parseInt(personalPoints.getText());
-      Villager villager = new Villager(first, last, points);
-      manager.removeVillager(villager);
-    }
-    catch (NumberFormatException event) {
-      System.out.println("Points must be a NUMBER!");
-      alert.setHeaderText(null);
-      alert.setTitle("Hoppá");
-      alert.setContentText("Points must be a NUMBER!");
-      alert.showAndWait();
-    }
-    catch (IllegalArgumentException event) {
-      alert.setHeaderText(null);
-      alert.setTitle("Hoppá");
-      alert.setContentText(event.getMessage()); // "Name must contain only letters!"
-      alert.showAndWait();
-    }
-    initialize();
-  }
-
-
-  @FXML public void setVillageDescription(){
-    manager.setVillageDescription(villageDescription.getText());
-    villageDescription.clear();
-  }
-
-
-  @FXML void addTadeOffer() {
-    Villager seller = (Villager) chooseTradeSeller.getValue();
-    String tradename = tradeName.getText();
-    int requiredpoints = Integer.parseInt(tradeRequiredPoints.getText());
-    String description = tradeDescription.getText();
-    TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints, description);
-    System.out.println("ADDING TRADE --> " + trade);
-    manager.addTrade(trade);
-
-    initialize();
-  }
-  @FXML void editTradeOffer(ActionEvent e) {
-    TradeOffer selectedTrade = (TradeOffer) chooseTrade.getValue();
-
-    if (e.getSource() == chooseTrade)
-    {
-      if (selectedTrade != null)
-      {
-        chooseTradeSellerEdit.setValue(selectedTrade.getSeller());
-        tradeNameEdit.setText(selectedTrade.getTradeName());
-        tradeRequiredPointsEdit.setText(String.valueOf(selectedTrade.getPoints()));
-        tradeDescriptionEdit.setText(selectedTrade.getDescription());
-      }
-    }
-    else if (e.getSource() == removeTrade || e.getSource()==updateTrade)
-    {
-      Villager editedSeller = (Villager) chooseTradeSellerEdit.getValue();
-      String editedTradeName = tradeNameEdit.getText();
-      int editedPoints = Integer.parseInt(tradeRequiredPointsEdit.getText());
-      String editedDescription = tradeDescriptionEdit.getText();
-      if(e.getSource()==removeTrade){
-        TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
-        manager.removeTrade(toRemove);
-      }
-      else if(e.getSource()==updateTrade){
-        TradeOffer newTrade = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
-        manager.changeTrade(selectedTrade, newTrade);
-      }
-
-      initialize();
-    }
-  }
-  @FXML void finishTradeOffer(ActionEvent e) {
-    TradeOffer selectedTrade = (TradeOffer) chooseTradeFinish.getValue();
-    Villager finalbuyer = (Villager) chooseTradeBuyer.getValue();
-
-    if (e.getSource() == chooseTradeFinish)
-    {
-      if (selectedTrade != null)
-      {
-        loadBuyerBox(selectedTrade);
-      }
-    }
-    if(e.getSource() == chooseTradeBuyer){
-      finalbuyer = (Villager) chooseTradeBuyer.getValue();
-    }
-    if (e.getSource()==finishTrade && finalbuyer != null)
-    {
-      manager.finishTrade(selectedTrade, finalbuyer);
-
-      initialize();
-    }
-  }
-
-
-  @FXML public void editGreenGoal(ActionEvent e)
-  {
-    GreenGoal selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();
-    if (e.getSource() == chooseGreenGoal)
-    {
-      if (selectedGreenGoal != null)
-      {
-        greenGoalName1.setText(selectedGreenGoal.getGoalName());
-        greenRequiredPoints1.setText(
-            String.valueOf(selectedGreenGoal.getRequiredPoints()));
-        greenDescription1.setText(selectedGreenGoal.getGreenDescription());
-      }
-    }
-    // When the Update button is clicked
-    else if (e.getSource() == upDateGreenGoal)
-    {
-      if (selectedGreenGoal != null)
-      {
-        GreenGoal newGoal = new GreenGoal(greenGoalName1.getText(),
-            Integer.parseInt(greenRequiredPoints1.getText()),
-            greenDescription1.getText());
-        manager.changeGreenGoal(selectedGreenGoal, newGoal);
-      }
-      initialize();
-    }
-  }
-
-  @FXML public void addGreenActivity() {
-    String name = greenActivityName.getText();
-    String pointsText = greenActivityPoints.getText();
-
-    if (!name.isEmpty() && !pointsText.isEmpty()) {
-      try {
-        if (!name.matches("[a-zA-Z ]+"))
-        {
-          throw new IllegalArgumentException("Name must contain only letters!");
-        }
-        int points = Integer.parseInt(pointsText);
-        GreenActivity greenActivity = new GreenActivity(name, points);
-        manager.addGreenActivity(greenActivity);
-        loadGreenActivity();
-        loadGreenActivityBox();
-        loadGreenActivityBox1();
-
-      }
-      catch (NumberFormatException e) {
-        System.out.println("Points must be a NUMBER!");
-
-
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.setContentText("Points must be a NUMBER!");
-        alert.showAndWait();
-      }
-      catch (IllegalArgumentException e) {
-
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.setContentText(e.getMessage()); // "Name must contain only letters!"
-        alert.showAndWait();
-      }
-    }
-    else
-    {
-      System.out.println("Fields cannot be empty");
-
-      alert.setHeaderText(null);
-      alert.setTitle("Error");
-      alert.setContentText("Fields cannot be empty!");
-      alert.showAndWait();
-    }
-
-  }
   @FXML public void loadGreenActivity() {
     ArrayList<GreenActivity> greenActivities = manager.getActivities();
 
@@ -725,94 +511,7 @@ public class Controller
     }
   }
 
-  @FXML public void editGreenActivity(ActionEvent e)
-  {
-    GreenActivity selectedGreenActivity = (GreenActivity) chooseGreenActivity.getValue();
-
-    // When a villager is selected in the ComboBox
-    if (e.getSource() == chooseGreenActivity)
-    {
-
-      if (selectedGreenActivity != null) {
-        greenActivityName1.setText(selectedGreenActivity.getActivityName());
-        greenActivityPoints1.setText(String.valueOf(selectedGreenActivity.getPoints()) );
-      }
-    }
-
-    // When the Update button is clicked
-    else if (e.getSource() == updateGreenActivity)
-    {
-      if (selectedGreenActivity!= null)
-      {
-        //selectedGreenActivity.setActivityName(greenActivityName.getText());
-        //selectedGreenActivity.setPoints(Integer.parseInt(greenActivityPoints.getText()));
-        try
-        {
-          if (!greenActivityName1.getText().matches("[a-zA-Z ]+"))
-          {
-            throw new IllegalArgumentException("Name must contain only letters!");
-          }
-          int points = Integer.parseInt(greenActivityPoints1.getText());
-          GreenActivity newGreenActivity = new GreenActivity(greenActivityName1.getText(), Integer.parseInt(greenActivityPoints1.getText()));
-          manager.changeGreenActivity(selectedGreenActivity,newGreenActivity);
-
-        }
-        catch (NumberFormatException event) {
-          System.out.println("Points must be a NUMBER!");
-
-
-          alert.setHeaderText(null);
-          alert.setTitle("Error");
-          alert.setContentText("Points must be a NUMBER!");
-          alert.showAndWait();
-        }
-        catch (IllegalArgumentException event) {
-
-          alert.setHeaderText(null);
-          alert.setTitle("Error");
-          alert.setContentText(event.getMessage()); // "Name must contain only letters!"
-          alert.showAndWait();
-        }
-      }
-      else
-      {
-        System.out.println("Fields cannot be empty");
-
-        alert.setHeaderText(null);
-        alert.setTitle("Error");
-        alert.setContentText("Fields cannot be empty!");
-        alert.showAndWait();
-      }
-      loadGreenActivity();
-      loadGreenActivityBox();
-      loadGreenActivityBox1();
-    }
-  }
-  public void removeGreenActivity()
-  {
-    if (greenActivityName.getText() != "" && greenActivityPoints.getText() != "")
-    {
-      String name = greenActivityName1.getText();
-      int points = Integer.parseInt(greenActivityPoints1.getText());
-      GreenActivity greenActivity = new GreenActivity(name,points);
-      manager.removeGreenActivity(greenActivity);
-
-      loadGreenActivity();
-      loadGreenActivityBox();
-      loadGreenActivityBox1();
-    }
-  }
-
-
-  public void completeGreenActivity()
-  {
-
-  }
-
-
-
-  @FXML
-  public void loadSharedTasks() {
+  @FXML public void loadSharedTasks() {
     if (listSharedTasks == null
         || availableSharedTasks == null
         || completeSharedTasks == null
@@ -835,75 +534,7 @@ public class Controller
 
     completeVillagersList.getItems().addAll(manager.getVillagers());
   }
-
-  @FXML
-  public void addSharedTask() {
-    String name = sharedTaskName.getText();
-    int points = Integer.parseInt(pointsRequired.getText());
-
-    Village village = manager.getVillage();
-
-    SharedTask task = new SharedTask(village, name, points);
-    int j=0;
-    for (int i = 0; i <manager.getSharedTasks().size(); i++) {
-
-      if (task.getTaskName().equals(manager.getSharedTasks().get(i).getTaskName()))
-        j++;
-    }
-    if (j==0){
-      manager.addSharedTask(task);
-    }
-
-
-    loadSharedTasks();
-    sharedTaskName.clear();
-    pointsRequired.clear();
-
-
-  }
-  @FXML
-  public void updateSelectedTask(){
-    SharedTask task = (SharedTask) availableSharedTasks.getSelectionModel().getSelectedItem();
-    if (task == null) return;
-    sharedTaskName1.setText(availableSharedTasks.getSelectionModel().getSelectedItem().getTaskName());
-    pointsRequired1.setText(String.valueOf(availableSharedTasks.getSelectionModel().getSelectedItem().getPoints()));
-  }
-
-  @FXML public void updateSharedTask() {
-    int index = availableSharedTasks.getSelectionModel().getSelectedIndex();
-
-    Village village = manager.getVillage();
-    ArrayList<SharedTask> tasks = village.getSharedTasks();
-
-    SharedTask task = tasks.get(index);
-    task.setTaskName(sharedTaskName1.getText());
-    task.setPoints(Integer.parseInt(pointsRequired1.getText()));
-
-    manager.saveVillage(village);
-    loadSharedTasks();
-
-    sharedTaskName1.clear();
-    pointsRequired1.clear();
-  }
-
-  @FXML public void removeSharedTask(){
-    int index = availableSharedTasks.getSelectionModel().getSelectedIndex();
-
-    Village village = manager.getVillage();
-    ArrayList<SharedTask> tasks = village.getSharedTasks();
-
-    tasks.remove(index);
-
-    manager.saveVillage(village);
-    loadSharedTasks();
-
-    sharedTaskName1.clear();
-    pointsRequired1.clear();
-  }
-
-
-  @FXML
-  private void loadSelectedPerformers() {
+  @FXML private void loadSelectedPerformers() {
     selectedVillagers.getItems().clear();
 
     SharedTask selectedTask = (SharedTask) completeSharedTasks
@@ -925,9 +556,486 @@ public class Controller
     }
   }
 
+  @FXML public void setVillageDescription(){
+    manager.setVillageDescription(villageDescription.getText());
+    villageDescription.clear();
+  }
 
-  @FXML
-  private void startCompletingSharedTask() {
+  @FXML public void loadResetDay(){
+    resetDay.clear();
+    Village cloverville =  manager.getVillage();
+    int daystil = cloverville.checkReset();
+    if (daystil == -1){
+      resetDay.setText("N/A");
+    }
+    else{
+      resetDay.setText(String.valueOf(daystil));
+    }
+    manager.saveVillage(cloverville);
+    everything();
+  }
+  @FXML public void saveResetDay() {
+    int days = Integer.parseInt(resetDayEdit.getText());
+    manager.addResetDay(days);
+    initialize();
+  }
+  @FXML public void resetNow() {
+    manager.resetNow();
+    initialize();
+  }
+
+
+  @FXML public void addVillager() {
+    String first = firstName.getText();
+    String last = lastName.getText();
+
+    if (!firstName.getText().equals("") && !lastName.getText().equals(""))
+    {
+      Villager villager = new Villager(first, last);
+      manager.addVillager(villager);
+
+      initialize();
+    }
+    else {
+      showAlert("Please enter a first name and alast name to add villager");
+    }
+  }
+  @FXML public void editVillager(ActionEvent e) {
+    Villager selectedVillager = (Villager) chooseVillagers.getValue();
+    // When a villager is selected in the ComboBox
+    if (e.getSource() == chooseVillagers)
+    {
+      if (selectedVillager != null)
+      {
+            firstName1.setText(selectedVillager.getFirstname());
+            lastName1.setText(selectedVillager.getLastname());
+            personalPoints.setText(String.valueOf(selectedVillager.getPoints()));
+      }
+    }
+    // When the Update button is clicked
+    else if (e.getSource() == updateVillager)
+    {
+      if (selectedVillager != null)
+      {
+        try{
+          if (!firstName1.getText().equals("") && !lastName1.getText().equals(""))
+          {
+            Villager newVillager = new Villager(firstName1.getText(),
+                lastName1.getText(), Integer.parseInt(personalPoints.getText()));
+            manager.changeVillager(selectedVillager, newVillager);
+          }
+          else {
+            showAlert("Please enter a first name and a last name to update villager");
+          }
+        }
+        catch (NumberFormatException event) {
+          showAlert("Points must be a number to update villager");
+        }
+        catch (IllegalArgumentException event) {
+          showAlert(event.getMessage());
+        }
+      }
+      initialize();
+    }
+  }
+  @FXML public void removeVillager() {
+    try{
+
+      if (!firstName1.getText().equals("") && !lastName1.getText().equals(""))
+      {
+        String first = firstName1.getText();
+        String last = lastName1.getText();
+        int points = Integer.parseInt(personalPoints.getText());
+        Villager villager = new Villager(first, last, points);
+        manager.removeVillager(villager);
+      }
+      else {
+        showAlert("Please enter a first name and a last name to update villager");
+      }
+    }
+    catch (NumberFormatException event) {
+      showAlert("Points must be a number to remove villager!");
+    }
+    catch (IllegalArgumentException event) {
+      showAlert(event.getMessage());
+    }
+    initialize();
+  }
+
+  @FXML public void addGreenGoal() {
+    String GoalName = greenGoalName.getText();
+    int RequiredPoints = Integer.parseInt(greenRequiredPoints.getText());
+    String greenDescriptions = greenDescription.getText();
+    GreenGoal greengoal = new GreenGoal(GoalName, RequiredPoints, greenDescriptions);
+    manager.addGoal(greengoal);
+    initialize();
+  }
+  @FXML public void removeGreenGoal() {
+    if (greenGoalName1.getText() != "" && greenRequiredPoints1.getText() != "" && greenDescription1.getText() != "")
+    {
+      String goalName1 = greenGoalName1.getText();
+      String greenDescription1 = greenDescription.getText();
+      int greenrequiredPoints1 = Integer.parseInt(greenRequiredPoints1.getText());
+      GreenGoal greengoal = new GreenGoal(goalName1, greenrequiredPoints1, greenDescription1);
+      manager.removeGreenGoal(greengoal);
+
+      initialize();
+    }
+  }
+
+  @FXML void addTadeOffer() {
+    Villager seller = (Villager) chooseTradeSeller.getValue();
+    String tradename = tradeName.getText();
+    int requiredpoints = Integer.parseInt(tradeRequiredPoints.getText());
+    String description = tradeDescription.getText();
+    TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints, description);
+    System.out.println("ADDING TRADE --> " + trade);
+    manager.addTrade(trade);
+
+    initialize();
+  }
+  @FXML void editTradeOffer(ActionEvent e) {
+    TradeOffer selectedTrade = (TradeOffer) chooseTrade.getValue();
+
+    if (e.getSource() == chooseTrade)
+    {
+      if (selectedTrade != null)
+      {
+        chooseTradeSellerEdit.setValue(selectedTrade.getSeller());
+        tradeNameEdit.setText(selectedTrade.getTradeName());
+        tradeRequiredPointsEdit.setText(String.valueOf(selectedTrade.getPoints()));
+        tradeDescriptionEdit.setText(selectedTrade.getDescription());
+      }
+    }
+    else if (e.getSource() == removeTrade || e.getSource()==updateTrade)
+    {
+      Villager editedSeller = (Villager) chooseTradeSellerEdit.getValue();
+      String editedTradeName = tradeNameEdit.getText();
+      int editedPoints = Integer.parseInt(tradeRequiredPointsEdit.getText());
+      String editedDescription = tradeDescriptionEdit.getText();
+      if(e.getSource()==removeTrade){
+        TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
+        manager.removeTrade(toRemove);
+      }
+      else if(e.getSource()==updateTrade){
+        TradeOffer newTrade = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
+        manager.changeTrade(selectedTrade, newTrade);
+      }
+
+      initialize();
+    }
+  }
+  @FXML void finishTradeOffer(ActionEvent e) {
+    TradeOffer selectedTrade = (TradeOffer) chooseTradeFinish.getValue();
+    Villager finalbuyer = (Villager) chooseTradeBuyer.getValue();
+
+    if (e.getSource() == chooseTradeFinish)
+    {
+      if (selectedTrade != null)
+      {
+        loadBuyerBox(selectedTrade);
+      }
+    }
+    if(e.getSource() == chooseTradeBuyer){
+      finalbuyer = (Villager) chooseTradeBuyer.getValue();
+    }
+    if (e.getSource()==finishTrade && finalbuyer != null)
+    {
+      manager.finishTrade(selectedTrade, finalbuyer);
+
+      initialize();
+    }
+  }
+
+
+  @FXML public void editGreenGoal(ActionEvent e) {
+    GreenGoal selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();
+    if (e.getSource() == chooseGreenGoal)
+    {
+      if (selectedGreenGoal != null)
+      {
+        greenGoalName1.setText(selectedGreenGoal.getGoalName());
+        greenRequiredPoints1.setText(
+            String.valueOf(selectedGreenGoal.getRequiredPoints()));
+        greenDescription1.setText(selectedGreenGoal.getGreenDescription());
+      }
+    }
+    // When the Update button is clicked
+    else if (e.getSource() == upDateGreenGoal)
+    {
+      if (selectedGreenGoal != null)
+      {
+        GreenGoal newGoal = new GreenGoal(greenGoalName1.getText(),
+            Integer.parseInt(greenRequiredPoints1.getText()),
+            greenDescription1.getText());
+        manager.changeGreenGoal(selectedGreenGoal, newGoal);
+      }
+      initialize();
+    }
+  }
+
+  @FXML public void addGreenActivity() {
+    String name = greenActivityName.getText();
+    String pointsText = greenActivityPoints.getText();
+
+    if (!name.isEmpty() && !pointsText.isEmpty()) {
+      try {
+        if (!name.matches("[a-zA-Z ]+"))
+        {
+          throw new IllegalArgumentException("Name must contain only letters!");
+        }
+        int points = Integer.parseInt(pointsText);
+        GreenActivity greenActivity = new GreenActivity(name, points);
+        manager.addGreenActivity(greenActivity);
+        loadGreenActivity();
+        loadGreenActivityBox();
+        loadGreenActivityBox1();
+
+      }
+      catch (NumberFormatException e) {
+        System.out.println("Points must be a NUMBER!");
+
+
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText("Points must be a NUMBER!");
+        alert.showAndWait();
+      }
+      catch (IllegalArgumentException e) {
+
+        alert.setHeaderText(null);
+        alert.setTitle("Error");
+        alert.setContentText(e.getMessage()); // "Name must contain only letters!"
+        alert.showAndWait();
+      }
+    }
+    else
+    {
+      System.out.println("Fields cannot be empty");
+
+      alert.setHeaderText(null);
+      alert.setTitle("Error");
+      alert.setContentText("Fields cannot be empty!");
+      alert.showAndWait();
+    }
+
+  }
+  @FXML public void editGreenActivity(ActionEvent e) {
+    GreenActivity selectedGreenActivity = (GreenActivity) chooseGreenActivity.getValue();
+
+    // When a villager is selected in the ComboBox
+    if (e.getSource() == chooseGreenActivity)
+    {
+
+      if (selectedGreenActivity != null) {
+        greenActivityName1.setText(selectedGreenActivity.getActivityName());
+        greenActivityPoints1.setText(String.valueOf(selectedGreenActivity.getPoints()) );
+      }
+    }
+
+    // When the Update button is clicked
+    else if (e.getSource() == updateGreenActivity)
+    {
+      if (selectedGreenActivity!= null)
+      {
+        //selectedGreenActivity.setActivityName(greenActivityName.getText());
+        //selectedGreenActivity.setPoints(Integer.parseInt(greenActivityPoints.getText()));
+
+        try
+        {
+          if (!greenActivityName1.getText().matches("[a-zA-Z ]+"))
+          {
+            throw new IllegalArgumentException("Name must contain only letters!");
+          }
+          int points = Integer.parseInt(greenActivityPoints1.getText());
+          GreenActivity newGreenActivity = new GreenActivity(greenActivityName1.getText(), Integer.parseInt(greenActivityPoints1.getText()));
+          manager.changeGreenActivity(selectedGreenActivity,newGreenActivity);
+
+        }
+        catch (NumberFormatException event) {
+          System.out.println("Points must be a NUMBER!");
+
+          showAlert("Points must be a NUMBER!");
+        }
+        catch (IllegalArgumentException event) {
+
+          showAlert("Name must contain only letters!");
+        }
+      }
+      else
+      {
+        System.out.println("Fields cannot be empty");
+
+        showAlert("Fields cannot be empty or there is no activity to edit!");
+      }
+      everything();
+    }
+  }
+  public void removeGreenActivity() {
+    if (!(greenActivityName.getText().isEmpty() && greenActivityPoints.getText().isEmpty()))
+    {
+      String name = greenActivityName1.getText();
+      int points = Integer.parseInt(greenActivityPoints1.getText());
+      GreenActivity greenActivity = new GreenActivity(name,points);
+      manager.removeGreenActivity(greenActivity);
+      //try catch for when the list is empty
+      everything();
+    }
+    else
+    {
+      showAlert("There is no activity to remove");
+    }
+  }
+  @FXML void completeGreenActivity(ActionEvent e) {
+    GreenActivity selectedGreenActivity = (GreenActivity) chooseGreenActivity1.getValue();
+    manager.finishGreenActivity(selectedGreenActivity);
+    showAlert(((GreenActivity) chooseGreenActivity1.getValue()).getPoints()+" points where added to the Green Goal because of the activity "+((GreenActivity) chooseGreenActivity1.getValue()).getActivityName());
+    everything();
+  }
+
+
+
+  @FXML public void addSharedTask() {
+    String name = sharedTaskName.getText();
+    int points;
+    try {
+      points=  Integer.parseInt(pointsRequired.getText());
+    }  catch (NumberFormatException event) {
+      System.out.println("Points must be a NUMBER!");
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Points must be a NUMBER and not EMPTY!");
+      alert.showAndWait();
+      return;
+    }
+
+    Village village = manager.getVillage();
+
+
+    SharedTask task = new SharedTask(name, points);
+    int j = 0;
+    for (int i = 0; i < manager.getSharedTasks().size(); i++) {
+
+      if (task.getTaskName().equals(manager.getSharedTasks().get(i).getTaskName()))
+        j++;
+    }
+
+
+    if (name.equals("")){
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Name cant be empty");
+      alert.showAndWait();
+      return;
+
+    }
+    if (j == 0 && !name.equals("") ) {
+      manager.addSharedTask(task);
+    }
+
+
+
+
+
+    loadSharedTasks();
+    sharedTaskName.clear();
+    pointsRequired.clear();
+
+
+  }
+  @FXML public void updateSelectedTask(){
+    SharedTask task = (SharedTask) availableSharedTasks.getSelectionModel().getSelectedItem();
+    if (task == null) return;
+
+    sharedTaskName1.setText(availableSharedTasks.getSelectionModel().getSelectedItem().getTaskName());
+    pointsRequired1.setText(String.valueOf(availableSharedTasks.getSelectionModel().getSelectedItem().getPoints()));
+  }
+  @FXML public void updateSharedTask() {
+    SharedTask selectedTask = availableSharedTasks.getSelectionModel().getSelectedItem();
+    if (selectedTask == null) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Please select a task to update!");
+      alert.showAndWait();
+      return;
+    }
+
+    int index = availableSharedTasks.getSelectionModel().getSelectedIndex();
+    if (index < 0) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Invalid selection!");
+      alert.showAndWait();
+      return;
+    }
+
+    String name = sharedTaskName1.getText();
+    if (name.equals("")) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Name cant be empty");
+      alert.showAndWait();
+      return;
+    }
+
+    int points;
+    try {
+      points = Integer.parseInt(pointsRequired1.getText());
+    } catch (NumberFormatException event) {
+      System.out.println("Points must be a NUMBER!");
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Points must be a NUMBER and not EMPTY!");
+      alert.showAndWait();
+      return;
+    }
+
+    Village village = manager.getVillage();
+    ArrayList<SharedTask> tasks = village.getSharedTasks();
+    SharedTask task = tasks.get(index);
+    task.setTaskName(name);
+    task.setPoints(points);
+
+    manager.saveVillage(village);
+    loadSharedTasks();
+
+    sharedTaskName1.clear();
+    pointsRequired1.clear();
+  }
+  @FXML public void removeSharedTask(){
+    SharedTask selectedTask = availableSharedTasks.getSelectionModel().getSelectedItem();
+    if (selectedTask == null) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("No task selected!");
+      alert.showAndWait();
+      return;
+    }
+
+    int index = availableSharedTasks.getSelectionModel().getSelectedIndex();
+    if (index < 0) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Invalid selection!");
+      alert.showAndWait();
+      return;
+    }
+
+    Village village = manager.getVillage();
+    ArrayList<SharedTask> tasks = village.getSharedTasks();
+
+
+
+    tasks.remove(index);
+
+    manager.saveVillage(village);
+    loadSharedTasks();
+
+    sharedTaskName1.clear();
+    pointsRequired1.clear();
+  }
+
+  @FXML private void startCompletingSharedTask() {
     selectedVillagers.getItems().clear();
 
     SharedTask selectedTask = (SharedTask) completeSharedTasks.getSelectionModel().getSelectedItem();
@@ -946,12 +1054,7 @@ public class Controller
 
 
   }
-
-
-
-
-  @FXML
-  public void addPerformer() {
+  @FXML public void addPerformer() {
     SharedTask selectedTask = (SharedTask) completeSharedTasks.getSelectionModel().getSelectedItem();
     Villager selectedVillager = (Villager) completeVillagersList.getSelectionModel().getSelectedItem();
     if (selectedTask == null || selectedVillager == null) return;
@@ -988,36 +1091,54 @@ public class Controller
 
     loadSelectedPerformers();
   }
-
-  @FXML
-  public void completeSharedTask() {
+  @FXML public void completeSharedTask() {
     SharedTask selectedTask = (SharedTask) completeSharedTasks.getSelectionModel().getSelectedItem();
-    if (selectedTask == null) return;
+    if (selectedTask == null) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Please select a task to complete!");
+      alert.showAndWait();
+      return;
+    }
 
     Village village = manager.getVillage();
     ArrayList<SharedTask> tasks = village.getSharedTasks();
 
-    int indexTask = tasks.indexOf(selectedTask); // uses SharedTask.equals(...)
+    int indexTask = tasks.indexOf(selectedTask);
+    if (indexTask < 0) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Task not found in village!");
+      alert.showAndWait();
+      return;
+    }
 
     SharedTask task = tasks.get(indexTask);
+
+    if (task.NrPerformers() == 0) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Cannot complete task: No performers assigned!");
+      alert.showAndWait();
+      return;
+    }
 
     village.finishSharedTask(task);
     manager.saveVillage(village);
 
     everything();
-
-
-
   }
+
+
 
   public void showAlert(String input)
   {
+    System.out.println("ERROR --> " + input);
+
     alert.setHeaderText(null);
     alert.setTitle("Error");
     alert.setContentText(input);
     alert.showAndWait();
   }
-
-
 }
 

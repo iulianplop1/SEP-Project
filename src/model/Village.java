@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class Village implements Serializable
 {
   private int greenpoints;
@@ -13,6 +14,7 @@ public class Village implements Serializable
   private ArrayList<String> catalogueOfIdeas;
   private ArrayList<GreenActivity> greenActivities;
   private ArrayList<GreenGoal> goals;
+  private GreenGoal currentGreenGoal;
   private int period;
   private String description;
 
@@ -26,11 +28,6 @@ public class Village implements Serializable
     this.goals = new ArrayList<>();
     period = 10;
     this.greenActivities = new ArrayList<>();
-  }
-
-  public int VillageSize()
-  {
-    return villagers.size();
   }
 
   public int getGreenpoints()
@@ -276,7 +273,9 @@ public class Village implements Serializable
     if (!catalogueOfIdeas.contains(name)){
       catalogueOfIdeas.add(name);
     }
-    //greenpoints += points;
+    System.out.println("Old"+ greenpoints);
+    greenpoints += points;
+    System.out.println("New"+greenpoints);
   }
   public void removeGreenActivity(GreenActivity greenactivity) {
     String name = greenactivity.getActivityName();
@@ -379,7 +378,30 @@ public class Village implements Serializable
       }
     }
   }
+  public void finishGreenActivity(GreenActivity greenActivity) {
+    if (greenActivity == null) {
+      System.out.println("GREEN ACTIVITY IS NULL");
+      return;
+    }
 
+    String name = greenActivity.getActivityName();
+    int points = greenActivity.getPoints();
+
+
+
+    System.out.println("OldCatalogue"+catalogueOfIdeas);
+    if (!catalogueOfIdeas.contains(name)) {
+      catalogueOfIdeas.add(name);
+      System.out.println("NewCatalogue"+catalogueOfIdeas);
+    }
+
+
+    System.out.println("OldPoints"+greenpoints);
+    greenpoints+= points;
+    System.out.println("NewPoints"+greenpoints);
+    System.out.println("FINISHED GREEN ACTIVITY → " + name
+        + " | +" + points + " points");
+  }
   public String toString(){
     return "\nvillagers: " + villagers.toString() + "\ngreen points:" + greenpoints
         + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueOfIdeas.toString()

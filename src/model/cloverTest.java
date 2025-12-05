@@ -12,18 +12,18 @@ public class cloverTest
     Villager villager2 = new Villager("Mike", "Lorenzen", 105);
     Villager villager3 = new Villager("Arsenie", "Bilba", 120);
     Villager villager4 = new Villager("Iulian", "Plop", 111);
-    Villager villager5 = new Villager("John", "Doe", 130);
-    Villager villager6 = new Villager("Laur", "Leon", 105);
-    Villager villager7 = new Villager("Sugi", "Pula", 250);
-    Villager villager8 = new Villager("Mike", "Suge", 160);
-    Villager villager9 = new Villager("ala", "bama", 67);
-    Villager villager10 = new Villager("bama", "ala", 76);
-    Villager villager11 = new Villager("suga", "mama", 777);
-    Villager villager12 = new Villager("mama", "suga", 66);
-    Villager villager13= new Villager("Johnny", "bravo", 559);
-    Villager villager14 = new Villager("biggie", "Len", 114);
-    Villager villager15 = new Villager("bal", "Pua", 112);
-    Villager villager16 = new Villager("Mie", "Sue", 113);
+    Villager villager5 = new Villager("John", "Marlow", 130);
+    Villager villager6 = new Villager("Laura", "Leonard", 105);
+    Villager villager7 = new Villager("Sophie", "Pullen", 250);
+    Villager villager8 = new Villager("Michael", "Sugden", 160);
+    Villager villager9 = new Villager("Alan", "Barnes", 67);
+    Villager villager10 = new Villager("Ben", "Allan", 76);
+    Villager villager11 = new Villager("Susan", "Marlow", 777);
+    Villager villager12 = new Villager("Maria", "Sutter", 66);
+    Villager villager13= new Villager("Johnny", "Branford", 559);
+    Villager villager14 = new Villager("Bianca", "Lennox", 114);
+    Villager villager15 = new Villager("Bella", "Pugh", 112);
+    Villager villager16 = new Villager("Mia", "Sutton", 113);
     Villager villager17 = new Villager("Liam", "Turner", 121);
     Villager villager18 = new Villager("Emma", "Stone", 132);
     Villager villager19 = new Villager("Noah", "Harper", 140);
@@ -50,7 +50,6 @@ public class cloverTest
     Villager villager40 = new Villager("Victoria", "Hale", 155);
     Villager villager41 = new Villager("Samuel", "Barton", 122);
     Villager villager42 = new Villager("Evelyn", "Summers", 144);
-
     cloverville.addVillager(villager1);
     cloverville.addVillager(villager2);
     cloverville.addVillager(villager3);
@@ -110,7 +109,6 @@ public class cloverTest
     TradeOffer trade14 = new TradeOffer(villager4, "leather-bound notebook", 50, "great for journaling");
     TradeOffer trade15 = new TradeOffer(villager1, "set of gardening tools", 70, "includes gloves, trowel, etc.");
     TradeOffer trade16 = new TradeOffer(villager2, "handcrafted clay mug", 22, "fired in my home kiln");
-
     cloverville.addTradeOffer(trade1);
     cloverville.addTradeOffer(trade2);
     cloverville.addTradeOffer(trade3);
@@ -128,10 +126,6 @@ public class cloverTest
     cloverville.addTradeOffer(trade15);
     cloverville.addTradeOffer(trade16);
 
-    cloverville.addResetPeriod(7);
-    cloverville.checkReset();
-
-
     GreenActivity activity1 = new GreenActivity("cycling to work", 50);
     GreenActivity activity2 = new GreenActivity("biodegradable kitchen waste", 40);
     GreenActivity activity3 = new GreenActivity("planting trees", 30);
@@ -144,7 +138,6 @@ public class cloverTest
     GreenActivity activity10 = new GreenActivity("avoiding single-use plastics", 30);
     GreenActivity activity11 = new GreenActivity("buying local produce", 20);
     GreenActivity activity12 = new GreenActivity("participating in clean-up drives", 50);
-
     cloverville.addGreenActivity(activity1);
     cloverville.addGreenActivity(activity2);
     cloverville.addGreenActivity(activity3);
@@ -158,25 +151,52 @@ public class cloverTest
     cloverville.addGreenActivity(activity11);
     cloverville.addGreenActivity(activity12);
 
-
-    GreenGoal goal1 = new GreenGoal("pizza", 150, "ballin");
-    cloverville.addGreenGoal(goal1);
-
-    SharedTask sharedtask1 = new SharedTask(cloverville, "cleaning grupperoom", 300);
+    SharedTask sharedtask1 = new SharedTask("cleaning grupperoom", 300);
+    SharedTask sharedtask2 = new SharedTask("cooking dinner", 500);
+    SharedTask sharedtask3 = new SharedTask("watering plants", 150);
+    SharedTask sharedtask4 = new SharedTask("taking out trash", 200);
+    SharedTask sharedtask5 = new SharedTask("organizing books", 250);
+    SharedTask sharedtask6 = new SharedTask("washing dishes", 180);
+    SharedTask sharedtask7 = new SharedTask("cleaning windows", 220);
+    SharedTask sharedtask8 = new SharedTask("mopping floor", 270);
+    SharedTask sharedtask9 = new SharedTask("preparing snacks", 160);
+    SharedTask sharedtask10 = new SharedTask("sorting recycling", 190);
     cloverville.addSharedTask(sharedtask1);
-    sharedtask1.addPerformer(villager1);
-    sharedtask1.addPerformer(villager2);
-
-    SharedTask sharedtask2 = new SharedTask(cloverville, "cooking dinner", 500);
     cloverville.addSharedTask(sharedtask2);
-    sharedtask2.addPerformer(villager3);
+    cloverville.addSharedTask(sharedtask3);
+    cloverville.addSharedTask(sharedtask4);
+    cloverville.addSharedTask(sharedtask5);
+    cloverville.addSharedTask(sharedtask6);
+    cloverville.addSharedTask(sharedtask7);
+    cloverville.addSharedTask(sharedtask8);
+    cloverville.addSharedTask(sharedtask9);
+    cloverville.addSharedTask(sharedtask10);
 
-    System.out.println(cloverville);
+    GreenGoal goal1 = new GreenGoal("pizza night", 1500, "ballin");
+    GreenGoal goal2 = new GreenGoal("4 electric bikes", 10000, "eco ride");
+    GreenGoal goal3 = new GreenGoal("solar panel for the gym", 5000, "sun power");
+    GreenGoal goal4 = new GreenGoal("flowers community garden", 1800, "green thumb");
+    GreenGoal goal5 = new GreenGoal("compost bin", 2500, "reduce waste");
+    GreenGoal goal6 = new GreenGoal("rainwater harvesting barrel", 2000, "save water");
+    GreenGoal goal7 = new GreenGoal("tree planting event", 1000, "plant trees");
+    GreenGoal goal8 = new GreenGoal("plastic-free week", 1000, "reduce plastic");
+    GreenGoal goal9 = new GreenGoal("reusable tote bags for everyone", 4000, "less plastic");
+    cloverville.addGreenGoal(goal1);
+    cloverville.addGreenGoal(goal2);
+    cloverville.addGreenGoal(goal3);
+    cloverville.addGreenGoal(goal4);
+    cloverville.addGreenGoal(goal5);
+    cloverville.addGreenGoal(goal6);
+    cloverville.addGreenGoal(goal7);
+    cloverville.addGreenGoal(goal8);
+    cloverville.addGreenGoal(goal9);
 
-    cloverville.setDescription("Cloverville is an eco-community, anyone is welcome tho (except Arsenie)");
+    cloverville.setDescription("Cloverville is an eco-community, anyone is welcome");
+
+    cloverville.addResetPeriod(20);
+    cloverville.checkReset();
 
     VillageModelManager manage = new VillageModelManager("village.bin");
     manage.saveVillage(cloverville);
-
   }
 }

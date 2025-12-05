@@ -7,12 +7,10 @@ public class SharedTask implements Serializable {
   private ArrayList<Villager> performers;
   private int points;
   private String taskName;
-  private Village village;
 
 
-  public SharedTask(Village village, String taskName, int points) {
+  public SharedTask(String taskName, int points) {
     this.performers = new ArrayList<>();
-    this.village = village;
     this.taskName = taskName;
     this.points=points;
   }
@@ -39,26 +37,11 @@ public class SharedTask implements Serializable {
     performers.add(vilagger);
   }
 
-  public void removePerformer(Villager villager) {
-    for (int i = 0; i < performers.size(); i++) {
-      if (villager.equals(performers.get(i))) {
-        performers.remove(i);
-      }
-
-    }
-  }
-
   public void resetPerformers()
-  {performers.removeAll(performers);
+  {
+    performers.removeAll(performers);
   }
 
-    /* public String printPerformers(){
-        for (int i = 0; i < performers.size(); i++) {
-            return performers.get(i);
-
-        }
-        else {return null;}
-    }*/
 
   public int NrPerformers() {
     return performers.size();
@@ -78,7 +61,7 @@ public class SharedTask implements Serializable {
   }
 
   public SharedTask copy() {
-    return new SharedTask(village, taskName, points);
+    return new SharedTask(taskName, points);
   }
 
   public Villager getPerformer(int i) {
