@@ -4,7 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Village implements Serializable {
+public class Village implements Serializable
+{
   private int greenpoints;
   private ArrayList<Villager> villagers;
   private ArrayList<TradeOffer> trades;
@@ -15,7 +16,8 @@ public class Village implements Serializable {
   private int period;
   private String description;
 
-  public Village() {
+  public Village()
+  {
     this.villagers = new ArrayList<>();
     this.trades = new ArrayList<>();
     this.catalogueOfIdeas = new ArrayList<>();
@@ -23,39 +25,54 @@ public class Village implements Serializable {
     this.sharedTasks = new ArrayList<>();
     this.goals = new ArrayList<>();
     period = 10;
-    this.greenActivities=new ArrayList<>();
+    this.greenActivities = new ArrayList<>();
   }
+
   public int VillageSize()
   {
     return villagers.size();
   }
 
-  public int getGreenpoints(){
+  public int getGreenpoints()
+  {
     return greenpoints;
   }
 
-  public void addVillager(Villager villager) {
+  public void addVillager(Villager villager)
+  {
     boolean in = false;
-    for(Villager v : villagers){
-      if (v.equals(villager)) {
+    for (Villager v : villagers)
+    {
+      if (v.equals(villager))
+      {
         in = true;
       }
-    } if (!in) {
+    }
+    if (!in)
+    {
       villagers.add(villager);
     }
   }
-  public void removeVillager(Villager villager) {
+
+  public void removeVillager(Villager villager)
+  {
     boolean in = false;
-    for(Villager v : villagers){
-      if (v.equals(villager)) {
+    for (Villager v : villagers)
+    {
+      if (v.equals(villager))
+      {
         in = true;
       }
-    } if (in) {
+    }
+    if (in)
+    {
       removeTradesWithVillager(villager);
       villagers.remove(villager);
     }
   }
-  private void removeTradesWithVillager(Villager villager) {
+
+  private void removeTradesWithVillager(Villager villager)
+  {
     ArrayList<TradeOffer> toRemove = new ArrayList<>();
     for (TradeOffer t : trades)
     {
@@ -71,11 +88,14 @@ public class Village implements Serializable {
     }
   }
 
-  public void changeVillager(Villager old, Villager villager) {
+  public void changeVillager(Villager old, Villager villager)
+  {
     String first = villager.getFirstname();
     String last = villager.getLastname();
-    int points = villager.getPoints();;
-    for(Villager v : villagers){
+    int points = villager.getPoints();
+    ;
+    for (Villager v : villagers)
+    {
       if (v.equals(old))
       {
         v.setFirstName(first);
@@ -85,51 +105,64 @@ public class Village implements Serializable {
     }
   }
 
-  public void setDescription(String description) {
+  public void setDescription(String description)
+  {
     this.description = description;
     System.out.println("DESCRIPTION SET --> " + description);
   }
+
   public String getDescription()
   {
     return description;
   }
 
-
-  public ArrayList<Villager> getVillagers() {
+  public ArrayList<Villager> getVillagers()
+  {
     return villagers;
   }
-  public ArrayList<TradeOffer> getTrades() {
+
+  public ArrayList<TradeOffer> getTrades()
+  {
     return trades;
   }
 
-
-  public void addTradeOffer(TradeOffer tradeOffer) {
+  public void addTradeOffer(TradeOffer tradeOffer)
+  {
     boolean in = false;
-    for(TradeOffer t : trades){
+    for (TradeOffer t : trades)
+    {
       if (t.equals(tradeOffer))
         in = true;
     }
-    if(!in){
+    if (!in)
+    {
       trades.add(tradeOffer);
       System.out.println("TRADE OFFER ADDED --> " + tradeOffer);
-      ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers(villagers);
+      ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers(
+          villagers);
       System.out.println("POSSIBLE BUYERS --> " + possiblebuyers);
     }
-    else{
+    else
+    {
       System.out.println("already in list");
     }
 
   }
-  public void removeTradeOffer(TradeOffer tradeOffer) {
+
+  public void removeTradeOffer(TradeOffer tradeOffer)
+  {
     trades.remove(tradeOffer);
   }
-  public void editTradeOffer(TradeOffer old, TradeOffer trade) {
+
+  public void editTradeOffer(TradeOffer old, TradeOffer trade)
+  {
     String name = trade.getTradeName();
     Villager seller = trade.getSeller();
     int points = trade.getPoints();
     String description = trade.getDescription();
 
-    for(TradeOffer t : trades){
+    for (TradeOffer t : trades)
+    {
       if (t.equals(old))
       {
         t.setTradeName(name);
@@ -139,34 +172,43 @@ public class Village implements Serializable {
       }
     }
   }
-  public void finishTradeOffer(TradeOffer tradeOffer, Villager buyer) {
+
+  public void finishTradeOffer(TradeOffer tradeOffer, Villager buyer)
+  {
     TradeOffer target = null;
     Villager sellerVillager = tradeOffer.getSeller();
 
-    for (TradeOffer t : trades) {
-      if (t.equals(tradeOffer)) {
+    for (TradeOffer t : trades)
+    {
+      if (t.equals(tradeOffer))
+      {
         target = t;
         break;
       }
     }
-    if (target != null) {
+    if (target != null)
+    {
       trades.remove(target);
       System.out.println("TRADE OFFER FINISHED --> " + target + " " + buyer);
     }
 
-    for (Villager v : villagers) {
-      if (v.equals(buyer)) {
+    for (Villager v : villagers)
+    {
+      if (v.equals(buyer))
+      {
         System.out.println(v);
         v.subtractPoints(tradeOffer.getPoints());
         System.out.println(tradeOffer.getPoints() + " subtracted from " + v);
       }
-      if (v.equals(sellerVillager)) {
+      if (v.equals(sellerVillager))
+      {
         System.out.println(v);
         v.addPoints(tradeOffer.getPoints());
         System.out.println(tradeOffer.getPoints() + " added to " + v);
       }
     }
   }
+
 
   public int getAveragePoints(){
     int sum = 0;

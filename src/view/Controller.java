@@ -416,7 +416,18 @@ public class Controller
     manager.addGoal(greengoal);
     initialize();
   }
+  public void removeGreenGoal() {
+    if (greenGoalName1.getText() != "" && greenRequiredPoints1.getText() != "" && greenDescription1.getText() != "")
+    {
+      String goalName1 = greenGoalName1.getText();
+      String greenDescription1 = greenDescription.getText();
+      int greenrequiredPoints1 = Integer.parseInt(greenRequiredPoints1.getText());
+      GreenGoal greengoal = new GreenGoal(goalName1, greenrequiredPoints1, greenDescription1);
+      manager.removeGreenGoal(greengoal);
 
+      initialize();
+    }
+  }
   @FXML public void editVillager(ActionEvent e) {
     Villager selectedVillager = (Villager) chooseVillagers.getValue();
     // When a villager is selected in the ComboBox
@@ -562,22 +573,27 @@ public class Controller
       initialize();
     }
   }
-  @FXML public void editGreenGoal(ActionEvent e) {
+  @FXML public void editGreenGoal(ActionEvent e)
+  {
     GreenGoal selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();
     if (e.getSource() == chooseGreenGoal)
     {
       if (selectedGreenGoal != null)
+      {
         greenGoalName1.setText(selectedGreenGoal.getGoalName());
-      greenRequiredPoints1.setText(
-          String.valueOf(selectedGreenGoal.getRequiredPoints()));
-      greenDescription1.setText(selectedGreenGoal.getGreenDescription());
+        greenRequiredPoints1.setText(
+            String.valueOf(selectedGreenGoal.getRequiredPoints()));
+        greenDescription1.setText(selectedGreenGoal.getGreenDescription());
+      }
     }
     // When the Update button is clicked
     else if (e.getSource() == upDateGreenGoal)
     {
       if (selectedGreenGoal != null)
       {
-        GreenGoal newGoal = new GreenGoal(greenGoalName1.getText(), Integer.parseInt(greenRequiredPoints.getText()), greenDescription1.getText());
+        GreenGoal newGoal = new GreenGoal(greenGoalName1.getText(),
+            Integer.parseInt(greenRequiredPoints1.getText()),
+            greenDescription1.getText());
         manager.changeGreenGoal(selectedGreenGoal, newGoal);
       }
       initialize();
@@ -904,6 +920,7 @@ public class Controller
     }
   }
 
+
   @FXML
   private void startCompletingSharedTask() {
     selectedVillagers.getItems().clear();
@@ -913,41 +930,54 @@ public class Controller
 
     Village village = manager.getVillage();
     ArrayList<SharedTask> tasks = village.getSharedTasks();
-
     int indexTask = tasks.indexOf(selectedTask);
+    if (indexTask < 0) return;
 
     SharedTask task = tasks.get(indexTask);
 
+
     task.resetPerformers();
     manager.saveVillage(village);
+
+
   }
+
 
 
 
   @FXML
   public void addPerformer() {
-
     SharedTask selectedTask = (SharedTask) completeSharedTasks.getSelectionModel().getSelectedItem();
     Villager selectedVillager = (Villager) completeVillagersList.getSelectionModel().getSelectedItem();
-
+    if (selectedTask == null || selectedVillager == null) return;
 
     Village village = manager.getVillage();
     ArrayList<SharedTask> tasks = village.getSharedTasks();
+    int indexTask = tasks.indexOf(selectedTask);
+    if (indexTask < 0) return;
 
-    int indexTask = tasks.indexOf(selectedTask); // find the correct task in the saved village
+
+    Villager villagerInVillage = null;
+    for (Villager v : village.getVillagers()) {
+      if (v.equals(selectedVillager)) {
+        villagerInVillage = v;
+        break;
+      }
+    }
+    if (villagerInVillage == null) return;
 
     SharedTask task = tasks.get(indexTask);
 
     boolean alreadyPerformer = false;
     for (int i = 0; i < task.NrPerformers(); i++) {
-      if (selectedVillager.equals(task.getPerformer(i))) {
+      if (villagerInVillage.equals(task.getPerformer(i))) {
         alreadyPerformer = true;
         break;
       }
     }
 
     if (!alreadyPerformer) {
-      task.addPerformer(selectedVillager);
+      task.addPerformer(villagerInVillage);
       manager.saveVillage(village);
     }
 
@@ -956,9 +986,7 @@ public class Controller
 
   @FXML
   public void completeSharedTask() {
-    SharedTask selectedTask = (SharedTask) completeSharedTasks
-        .getSelectionModel()
-        .getSelectedItem();
+    SharedTask selectedTask = (SharedTask) completeSharedTasks.getSelectionModel().getSelectedItem();
     if (selectedTask == null) return;
 
     Village village = manager.getVillage();
@@ -971,14 +999,10 @@ public class Controller
     village.finishSharedTask(task);
     manager.saveVillage(village);
 
+    everything();
 
-//    loadVillagers();
-//    loadVillagerBox();
-//    loadSharedTasks();
-//    loadSelectedPerformers();
-//    loadInfoPage();
 
-    initialize();
+
   }
 
 

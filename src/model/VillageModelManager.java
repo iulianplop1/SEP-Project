@@ -172,6 +172,12 @@ public class VillageModelManager
     saveVillage(cloverville);
   }
 
+  public void removeGreenGoal(GreenGoal goal){
+    Village cloverville = getVillage();
+    ArrayList<GreenGoal> goals = cloverville.getGoals();
+    cloverville.removeGreenGoal(goal);
+    saveVillage(cloverville);
+  }
   public void removeGreenActivity(GreenActivity greenActivity){
     Village cloverville = getVillage();
     ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
