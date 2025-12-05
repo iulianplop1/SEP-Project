@@ -283,24 +283,32 @@ public class Village implements Serializable {
   }
   public void finishSharedTask(SharedTask sharedtask1){
     System.out.println("SHARED TASK HAPPENING --> " + sharedtask1);
-    double revenue = sharedtask1.getPoints() / sharedtask1.NrPerformers();
-    for (int i = 0; i <sharedtask1.NrPerformers() ; i++) {
-      if (!sharedtask1.getPerformer(i).isAboveAverage(getAveragePoints())){
-        revenue = revenue * 1.2;
-        sharedtask1.getPerformer(i).addPoints((int) Math.floor(revenue));
-      }
-      else {sharedtask1.getPerformer(i).addPoints((int) revenue);}
 
-      System.out.println(sharedtask1.getPerformer(i) + " recieved " + revenue + " points");
-
+    if (sharedtask1.NrPerformers() == 0) { // guard
+      System.out.println("No performers for shared task, skipping.");
+      return;
     }
 
+    double revenue = (double) sharedtask1.getPoints() / sharedtask1.NrPerformers();
+    for (int i = 0; i < sharedtask1.NrPerformers(); i++) {
+      if (!sharedtask1.getPerformer(i).isAboveAverage(getAveragePoints())) {
+        double bonus = revenue * 1.2;
+        sharedtask1.getPerformer(i).addPoints((int) Math.floor(bonus));
+      } else {
+        sharedtask1.getPerformer(i).addPoints((int) revenue);
+      }
+    }
   }
+
   public ArrayList<GreenGoal> getGoals()
   {
     return goals;
   }
 
+  public void removeGreenGoal(GreenGoal greengoal)
+  {
+    goals.remove(greengoal);
+  }
 
   public void finishGreenGoal(GreenGoal greengoalNew)
   {

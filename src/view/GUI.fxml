@@ -225,7 +225,7 @@
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
-                                <TitledPane expanded="false" text="Add Green Goal">
+                                <TitledPane text="Add Green Goal">
                                     <content>
                                         <AnchorPane>
                                             <children>
@@ -235,16 +235,16 @@
                                                 <Text layoutX="22.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Name" />
                                                 <Text layoutX="22.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
                                                 <Text layoutX="22.0" layoutY="124.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Description" />
-                                                <Button fx:id="addGreenGoal" layoutX="176.0" layoutY="154.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="148.0" text="Add" />
+                                                <Button fx:id="addGreenGoal" layoutX="176.0" layoutY="154.0" mnemonicParsing="false" onAction="#addGreenGoal" prefHeight="25.0" prefWidth="148.0" text="Add" />
                                             </children>
                                         </AnchorPane>
                                     </content>
                                 </TitledPane>
-                                <TitledPane text="Edit Green Goal">
+                                <TitledPane expanded="false" text="Edit Green Goal">
                                     <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="199.0" prefWidth="351.0">
                                             <children>
-                                                <ComboBox fx:id="chooseGreenGoal" layoutX="176.0" layoutY="14.0" prefWidth="150.0" />
+                                                <ComboBox fx:id="chooseGreenGoal" layoutX="176.0" layoutY="14.0" onAction="#editGreenGoal" prefWidth="150.0" />
                                                 <TextField fx:id="greenGoalName1" layoutX="177.0" layoutY="48.0" />
                                                 <TextField fx:id="greenRequiredPoints1" layoutX="177.0" layoutY="83.0" />
                                                 <TextArea fx:id="greenDescription1" layoutX="178.0" layoutY="119.0" prefHeight="22.0" prefWidth="148.0" />

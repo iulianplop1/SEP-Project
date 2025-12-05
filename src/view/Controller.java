@@ -141,35 +141,48 @@ public class Controller
     listGreenGoals.setEditable(false);
   }
   @FXML public void loadGoalsBox() {
-    chooseGreenGoal.getItems().clear();
-    ArrayList<GreenGoal> goals = manager.getGoals();
-    for (GreenGoal greengoal : goals)
     {
-      chooseGreenGoal.getItems().add(greengoal);
-    }
-    int currentIndex = chooseGreenGoal.getSelectionModel().getSelectedIndex();  //gets index of selected villager in the box
+      chooseGreenGoal.getItems().clear();
+      ArrayList<GreenGoal> goals = manager.getGoals();
+      for (GreenGoal greengoal : goals)
+      {
+        String line = "";
+        line +=
+            greengoal.getGoalName() + " " + "-" + greengoal.getRequiredPoints()
+                + "\n";
+        chooseGreenGoal.getItems().add(greengoal);
+      }
+      int currentIndex = chooseGreenGoal.getSelectionModel()
+          .getSelectedIndex();  //gets index of selected villager in the box
 
-    GreenGoal selectedGreenGoal = null;
+      GreenGoal selectedGreenGoal = null;
 
-    if (currentIndex == -1 && chooseGreenGoal.getItems().size() > 0)
-    {   //no selection (no index) and there are villagers
-      chooseGreenGoal.getSelectionModel().select(0);              //show first villager in the box
+      if (currentIndex == -1 && chooseGreenGoal.getItems().size() > 0)
+      {   //no selection (no index) and there are villagers
+        chooseGreenGoal.getSelectionModel()
+            .select(0);              //show first villager in the box
 
-      selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();          //this will be the villager to fill up the textboxes
-    }
-    else
-    {
-      chooseGreenGoal.getSelectionModel().select(
-          currentIndex);         //there is a selected villager (not -1 index)
+        selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();          //this will be the villager to fill up the textboxes
 
-      selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();           //this wil be the villager to fill up the textboxes
-    }
+      }
+      else
+      {
+        chooseGreenGoal.getSelectionModel().select(
+            currentIndex);         //there is a selected villager (not -1 index)
 
-    if (selectedGreenGoal != null)
-    {                                   //filling up textboxes
-      greenGoalName1.setText(selectedGreenGoal.getGoalName());
-      greenDescription1.setText(selectedGreenGoal.getGreenDescription());
-      greenRequiredPoints1.setText(String.valueOf(selectedGreenGoal.getRequiredPoints()));
+        selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();
+
+        //this wil be the villager to fill up the textboxes
+      }
+
+      if (selectedGreenGoal != null)
+      {                                   //filling up textboxes
+        greenGoalName1.setText(selectedGreenGoal.getGoalName());
+        greenDescription1.setText(selectedGreenGoal.getGreenDescription());
+        greenRequiredPoints1.setText(
+            String.valueOf(selectedGreenGoal.getRequiredPoints()));
+
+      }
     }
   }
   @FXML public void loadVillagers() {
@@ -366,7 +379,7 @@ public class Controller
     numberOfVillagers.setText(String.valueOf(villagers.size()));
     greenPointNumber.setText(String.valueOf(cloverville.getGreenpoints()));
     descriptionVillage.setText("'" + cloverville.getDescription() + "'");
-    nextGreenGoal.setText(cloverville.getGoals().get(0).toString());
+    //nextGreenGoal.setText(cloverville.getGoals().get(0).toString());
     numberOfSharedTasks.setText(String.valueOf(cloverville.getSharedTasks().size()));
     numberOfTrades.setText(String.valueOf(cloverville.getTrades().size()));
     dateOfReset.setText(reset.toString());
@@ -421,25 +434,52 @@ public class Controller
     {
       if (selectedVillager != null)
       {
-        Villager newVillager = new Villager(firstName1.getText(),
-            lastName1.getText(), Integer.parseInt(personalPoints.getText()));
-        manager.changeVillager(selectedVillager, newVillager);
+        try{
+          Villager newVillager = new Villager(firstName1.getText(),
+              lastName1.getText(), Integer.parseInt(personalPoints.getText()));
+          manager.changeVillager(selectedVillager, newVillager);
+        }
+        catch (NumberFormatException event) {
+          System.out.println("Points must be a NUMBER!");
+          alert.setHeaderText(null);
+          alert.setTitle("Hoppá");
+          alert.setContentText("Points must be a NUMBER!");
+          alert.showAndWait();
+        }
+        catch (IllegalArgumentException event) {
+          alert.setHeaderText(null);
+          alert.setTitle("Hoppá");
+          alert.setContentText(event.getMessage()); // "Name must contain only letters!"
+          alert.showAndWait();
+        }
       }
       initialize();
     }
   }
   @FXML public void removeVillager() {
-    if (firstName1.getText() != "" && lastName1.getText() != "")
-    {
+    try{
       String first = firstName1.getText();
       String last = lastName1.getText();
       int points = Integer.parseInt(personalPoints.getText());
       Villager villager = new Villager(first, last, points);
       manager.removeVillager(villager);
-
-      initialize();
     }
+    catch (NumberFormatException event) {
+      System.out.println("Points must be a NUMBER!");
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Points must be a NUMBER!");
+      alert.showAndWait();
+    }
+    catch (IllegalArgumentException event) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText(event.getMessage()); // "Name must contain only letters!"
+      alert.showAndWait();
+    }
+    initialize();
   }
+
 
   @FXML public void setVillageDescription(){
     manager.setVillageDescription(villageDescription.getText());
@@ -628,8 +668,7 @@ public class Controller
       chooseGreenActivity1.getSelectionModel().select(currentIndex);
     }
   }
-  @FXML public void loadGreenActivityBox()
-  {
+  @FXML public void loadGreenActivityBox() {
     chooseGreenActivity.getItems().clear();
 
     ArrayList<GreenActivity> greenActivities = manager.getActivities();
@@ -686,7 +725,6 @@ public class Controller
       {
         //selectedGreenActivity.setActivityName(greenActivityName.getText());
         //selectedGreenActivity.setPoints(Integer.parseInt(greenActivityPoints.getText()));
-
         try
         {
           if (!greenActivityName1.getText().matches("[a-zA-Z ]+"))
@@ -772,8 +810,9 @@ public class Controller
       listSharedTasks.getItems().addAll(tasks);
       availableSharedTasks.getItems().addAll(tasks);
       completeSharedTasks.getItems().addAll(tasks);
-      completeVillagersList.getItems().addAll(manager.getVillagers());
     }
+
+    completeVillagersList.getItems().addAll(manager.getVillagers());
   }
 
   @FXML
