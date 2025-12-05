@@ -464,19 +464,10 @@ public class Controller
           manager.changeVillager(selectedVillager, newVillager);
         }
         catch (NumberFormatException event) {
-          System.out.println("Points must be a NUMBER!");
-          alert.setHeaderText(null);
-          alert.setTitle("Hoppá");
-          alert.setContentText("Points must be a NUMBER!");
-          alert.showAndWait();
-
-
+          showAlert("Points must be a NUMBER!");
         }
         catch (IllegalArgumentException event) {
-          alert.setHeaderText(null);
-          alert.setTitle("Hoppá");
-          alert.setContentText(event.getMessage()); // "Name must contain only letters!"
-          alert.showAndWait();
+          showAlert(event.getMessage());
         }
       }
       initialize();
@@ -1008,6 +999,14 @@ public class Controller
 
 
 
+  }
+
+  public void showAlert(String input)
+  {
+    alert.setHeaderText(null);
+    alert.setTitle("Error");
+    alert.setContentText(input);
+    alert.showAndWait();
   }
 
 
