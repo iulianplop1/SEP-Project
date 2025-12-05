@@ -430,15 +430,18 @@ public class Controller
   }
 
   @FXML public void addVillager() {
-    if (firstName.getText() != "" && lastName.getText() != "")
+    String first = firstName.getText();
+    String last = lastName.getText();
+
+    if (!firstName.getText().equals("") && !lastName.getText().equals(""))
     {
-      String first = firstName.getText();
-      String last = lastName.getText();
       Villager villager = new Villager(first, last);
       manager.addVillager(villager);
 
-
       initialize();
+    }
+    else {
+      showAlert("Please enter first name and last name");
     }
   }
   @FXML public void editVillager(ActionEvent e) {
@@ -459,9 +462,15 @@ public class Controller
       if (selectedVillager != null)
       {
         try{
-          Villager newVillager = new Villager(firstName1.getText(),
-              lastName1.getText(), Integer.parseInt(personalPoints.getText()));
-          manager.changeVillager(selectedVillager, newVillager);
+          if (!firstName.getText().equals("") && !lastName.getText().equals(""))
+          {
+            Villager newVillager = new Villager(firstName1.getText(),
+                lastName1.getText(), Integer.parseInt(personalPoints.getText()));
+            manager.changeVillager(selectedVillager, newVillager);
+          }
+          else {
+            showAlert("Please enter first name and last name");
+          }
         }
         catch (NumberFormatException event) {
           showAlert("Points must be a NUMBER!");
