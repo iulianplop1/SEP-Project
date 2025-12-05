@@ -260,12 +260,12 @@
                                                       <TextField fx:id="greenGoalName1" layoutX="180.0" layoutY="33.0" prefHeight="4.0" prefWidth="160.0" />
                                                       <TextField fx:id="greenRequiredPoints1" layoutX="181.0" layoutY="63.0" />
                                                       <TextArea fx:id="greenDescription1" layoutX="181.0" layoutY="93.0" prefHeight="30.0" prefWidth="158.0" />
-                                                      <Text layoutX="28.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Green Goal" />
-                                                      <Text layoutX="28.0" layoutY="57.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Name" />
-                                                      <Text layoutX="28.0" layoutY="93.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
-                                                      <Text layoutX="27.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Description" />
+                                                      <Text layoutX="29.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Green Goal" />
+                                                      <Text layoutX="30.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Name" />
+                                                      <Text layoutX="28.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Required Points" />
+                                                      <Text layoutX="27.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green Goal Description" />
                                                       <Button fx:id="upDateGreenGoal" layoutX="183.0" layoutY="141.0" mnemonicParsing="false" onAction="#editGreenGoal" prefHeight="26.0" prefWidth="158.0" text="Update" />
-                                                      <Button fx:id="removeGreenGoal" layoutX="5.0" layoutY="142.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="146.0" text="Remove" />
+                                                      <Button fx:id="removeGreenGoal" layoutX="24.0" layoutY="141.0" mnemonicParsing="false" onAction="#removeGreenGoal" prefHeight="26.0" prefWidth="139.0" text="Remove" />
                                                   </children>
                                               </AnchorPane>
                                           </content>

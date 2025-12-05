@@ -428,6 +428,19 @@ public class Controller
       initialize();
     }
   }
+
+  @FXML public void addVillager() {
+    if (firstName.getText() != "" && lastName.getText() != "")
+    {
+      String first = firstName.getText();
+      String last = lastName.getText();
+      Villager villager = new Villager(first, last);
+      manager.addVillager(villager);
+
+
+      initialize();
+    }
+  }
   @FXML public void editVillager(ActionEvent e) {
     Villager selectedVillager = (Villager) chooseVillagers.getValue();
     // When a villager is selected in the ComboBox
@@ -456,6 +469,8 @@ public class Controller
           alert.setTitle("Hoppá");
           alert.setContentText("Points must be a NUMBER!");
           alert.showAndWait();
+
+
         }
         catch (IllegalArgumentException event) {
           alert.setHeaderText(null);
@@ -562,17 +577,7 @@ public class Controller
     }
   }
 
-  @FXML public void addVillager() {
-    if (firstName.getText() != "" && lastName.getText() != "")
-    {
-      String first = firstName.getText();
-      String last = lastName.getText();
-      Villager villager = new Villager(first, last);
-      manager.addVillager(villager);
 
-      initialize();
-    }
-  }
   @FXML public void editGreenGoal(ActionEvent e)
   {
     GreenGoal selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();
