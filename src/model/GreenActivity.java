@@ -6,11 +6,19 @@ public class GreenActivity implements Serializable
 {
   private String activityName;
   private int points;
+  private Date date;
 
   public GreenActivity(String activityName, int points)
   {
     this.activityName = activityName;
     this.points = points;
+    date = Date.today();
+  }
+
+  public GreenActivity(String activityName, int points, Date date) {
+    this.activityName = activityName;
+    this.points = points;
+    this.date = date;
   }
 
   public void setActivityName(String activityName)
@@ -37,15 +45,16 @@ public class GreenActivity implements Serializable
     if (obj == null || getClass() != obj.getClass())
       return false;
     GreenActivity other = (GreenActivity) obj;
-    return this.activityName.equals(other.activityName) && points == other.points;
+    return this.activityName.equals(other.activityName) && points == other.points &&
+        date.equals(other.date);
   }
 
   public String toString()
   {
-    return activityName + " " +points + " points";
+    return activityName + " " + points + " points - " + date.toString();
   }
   public GreenActivity copy()
   {
-    return new GreenActivity(activityName, points);
+    return new GreenActivity(activityName, points, date);
   }
 }

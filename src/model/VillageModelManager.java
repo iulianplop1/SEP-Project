@@ -246,13 +246,11 @@ public class VillageModelManager
     saveVillage(cloverville);
   }
 
-
   public void addResetDay(int days){
     Village cloverville = getVillage();
     cloverville.addResetPeriod(days);
     saveVillage(cloverville);
   }
-
   public void resetNow(){
     Village cloverville = getVillage();
     cloverville.resetnow();
@@ -266,7 +264,6 @@ public class VillageModelManager
     else
     {
       XmlJsonParser parser = new XmlJsonParser();
-
       Village cloverville = getVillage();
       cloverville.finishGreenActivity(greenActivity);
       System.out.println("finished GreenActivity");
@@ -275,7 +272,6 @@ public class VillageModelManager
       try
       {
         ArrayList<GreenActivity> list;
-
         try
         {
           list = parser.fromJsonFile("greenActivityList.json", ArrayList.class);
@@ -284,12 +280,9 @@ public class VillageModelManager
         {
           list = new ArrayList<>();
         }
-
         list.add(greenActivity);
         parser.toJsonFile(list, "greenActivityList.json");
-
         System.out.println("Finished + saved updated JSON list.");
-
       }
       catch (ParserException e)
       {
@@ -297,10 +290,10 @@ public class VillageModelManager
       }
     }
   }
+
   public void loadGreenActivityListJson() {
     XmlJsonParser parser = new XmlJsonParser();
     ArrayList<GreenActivity> greenActivityList = getActivities();
-
     try {
       parser.toJsonFile(greenActivityList, "greenActivityList.json");
       System.out.println("Green activity list written to JSON.");

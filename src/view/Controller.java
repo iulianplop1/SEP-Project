@@ -38,6 +38,8 @@ public class Controller
   @FXML private TextArea listGreenGoals;
   @FXML private ComboBox chooseGreenGoal2;
   @FXML private ComboBox chooseGreenGoal3;
+  @FXML private Button completeGreenGoal;
+
 
   @FXML private TextArea listTrades;
   @FXML private ComboBox chooseTradeSeller;
@@ -190,7 +192,8 @@ public class Controller
       }
     }
   }
-  @FXML public void loadGoalBox1() {
+  @FXML public void loadGoalBox1()
+  {
     int greenbox1 = chooseGreenGoal2.getSelectionModel().getSelectedIndex();
     chooseGreenGoal2.getItems().clear();
 
@@ -206,14 +209,16 @@ public class Controller
 
     if (greenbox1 == -1 && chooseGreenGoal2.getItems().size() > 0)
     {
-      chooseGreenGoal.getSelectionModel().select(0);
+      chooseGreenGoal2.getSelectionModel().select(0);
     }
     else
     {
-      chooseGreenActivity1.getSelectionModel().select(greenbox1);
+      chooseGreenGoal2.getSelectionModel().select(greenbox1);
     }
   }
-  @FXML public void loadGoalBox2() {
+
+  @FXML public void loadGoalBox2()
+  {
     int greenbox2 = chooseGreenGoal3.getSelectionModel().getSelectedIndex();
     chooseGreenGoal3.getItems().clear();
 
@@ -229,13 +234,14 @@ public class Controller
 
     if (greenbox2 == -1 && chooseGreenGoal3.getItems().size() > 0)
     {
-      chooseGreenGoal.getSelectionModel().select(0);
+      chooseGreenGoal3.getSelectionModel().select(0);
     }
     else
     {
       chooseGreenGoal3.getSelectionModel().select(greenbox2);
     }
   }
+
   @FXML public void loadVillagers() {
     ArrayList<Villager> villagers = manager.getVillagers();
 
@@ -430,7 +436,12 @@ public class Controller
     greenPointNumber.setText(String.valueOf(cloverville.getGreenpoints()));
     descriptionVillage.setText("'" + cloverville.getDescription() + "'");
 
-    //nextGreenGoal.setText(cloverville.getGoals().get(0).toString());
+    if (cloverville.getActiveGreenGoal() != null) {
+      nextGreenGoal.setText(cloverville.getActiveGreenGoal().getGoalName() + " - "
+          + cloverville.getActiveGreenGoal().getRequiredPoints());
+    } else {
+      nextGreenGoal.setText("No active green goal");
+    }
 
     numberOfSharedTasks.setText(String.valueOf(cloverville.getSharedTasks().size()));
     numberOfTrades.setText(String.valueOf(cloverville.getTrades().size()));
@@ -662,26 +673,94 @@ public class Controller
     initialize();
   }
 
-  @FXML public void addGreenGoal() {
-    String GoalName = greenGoalName.getText();
-    int RequiredPoints = Integer.parseInt(greenRequiredPoints.getText());
-    String greenDescriptions = greenDescription.getText();
-    GreenGoal greengoal = new GreenGoal(GoalName, RequiredPoints, greenDescriptions);
-    manager.addGoal(greengoal);
-
-    initialize();
-  }
-  @FXML public void removeGreenGoal() {
-    if (greenGoalName1.getText() != "" && greenRequiredPoints1.getText() != "" && greenDescription1.getText() != "")
+  @FXML public void addGreenGoal()
+  {
+    try
     {
-      String goalName1 = greenGoalName1.getText();
-      String greenDescription1 = greenDescription.getText();
-      int greenrequiredPoints1 = Integer.parseInt(greenRequiredPoints1.getText());
-      GreenGoal greengoal = new GreenGoal(goalName1, greenrequiredPoints1, greenDescription1);
-      manager.removeGreenGoal(greengoal);
+      if (greenGoalName.getText().isEmpty() || greenRequiredPoints.getText()
+          .isEmpty() || greenDescription.getText().isEmpty())
 
+      {
+        showAlert1("fill all fields");
+        return;
+      }
+      String GoalName = greenGoalName.getText();
+      int RequiredPoints = Integer.parseInt(greenRequiredPoints.getText());
+      String greenDescriptions = greenDescription.getText();
+      GreenGoal greengoal = new GreenGoal(GoalName, RequiredPoints,
+          greenDescriptions);
+      showAlert1("Green goal was added!");
+      manager.addGoal(greengoal);
       initialize();
     }
+    catch (NumberFormatException e)
+    {
+      showAlert1("required points must be number");
+    }
+  }
+
+
+
+  @FXML public void removeGreenGoal()
+  {
+    {
+      if (greenGoalName1.getText() != "" && greenRequiredPoints1.getText() != ""
+          && greenDescription1.getText() != "")
+      {
+        String goalName1 = greenGoalName1.getText();
+        String greenDescription1 = greenDescription.getText();
+        int greenrequiredPoints1 = Integer.parseInt(
+            greenRequiredPoints1.getText());
+        GreenGoal greengoal = new GreenGoal(goalName1, greenrequiredPoints1,
+            greenDescription1);
+        Village village = manager.getVillage();
+        if (village.getActiveGreenGoal() != null &&
+            village.getActiveGreenGoal().equals(greengoal)) {
+
+          showAlert1("You cannot remove the active green goal. change it first.");
+          return;
+        }
+        manager.removeGreenGoal(greengoal);
+        showAlert1("green goal was removed!");
+        initialize();
+      }
+    }
+  }
+
+  @FXML public void completeGreenGoal(ActionEvent e)
+  {
+    GreenGoal selectedGreenGoal = (GreenGoal) chooseGreenGoal2.getValue();
+
+    if (selectedGreenGoal == null)
+    {
+      showAlert1("Please select a green goal to complete.");
+      return;
+    }
+    Village village = manager.getVillage();
+    int requiredPoints = selectedGreenGoal.getRequiredPoints();
+    int currentGreenPoints = village.getGreenpoints();
+    if (currentGreenPoints < requiredPoints)
+    {
+      showAlert1("Not enough green points to complete this goal!");
+      return;
+    }
+
+    // Subtract points
+    village.setGreenpoints(currentGreenPoints - requiredPoints);
+
+    // Remove the goal
+    village.getGoals().remove(selectedGreenGoal);
+
+    // Refresh UI
+    manager.saveVillage(village);
+    everything();
+
+    showAlert1(
+        "Completed " + selectedGreenGoal.getGoalName() + " → -" + requiredPoints
+            + " green points");
+    showAlert1("Green Goal '" + selectedGreenGoal.getGoalName()
+        + "' has been completed.");
+    showAlert1("Select new green goal in settings!");
   }
 
   @FXML void addTadeOffer() {
@@ -697,14 +776,14 @@ public class Controller
         manager.addTrade(trade);
       }
       else {
-        showAlert("Please enter a trade name, a description, and a value to add trade offer");
+        showAlert1("Please enter a trade name, a description, and a value to add trade offer");
       }
     }
     catch (NumberFormatException event) {
-      showAlert("Points must be a number to add a trade!");
+      showAlert1("Points must be a number to add a trade!");
     }
     catch (IllegalArgumentException event) {
-      showAlert(event.getMessage());
+      showAlert1(event.getMessage());
     }
 
     initialize();
@@ -742,11 +821,11 @@ public class Controller
           }
         }
         else {
-          showAlert("Please enter a trade name, a description and a value to update or remove trade offer");
+          showAlert1("Please enter a trade name, a description and a value to update or remove trade offer");
         }
       }
       catch (NumberFormatException event) {
-        showAlert("Points must be a number to edit or remove a trade!");
+        showAlert1("Points must be a number to edit or remove a trade!");
       }
       catch (IllegalArgumentException event) {
         showAlert(event.getMessage());
@@ -780,128 +859,145 @@ public class Controller
     }
   }
 
-  @FXML public void editGreenGoal(ActionEvent e) {
-    GreenGoal selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();
-    if (e.getSource() == chooseGreenGoal)
+  @FXML public void editGreenGoal(ActionEvent e)
+  {
+    try
     {
-      if (selectedGreenGoal != null)
+      if (greenGoalName1.getText().isEmpty() || greenRequiredPoints1.getText()
+          .isEmpty() || greenDescription1.getText().isEmpty())
       {
-        greenGoalName1.setText(selectedGreenGoal.getGoalName());
-        greenRequiredPoints1.setText(
-            String.valueOf(selectedGreenGoal.getRequiredPoints()));
-        greenDescription1.setText(selectedGreenGoal.getGreenDescription());
+        showAlert1("fill all fields");
+        return;
+      }
+      {
+        GreenGoal selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();
+        if (e.getSource() == chooseGreenGoal)
+        {
+          if (selectedGreenGoal != null)
+          {
+            greenGoalName1.setText(selectedGreenGoal.getGoalName());
+            greenRequiredPoints1.setText(
+                String.valueOf(selectedGreenGoal.getRequiredPoints()));
+            greenDescription1.setText(selectedGreenGoal.getGreenDescription());
+          }
+        }
+        // When the Update button is clicked
+        else if (e.getSource() == upDateGreenGoal)
+        {
+          if (selectedGreenGoal != null)
+          {
+            GreenGoal newGoal = new GreenGoal(greenGoalName1.getText(),
+                Integer.parseInt(greenRequiredPoints1.getText()),
+                greenDescription1.getText());
+            manager.changeGreenGoal(selectedGreenGoal, newGoal);
+            showAlert1("Green goal was updated!");
+          }
+          initialize();
+        }
       }
     }
-    // When the Update button is clicked
-    else if (e.getSource() == upDateGreenGoal)
+    catch (NumberFormatException c)
     {
-      if (selectedGreenGoal != null)
-      {
-        GreenGoal newGoal = new GreenGoal(greenGoalName1.getText(),
-            Integer.parseInt(greenRequiredPoints1.getText()),
-            greenDescription1.getText());
-        manager.changeGreenGoal(selectedGreenGoal, newGoal);
-      }
-      initialize();
+      showAlert1("required points must be number");
     }
   }
+
   @FXML public void addGreenActivity() {
     String name = greenActivityName.getText();
     String pointsText = greenActivityPoints.getText();
 
     if (!name.isEmpty() && !pointsText.isEmpty()) {
       try {
-        if (!name.matches("[a-zA-Z ]+"))
-        {
+        if (!name.matches("[a-zA-Z ]+")) {
           throw new IllegalArgumentException("Name must contain only letters!");
         }
+
         int points = Integer.parseInt(pointsText);
+
+        boolean exists = false;
+        for (GreenActivity greenActivity : manager.getVillage().getGreenActivities()) {
+          if (greenActivity.getActivityName().equalsIgnoreCase(name)) {
+            exists = true;
+            break;
+          }
+        }
+
+        if (exists) {
+          throw new IllegalArgumentException("An activity with this name already exists!");
+        }
+
         GreenActivity greenActivity = new GreenActivity(name, points);
         manager.addGreenActivity(greenActivity);
-        loadGreenActivity();
-        loadGreenActivityBox();
-        loadGreenActivityBox1();
-
-      }
-      catch (NumberFormatException e) {
-        System.out.println("Points must be a NUMBER!");
-
-
-        alert.setHeaderText(null);
+        manager.finishGreenActivity(greenActivity);
+        showAlert(greenActivityPoints.getText()+" points where added to the Green Goal because of the activity "+greenActivityName.getText());
+        everything();
+      } catch (NumberFormatException e) {
         alert.setTitle("Error");
         alert.setContentText("Points must be a NUMBER!");
         alert.showAndWait();
-      }
-      catch (IllegalArgumentException e) {
 
-        alert.setHeaderText(null);
+      } catch (IllegalArgumentException e) {
         alert.setTitle("Error");
-        alert.setContentText(e.getMessage()); // "Name must contain only letters!"
+        alert.setContentText(e.getMessage());
         alert.showAndWait();
       }
     }
-    else
-    {
-      System.out.println("Fields cannot be empty");
-
-      alert.setHeaderText(null);
+    else {
       alert.setTitle("Error");
       alert.setContentText("Fields cannot be empty!");
       alert.showAndWait();
     }
 
   }
-  @FXML public void editGreenActivity(ActionEvent e) {
+  @FXML
+  public void editGreenActivity(ActionEvent e) {
+
+
     GreenActivity selectedGreenActivity = (GreenActivity) chooseGreenActivity.getValue();
-    // When a villager is selected in the ComboBox
-    if (e.getSource() == chooseGreenActivity)
-    {
+
+    if (e.getSource() == chooseGreenActivity) {
 
       if (selectedGreenActivity != null) {
         greenActivityName1.setText(selectedGreenActivity.getActivityName());
-        greenActivityPoints1.setText(String.valueOf(selectedGreenActivity.getPoints()) );
+        greenActivityPoints1.setText(String.valueOf(selectedGreenActivity.getPoints()));
       }
+      return;
     }
-    // When the Update button is clicked
-    else if (e.getSource() == updateGreenActivity)
-    {
-      if (selectedGreenActivity!= null)
-      {
-        selectedGreenActivity.setActivityName(greenActivityName.getText());
-        selectedGreenActivity.setPoints(Integer.parseInt(greenActivityPoints.getText()));
 
-        try
-        {
-          if (!greenActivityName1.getText().matches("[a-zA-Z ]+"))
-          {
-            throw new IllegalArgumentException("Name must contain only letters!");
-          }
-          int points = Integer.parseInt(greenActivityPoints1.getText());
-          GreenActivity newGreenActivity = new GreenActivity(greenActivityName1.getText(), Integer.parseInt(greenActivityPoints1.getText()));
-          manager.changeGreenActivity(selectedGreenActivity,newGreenActivity);
+    if (e.getSource() == updateGreenActivity) {
 
-        }
-        catch (NumberFormatException event) {
-          System.out.println("Points must be a NUMBER!");
-
-          showAlert("Points must be a NUMBER!");
-        }
-        catch (IllegalArgumentException event) {
-
-          showAlert("Name must contain only letters!");
-        }
+      if (selectedGreenActivity == null) {
+        showAlert("No activity selected to edit!");
+        return;
       }
-      else
-      {
-        System.out.println("Fields cannot be empty");
 
-        showAlert("Fields cannot be empty or there is no activity to edit!");
+      String newName = greenActivityName1.getText();
+      String newPointsText = greenActivityPoints1.getText();
+
+      try {
+        if (!newName.matches("[a-zA-Z ]+")) {
+          throw new IllegalArgumentException("Name must contain only letters!");
+        }
+
+        int newPoints = Integer.parseInt(newPointsText);
+
+        GreenActivity updated = new GreenActivity(newName, newPoints);
+
+        manager.changeGreenActivity(selectedGreenActivity, updated);
+
+        everything();
+
       }
-      everything();
+      catch (NumberFormatException ex) {
+        showAlert("Points must be a NUMBER!");
+      }
+      catch (IllegalArgumentException ex) {
+        showAlert(ex.getMessage());
+      }
     }
   }
   public void removeGreenActivity() {
-    if (!(greenActivityName.getText().isEmpty() && greenActivityPoints.getText().isEmpty()))
+    if (!(greenActivityName1.getText().isEmpty() && greenActivityPoints1.getText().isEmpty()))
     {
       String name = greenActivityName1.getText();
       int points = Integer.parseInt(greenActivityPoints1.getText());
@@ -1156,7 +1252,24 @@ public class Controller
     everything();
   }
 
+  @FXML public void saveGreenGoal()
+  {
+    GreenGoal selectedGoal = (GreenGoal) chooseGreenGoal3.getValue();
 
+    if (selectedGoal == null)
+    {
+      showAlert("Please select a green goal to set as active.");
+      return;
+    }
+
+    Village village = manager.getVillage();
+    village.setActiveGreenGoal(selectedGoal);
+    manager.saveVillage(village);
+
+    everything();
+
+    showAlert("Green goal '" + selectedGoal.getGoalName() + "' is now active.");
+  }
 
   public void showAlert(String input)
   {
@@ -1164,6 +1277,15 @@ public class Controller
 
     alert.setHeaderText(null);
     alert.setTitle("Error");
+    alert.setContentText(input);
+    alert.showAndWait();
+  }
+  public void showAlert1(String input)
+  {
+    System.out.println(input);
+
+    alert.setHeaderText(null);
+    alert.setTitle("");
     alert.setContentText(input);
     alert.showAndWait();
   }

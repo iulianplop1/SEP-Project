@@ -14,7 +14,7 @@ public class Village implements Serializable
   private ArrayList<String> catalogueOfIdeas;
   private ArrayList<GreenActivity> greenActivities;
   private ArrayList<GreenGoal> goals;
-  private GreenGoal currentGreenGoal;
+  private GreenGoal activeGreenGoal;
   private int period;
   private String description;
 
@@ -35,6 +35,14 @@ public class Village implements Serializable
     return greenpoints;
   }
 
+  public GreenGoal getActiveGreenGoal()
+  {
+    return activeGreenGoal;
+  }
+public void setActiveGreenGoal(GreenGoal activeGreenGoal)
+{
+  this.activeGreenGoal = activeGreenGoal;
+}
   public void addVillager(Villager villager)
   {
     boolean in = false;
@@ -377,6 +385,11 @@ public class Village implements Serializable
         System.out.println("\nNOT ENOUGH POINTS TO FINISH " + goals + "\n");
       }
     }
+  }
+
+  public void setGreenpoints(int greenpoints)
+  {
+    this.greenpoints = greenpoints;
   }
   public void finishGreenActivity(GreenActivity greenActivity) {
     if (greenActivity == null) {
