@@ -191,7 +191,7 @@ public class cloverTest
     cloverville.addGreenGoal(goal8);
     cloverville.addGreenGoal(goal9);
 
-    cloverville.setDescription("Cloverville is an eco-community, anyone is welcome");
+    cloverville.setDescription("Cloverville began as a handful of curious homes around a stream. Green Bob rallied the neighbors  to capture every small act of care—cycling, composting, planting, sharing—and turn it into common  green points. The points remind us that every helpful gesture counts toward a thriving place. The goal is simple: make the invisible visible. We log the work, celebrate contributors, and reinvest points into community rewards that keep the cycle alive.");
 
     cloverville.addResetPeriod(20);
     cloverville.checkReset();

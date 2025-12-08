@@ -107,6 +107,9 @@ public class Controller
 
   public void initialize()
   {
+    manager.loadVillageDescription();
+    manager.loadSavedGreenGoalJson(null);
+    manager.loadGreenGoalListJson();
     manager.loadGreenActivityListJson();
     manager.loadTradeOfferListJson();
     everything();
@@ -570,6 +573,7 @@ public class Controller
 
   @FXML public void setVillageDescription(){
     manager.setVillageDescription(villageDescription.getText());
+    manager.loadVillageDescription();
     villageDescription.clear();
   }
 
@@ -615,6 +619,7 @@ public class Controller
   @FXML public void editVillager(ActionEvent e) {
     Villager selectedVillager = (Villager) chooseVillagers.getValue();
     // When a villager is selected in the ComboBox
+    Village village = manager.getVillage();
     if (e.getSource() == chooseVillagers)
     {
       if (selectedVillager != null)
@@ -647,7 +652,8 @@ public class Controller
           showAlert(event.getMessage());
         }
       }
-      initialize();
+      manager.saveVillage(village);
+      everything();
     }
   }
   @FXML public void removeVillager() {
@@ -692,6 +698,8 @@ public class Controller
           greenDescriptions);
       showAlert1("Green goal was added!");
       manager.addGoal(greengoal);
+      manager.finishGreenGoal(greengoal);
+      System.out.println("GreenGoal added");
       initialize();
     }
     catch (NumberFormatException e)

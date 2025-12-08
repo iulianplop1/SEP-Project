@@ -324,4 +324,77 @@ public class VillageModelManager
       e.printStackTrace();
     }
   }
+  public void finishGreenGoal(GreenGoal greenGoal) {
+    if (greenGoal == null){
+      throw new IllegalArgumentException("There is not any available green activity");
+    }
+    else {
+      XmlJsonParser parser = new XmlJsonParser();
+      Village cloverville = getVillage();
+      cloverville.finishGreenGoal(greenGoal);
+      System.out.println("website/json/greenGoalList.json");
+      saveVillage(cloverville);
+      try {
+        ArrayList<GreenGoal> list;
+        try {
+          list = parser.fromJsonFile("website/json/greenGoalList.json", ArrayList.class);
+        }
+        catch (ParserException ex) {
+          list = new ArrayList<>();
+        }
+        list.add(greenGoal);
+        parser.toJsonFile(list, "website/json/greenGoalList.json");
+        System.out.println("Finished + saved updated JSON list.");
+      }
+      catch (ParserException e) {
+        e.printStackTrace();
+      }
+    }
+  }
+  public void loadGreenGoalListJson() {
+    ArrayList<GreenGoal> greenGoalList = getGoals();
+    try {
+      parser.toJsonFile(greenGoalList, "website/json/greenGoalList.json");
+      System.out.println("Green goal list written to JSON.");
+      Village cloverville = getVillage();
+      cloverville.getGoals().clear();
+      cloverville.getGoals().addAll(greenGoalList);
+      System.out.println("Green goal list updated in memory.");
+    }
+    catch (ParserException e) {
+      e.printStackTrace();
+    }
+  }
+  public void loadSavedGreenGoalJson(GreenGoal activeGoal) {
+    try {
+      ArrayList<GreenGoal> singleGoalList = new ArrayList<>();
+      if (activeGoal != null) {
+        singleGoalList.add(activeGoal);
+      } else {
+        ArrayList<GreenGoal> allGoals = getGoals();
+        if (!allGoals.isEmpty()) {
+          singleGoalList.add(allGoals.get(0));
+        }
+      }
+      parser.toJsonFile(singleGoalList, "website/json/SavedGreenGoalList.json");
+      Village cloverville = getVillage();
+      cloverville.getGoals().clear();
+      cloverville.getGoals().addAll(singleGoalList);
+      System.out.println("Green goal loaded: " + (singleGoalList.isEmpty() ? "none" : singleGoalList.get(0).getGoalName()));
+    } catch (ParserException e) {
+      e.printStackTrace();
+    }
+  }
+  public void loadVillageDescription() {
+    try {
+      Village cloverville = getVillage();
+      String description = cloverville.getDescription();
+      ArrayList<String> list = new ArrayList<>();
+      list.add(description);
+      parser.toJsonFile(list, "website/json/VillageDescription.json");
+      System.out.println("Village description written to JSON.");
+    } catch (ParserException e) {
+      e.printStackTrace();
+    }
+  }
 }
