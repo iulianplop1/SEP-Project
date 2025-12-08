@@ -1,6 +1,7 @@
 package model;
 
 import java.io.Serializable;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +29,15 @@ public class Village implements Serializable
     this.goals = new ArrayList<>();
     period = 10;
     this.greenActivities = new ArrayList<>();
+  }
+
+  public ArrayList<TradeOffer> copytradeswithoutpos(){
+    ArrayList<TradeOffer> toreturn = new ArrayList<>();
+    for(TradeOffer t : this.trades){
+      t = t.copywithoutpos();
+      toreturn.add(t);
+    }
+    return toreturn;
   }
 
   public int getGreenpoints()

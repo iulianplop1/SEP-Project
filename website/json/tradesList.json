@@ -1,0 +1,152 @@
+[
+  {
+    "tradename": "world famous hungarian pálinka",
+    "points": 67,
+    "seller": {
+      "firstname": "Arsenie",
+      "lastname": "Bilba",
+      "personalpoints": 120
+    },
+    "description": "brought from home"
+  },
+  {
+    "tradename": "carrots",
+    "points": 35,
+    "seller": {
+      "firstname": "Arsenie",
+      "lastname": "Bilba",
+      "personalpoints": 120
+    },
+    "description": "collected from the field"
+  },
+  {
+    "tradename": "pears",
+    "points": 67,
+    "seller": {
+      "firstname": "Arsenie",
+      "lastname": "Bilba",
+      "personalpoints": 120
+    },
+    "description": "a bit ripe"
+  },
+  {
+    "tradename": "freshly baked bread",
+    "points": 25,
+    "seller": {
+      "firstname": "Bátor",
+      "lastname": "Gábora",
+      "personalpoints": 47
+    },
+    "description": "just made this morning"
+  },
+  {
+    "tradename": "homemade wooden spoon",
+    "points": 40,
+    "seller": {
+      "firstname": "Bátor",
+      "lastname": "Gábora",
+      "personalpoints": 47
+    },
+    "description": "crafted with care"
+  },
+  {
+    "tradename": "basket of apples",
+    "points": 30,
+    "seller": {
+      "firstname": "Arsenie",
+      "lastname": "Bilba",
+      "personalpoints": 120
+    },
+    "description": "picked from the village orchard"
+  },
+  {
+    "tradename": "hand-knitted scarf",
+    "points": 55,
+    "seller": {
+      "firstname": "Arsenie",
+      "lastname": "Bilba",
+      "personalpoints": 120
+    },
+    "description": "keeps you warm in winter"
+  },
+  {
+    "tradename": "jar of organic honey",
+    "points": 45,
+    "seller": {
+      "firstname": "Mike",
+      "lastname": "Lorenzen",
+      "personalpoints": 127
+    },
+    "description": "harvested from local hives"
+  },
+  {
+    "tradename": "warm wool mittens",
+    "points": 38,
+    "seller": {
+      "firstname": "Iulian",
+      "lastname": "Plop",
+      "personalpoints": 146
+    },
+    "description": "handmade for cold winters"
+  },
+  {
+    "tradename": "vintage pocket watch",
+    "points": 90,
+    "seller": {
+      "firstname": "Bátor",
+      "lastname": "Gábora",
+      "personalpoints": 47
+    },
+    "description": "passed down from family"
+  },
+  {
+    "tradename": "bundle of firewood",
+    "points": 28,
+    "seller": {
+      "firstname": "Mike",
+      "lastname": "Lorenzen",
+      "personalpoints": 127
+    },
+    "description": "perfectly dried"
+  },
+  {
+    "tradename": "herbal healing tea",
+    "points": 33,
+    "seller": {
+      "firstname": "Arsenie",
+      "lastname": "Bilba",
+      "personalpoints": 120
+    },
+    "description": "made from rare mountain herbs"
+  },
+  {
+    "tradename": "leather-bound notebook",
+    "points": 50,
+    "seller": {
+      "firstname": "Iulian",
+      "lastname": "Plop",
+      "personalpoints": 146
+    },
+    "description": "great for journaling"
+  },
+  {
+    "tradename": "set of gardening tools",
+    "points": 70,
+    "seller": {
+      "firstname": "Bátor",
+      "lastname": "Gábora",
+      "personalpoints": 47
+    },
+    "description": "includes gloves, trowel, etc."
+  },
+  {
+    "tradename": "ballin",
+    "points": 1000,
+    "seller": {
+      "firstname": "Bátor",
+      "lastname": "Gábora",
+      "personalpoints": 82
+    },
+    "description": "ball"
+  }
+]

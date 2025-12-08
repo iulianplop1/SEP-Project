@@ -3,6 +3,7 @@ package model;
 import utils.MyFileHandler;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import parser.XmlJsonParser;
 import parser.ParserException;
@@ -10,9 +11,11 @@ import parser.ParserException;
 public class VillageModelManager
 {
   private String fileName;
+  private XmlJsonParser parser;
 
   public VillageModelManager(String fileName) {
     this.fileName = fileName;
+    parser = new XmlJsonParser();
   }
 
   public Village getVillage() {
@@ -120,9 +123,30 @@ public class VillageModelManager
   }
 
   public void addTrade(TradeOffer trade){
-    Village cloverville = getVillage();
-    cloverville.addTradeOffer(trade);
-    saveVillage(cloverville);
+    if (trade == null){
+      throw new IllegalArgumentException("There is not an available trade");
+    }
+    else {
+      Village cloverville = getVillage();
+      cloverville.addTradeOffer(trade);
+      saveVillage(cloverville);
+      trade = trade.copywithoutpos();
+      try {
+        ArrayList<TradeOffer> list;
+        try {
+          list = parser.fromJsonFile("website/json/tradesList.json", ArrayList.class);
+        }
+        catch (ParserException ex) {
+          list = new ArrayList<>();
+        }
+        list.add(trade);
+        parser.toJsonFile(list, "website/json/tradesList.json");
+        System.out.println("finished and saved to tradesList.json.");
+      }
+      catch (ParserException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
   public void removeTrade(TradeOffer trade) {
@@ -144,12 +168,11 @@ public class VillageModelManager
       saveVillage(cloverville);
     }
   }
-
   public void finishTrade(TradeOffer trade, Villager buyer) {
     if (trade == null || buyer == null){
-      throw new IllegalArgumentException("Trade or buyer is null");
+      throw new IllegalArgumentException("There is not any available trade or buyer");
     }
-    else{
+    else {
       Village cloverville = getVillage();
       cloverville.finishTradeOffer(trade, buyer);
       System.out.println("finished tradeoffer");
@@ -157,77 +180,33 @@ public class VillageModelManager
     }
   }
 
-
-  public ArrayList<GreenActivity> getActivities()
-  {
-    Village cloverville= getVillage();
-    return cloverville.getGreenActivities();
-  }
-
-  public void addGreenActivity(GreenActivity greenActivity) {
-    System.out.println("Manager: adding activity: " + greenActivity);
-
+  public void addResetDay(int days){
     Village cloverville = getVillage();
-    ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
-    greenActivities.add(greenActivity);
-
+    cloverville.addResetPeriod(days);
+    saveVillage(cloverville);
+  }
+  public void resetNow(){
+    Village cloverville = getVillage();
+    cloverville.resetnow();
     saveVillage(cloverville);
   }
 
+
+  public ArrayList<GreenGoal> getGoals() {
+    Village cloverville = getVillage();
+    return cloverville.getGoals();
+  }
+  public void addGoal(GreenGoal goal) {
+    Village cloverville = getVillage();
+    cloverville.addGreenGoal(goal);
+    saveVillage(cloverville);
+  }
   public void removeGreenGoal(GreenGoal goal){
     Village cloverville = getVillage();
     ArrayList<GreenGoal> goals = cloverville.getGoals();
     cloverville.removeGreenGoal(goal);
     saveVillage(cloverville);
   }
-  public void removeGreenActivity(GreenActivity greenActivity){
-    Village cloverville = getVillage();
-    ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
-
-    for(int i=0;i<greenActivities.size();i++){
-      if(greenActivities.get(i).equals(greenActivity)){
-        greenActivities.remove(greenActivities.get(i));
-        // Added break to stop after finding the item
-        break;
-      }
-    }
-    saveVillage(cloverville);
-  }
-
-  public void changeGreenActivity(GreenActivity old, GreenActivity greenActivity) {
-    String name = greenActivity.getActivityName();
-    int points = greenActivity.getPoints();
-    Village cloverville = getVillage();
-    ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
-    for (int i = 0; i < greenActivities.size(); i++)
-    {
-      if (greenActivities.get(i).equals(old))
-      {
-        greenActivities.get(i).setActivityName(name);
-        greenActivities.get(i).setPoints(points);
-      }
-    }
-    saveVillage(cloverville);
-  }
-
-  public ArrayList<GreenGoal> getGoals() {
-    Village cloverville = getVillage();
-    return cloverville.getGoals();
-  }
-
-  public void addGoal(GreenGoal goal) {
-    Village cloverville = getVillage();
-    cloverville.addGreenGoal(goal);
-    saveVillage(cloverville);
-  }
-
-  public void removeGoal(GreenGoal goal) {
-    Village cloverville = getVillage();
-    ArrayList<GreenGoal> goals = cloverville.getGoals();
-    goals.remove(goal);
-    saveVillage(cloverville);
-  }
-
   public void changeGreenGoal(GreenGoal old, GreenGoal goal) {
     String goalName = goal.getGoalName();
     String greenDescription = goal.getGreenDescription();
@@ -246,61 +225,100 @@ public class VillageModelManager
     saveVillage(cloverville);
   }
 
-  public void addResetDay(int days){
-    Village cloverville = getVillage();
-    cloverville.addResetPeriod(days);
-    saveVillage(cloverville);
+  public ArrayList<GreenActivity> getActivities() {
+    Village cloverville= getVillage();
+    return cloverville.getGreenActivities();
   }
-  public void resetNow(){
-    Village cloverville = getVillage();
-    cloverville.resetnow();
-    saveVillage(cloverville);
-  }
+  public void addGreenActivity(GreenActivity greenActivity) {
+    System.out.println("Manager: adding activity: " + greenActivity);
 
+    Village cloverville = getVillage();
+    ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
+    greenActivities.add(greenActivity);
+
+    saveVillage(cloverville);
+  }
+  public void removeGreenActivity(GreenActivity greenActivity){
+    Village cloverville = getVillage();
+    ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
+
+    for(int i=0;i<greenActivities.size();i++){
+      if(greenActivities.get(i).equals(greenActivity)){
+        greenActivities.remove(greenActivities.get(i));
+        // Added break to stop after finding the item
+        break;
+      }
+    }
+    saveVillage(cloverville);
+  }
+  public void changeGreenActivity(GreenActivity old, GreenActivity greenActivity) {
+    String name = greenActivity.getActivityName();
+    int points = greenActivity.getPoints();
+    Village cloverville = getVillage();
+    ArrayList<GreenActivity> greenActivities = cloverville.getGreenActivities();
+    for (int i = 0; i < greenActivities.size(); i++)
+    {
+      if (greenActivities.get(i).equals(old))
+      {
+        greenActivities.get(i).setActivityName(name);
+        greenActivities.get(i).setPoints(points);
+      }
+    }
+    saveVillage(cloverville);
+  }
   public void finishGreenActivity(GreenActivity greenActivity) {
     if (greenActivity == null){
       throw new IllegalArgumentException("There is not any available green activity");
     }
-    else
-    {
+    else {
       XmlJsonParser parser = new XmlJsonParser();
       Village cloverville = getVillage();
       cloverville.finishGreenActivity(greenActivity);
-      System.out.println("finished GreenActivity");
+      System.out.println("website/json/greenActivityList.json");
       saveVillage(cloverville);
-
-      try
-      {
+      try {
         ArrayList<GreenActivity> list;
-        try
-        {
-          list = parser.fromJsonFile("greenActivityList.json", ArrayList.class);
+        try {
+          list = parser.fromJsonFile("website/json/greenActivityList.json", ArrayList.class);
         }
-        catch (ParserException ex)
-        {
+        catch (ParserException ex) {
           list = new ArrayList<>();
         }
         list.add(greenActivity);
-        parser.toJsonFile(list, "greenActivityList.json");
+        parser.toJsonFile(list, "website/json/greenActivityList.json");
         System.out.println("Finished + saved updated JSON list.");
       }
-      catch (ParserException e)
-      {
+      catch (ParserException e) {
         e.printStackTrace();
       }
     }
   }
-
   public void loadGreenActivityListJson() {
-    XmlJsonParser parser = new XmlJsonParser();
     ArrayList<GreenActivity> greenActivityList = getActivities();
     try {
-      parser.toJsonFile(greenActivityList, "greenActivityList.json");
+      parser.toJsonFile(greenActivityList, "website/json/greenActivityList.json");
       System.out.println("Green activity list written to JSON.");
       Village cloverville = getVillage();
       cloverville.getGreenActivities().clear();
       cloverville.getGreenActivities().addAll(greenActivityList);
       System.out.println("Green activity list updated in memory.");
+    }
+    catch (ParserException e) {
+      e.printStackTrace();
+    }
+  }
+
+
+  public void loadTradeOfferListJson() {
+    Village cloverville = getVillage();
+    ArrayList<TradeOffer> trades = getTrades();
+    ArrayList<TradeOffer> tradesnopos = cloverville.copytradeswithoutpos();
+    try {
+      parser.toJsonFile(tradesnopos, "website/json/tradesList.json");
+      System.out.println("Trade offers list written to JSON.");
+      cloverville.getTrades().clear();
+      cloverville.getTrades().addAll(trades);
+      System.out.println("Trade offer list updated in memory.");
     }
     catch (ParserException e) {
       e.printStackTrace();

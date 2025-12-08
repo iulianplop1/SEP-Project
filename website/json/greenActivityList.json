@@ -1,0 +1,110 @@
+[
+  {
+    "activityName": "cycling to work",
+    "points": 50,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "biodegradable kitchen waste",
+    "points": 40,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "planting trees",
+    "points": 30,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "using public transport",
+    "points": 20,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "recycling plastic bottles",
+    "points": 25,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "composting garden waste",
+    "points": 35,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "installing solar panels",
+    "points": 100,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "reducing water usage",
+    "points": 15,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "carpooling to work",
+    "points": 40,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "avoiding single-use plastics",
+    "points": 30,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "buying local produce",
+    "points": 20,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "participating in clean-up drives",
+    "points": 50,
+    "date": {
+      "day": 8,
+      "month": 12,
+      "year": 2025
+    }
+  }
+]

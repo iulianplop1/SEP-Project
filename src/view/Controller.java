@@ -108,6 +108,7 @@ public class Controller
   public void initialize()
   {
     manager.loadGreenActivityListJson();
+    manager.loadTradeOfferListJson();
     everything();
     loadResetDay();
   }

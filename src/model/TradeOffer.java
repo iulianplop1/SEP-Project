@@ -59,6 +59,11 @@ public class TradeOffer implements Serializable {
   public TradeOffer copy(){
     return new TradeOffer(seller, tradename, points, description);
   }
+  public TradeOffer copywithoutpos(){
+    TradeOffer trade = new TradeOffer(seller, tradename, points, description);
+    trade.possiblebuyers = null;
+    return trade;
+  }
 
   public String toString()
   {
