@@ -105,7 +105,7 @@ public class Controller
 
   public void initialize()
   {
-    manager.loadGreenActivityListJson();
+    //manager.loadGreenActivityListJson();
     everything();
     loadResetDay();
   }
@@ -430,7 +430,7 @@ public class Controller
     greenPointNumber.setText(String.valueOf(cloverville.getGreenpoints()));
     descriptionVillage.setText("'" + cloverville.getDescription() + "'");
 
-    nextGreenGoal.setText(cloverville.getGoals().get(0).toString());
+    //nextGreenGoal.setText(cloverville.getGoals().get(0).toString());
 
     numberOfSharedTasks.setText(String.valueOf(cloverville.getSharedTasks().size()));
     numberOfTrades.setText(String.valueOf(cloverville.getTrades().size()));
@@ -888,7 +888,7 @@ public class Controller
   }
   @FXML void completeGreenActivity(ActionEvent e) {
     GreenActivity selectedGreenActivity = (GreenActivity) chooseGreenActivity1.getValue();
-    manager.finishGreenActivity(selectedGreenActivity);
+    //manager.finishGreenActivity(selectedGreenActivity);
     showAlert(((GreenActivity) chooseGreenActivity1.getValue()).getPoints()+" points where added to the Green Goal because of the activity "+((GreenActivity) chooseGreenActivity1.getValue()).getActivityName());
     everything();
   }
