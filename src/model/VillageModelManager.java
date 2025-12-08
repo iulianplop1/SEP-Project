@@ -4,8 +4,8 @@ import utils.MyFileHandler;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-//import parser.XmlJsonParser;
-//import parser.ParserException;
+import parser.XmlJsonParser;
+import parser.ParserException;
 
 public class VillageModelManager
 {
@@ -258,59 +258,59 @@ public class VillageModelManager
     cloverville.resetnow();
     saveVillage(cloverville);
   }
-//
-//  public void finishGreenActivity(GreenActivity greenActivity) {
-//    if (greenActivity == null){
-//      throw new IllegalArgumentException("There is not any available green activity");
-//    }
-//    else
-//    {
-//      XmlJsonParser parser = new XmlJsonParser();
-//
-//      Village cloverville = getVillage();
-//      cloverville.finishGreenActivity(greenActivity);
-//      System.out.println("finished GreenActivity");
-//      saveVillage(cloverville);
-//
-//      try
-//      {
-//        ArrayList<GreenActivity> list;
-//
-//        try
-//        {
-//          list = parser.fromJsonFile("greenActivityList.json", ArrayList.class);
-//        }
-//        catch (ParserException ex)
-//        {
-//          list = new ArrayList<>();
-//        }
-//
-//        list.add(greenActivity);
-//        parser.toJsonFile(list, "greenActivityList.json");
-//
-//        System.out.println("Finished + saved updated JSON list.");
-//
-//      }
-//      catch (ParserException e)
-//      {
-//        e.printStackTrace();
-//      }
-//    }
-//  }
-//  public void loadGreenActivityListJson() {
-//    XmlJsonParser parser = new XmlJsonParser();
-//    ArrayList<GreenActivity> greenActivityList = getActivities();
-//
-//    try {
-//      parser.toJsonFile(greenActivityList, "greenActivityList.json");
-//      System.out.println("Green activity list written to JSON.");
-//      Village cloverville = getVillage();
-//      cloverville.getGreenActivities().clear();
-//      cloverville.getGreenActivities().addAll(greenActivityList);
-//      System.out.println("Green activity list updated in memory.");
-//    }
-//    catch (ParserException e) {
-//      e.printStackTrace();
-//    }
-//  }
+
+  public void finishGreenActivity(GreenActivity greenActivity) {
+    if (greenActivity == null){
+      throw new IllegalArgumentException("There is not any available green activity");
+    }
+    else
+    {
+      XmlJsonParser parser = new XmlJsonParser();
+
+      Village cloverville = getVillage();
+      cloverville.finishGreenActivity(greenActivity);
+      System.out.println("finished GreenActivity");
+      saveVillage(cloverville);
+
+      try
+      {
+        ArrayList<GreenActivity> list;
+
+        try
+        {
+          list = parser.fromJsonFile("greenActivityList.json", ArrayList.class);
+        }
+        catch (ParserException ex)
+        {
+          list = new ArrayList<>();
+        }
+
+        list.add(greenActivity);
+        parser.toJsonFile(list, "greenActivityList.json");
+
+        System.out.println("Finished + saved updated JSON list.");
+
+      }
+      catch (ParserException e)
+      {
+        e.printStackTrace();
+      }
+    }
+  }
+  public void loadGreenActivityListJson() {
+    XmlJsonParser parser = new XmlJsonParser();
+    ArrayList<GreenActivity> greenActivityList = getActivities();
+
+    try {
+      parser.toJsonFile(greenActivityList, "greenActivityList.json");
+      System.out.println("Green activity list written to JSON.");
+      Village cloverville = getVillage();
+      cloverville.getGreenActivities().clear();
+      cloverville.getGreenActivities().addAll(greenActivityList);
+      System.out.println("Green activity list updated in memory.");
+    }
+    catch (ParserException e) {
+      e.printStackTrace();
+    }
+  }
 }

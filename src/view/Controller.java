@@ -105,7 +105,7 @@ public class Controller
 
   public void initialize()
   {
-    //manager.loadGreenActivityListJson();
+    manager.loadGreenActivityListJson();
     everything();
     loadResetDay();
   }
@@ -650,7 +650,7 @@ public class Controller
         manager.removeVillager(villager);
       }
       else {
-        showAlert("Please enter a first name and a last name to update villager");
+        showAlert("Please enter a first name, a last name, and personal points to remove villager");
       }
     }
     catch (NumberFormatException event) {
@@ -668,6 +668,7 @@ public class Controller
     String greenDescriptions = greenDescription.getText();
     GreenGoal greengoal = new GreenGoal(GoalName, RequiredPoints, greenDescriptions);
     manager.addGoal(greengoal);
+
     initialize();
   }
   @FXML public void removeGreenGoal() {
@@ -696,7 +697,7 @@ public class Controller
         manager.addTrade(trade);
       }
       else {
-        showAlert("Please enter a first name and a description to update villager");
+        showAlert("Please enter a trade name, a description, and a value to add trade offer");
       }
     }
     catch (NumberFormatException event) {
@@ -723,18 +724,36 @@ public class Controller
     }
     else if (e.getSource() == removeTrade || e.getSource()==updateTrade)
     {
-      Villager editedSeller = (Villager) chooseTradeSellerEdit.getValue();
-      String editedTradeName = tradeNameEdit.getText();
-      int editedPoints = Integer.parseInt(tradeRequiredPointsEdit.getText());
-      String editedDescription = tradeDescriptionEdit.getText();
-      if(e.getSource()==removeTrade){
-        TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
-        manager.removeTrade(toRemove);
+
+      try{
+        if (!tradeNameEdit.getText().equals("") && !tradeDescriptionEdit.getText().equals("") && chooseTradeSeller.getValue() != null)
+        {
+          Villager editedSeller = (Villager) chooseTradeSellerEdit.getValue();
+          String editedTradeName = tradeNameEdit.getText();
+          int editedPoints = Integer.parseInt(tradeRequiredPointsEdit.getText());
+          String editedDescription = tradeDescriptionEdit.getText();
+          if(e.getSource()==removeTrade){
+            TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
+            manager.removeTrade(toRemove);
+          }
+          else if(e.getSource()==updateTrade){
+            TradeOffer newTrade = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
+            manager.changeTrade(selectedTrade, newTrade);
+          }
+        }
+        else {
+          showAlert("Please enter a trade name, a description and a value to update or remove trade offer");
+        }
       }
-      else if(e.getSource()==updateTrade){
-        TradeOffer newTrade = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
-        manager.changeTrade(selectedTrade, newTrade);
+      catch (NumberFormatException event) {
+        showAlert("Points must be a number to edit or remove a trade!");
       }
+      catch (IllegalArgumentException event) {
+        showAlert(event.getMessage());
+      }
+
+
+
 
       initialize();
     }
@@ -761,7 +780,6 @@ public class Controller
     }
   }
 
-
   @FXML public void editGreenGoal(ActionEvent e) {
     GreenGoal selectedGreenGoal = (GreenGoal) chooseGreenGoal.getValue();
     if (e.getSource() == chooseGreenGoal)
@@ -787,7 +805,6 @@ public class Controller
       initialize();
     }
   }
-
   @FXML public void addGreenActivity() {
     String name = greenActivityName.getText();
     String pointsText = greenActivityPoints.getText();
@@ -836,7 +853,6 @@ public class Controller
   }
   @FXML public void editGreenActivity(ActionEvent e) {
     GreenActivity selectedGreenActivity = (GreenActivity) chooseGreenActivity.getValue();
-
     // When a villager is selected in the ComboBox
     if (e.getSource() == chooseGreenActivity)
     {
@@ -846,14 +862,13 @@ public class Controller
         greenActivityPoints1.setText(String.valueOf(selectedGreenActivity.getPoints()) );
       }
     }
-
     // When the Update button is clicked
     else if (e.getSource() == updateGreenActivity)
     {
       if (selectedGreenActivity!= null)
       {
-        //selectedGreenActivity.setActivityName(greenActivityName.getText());
-        //selectedGreenActivity.setPoints(Integer.parseInt(greenActivityPoints.getText()));
+        selectedGreenActivity.setActivityName(greenActivityName.getText());
+        selectedGreenActivity.setPoints(Integer.parseInt(greenActivityPoints.getText()));
 
         try
         {
@@ -902,11 +917,10 @@ public class Controller
   }
   @FXML void completeGreenActivity(ActionEvent e) {
     GreenActivity selectedGreenActivity = (GreenActivity) chooseGreenActivity1.getValue();
-    //manager.finishGreenActivity(selectedGreenActivity);
+    manager.finishGreenActivity(selectedGreenActivity);
     showAlert(((GreenActivity) chooseGreenActivity1.getValue()).getPoints()+" points where added to the Green Goal because of the activity "+((GreenActivity) chooseGreenActivity1.getValue()).getActivityName());
     everything();
   }
-
 
 
   @FXML public void addSharedTask() {
@@ -1048,7 +1062,6 @@ public class Controller
     sharedTaskName1.clear();
     pointsRequired1.clear();
   }
-
   @FXML private void startCompletingSharedTask() {
     selectedVillagers.getItems().clear();
 
