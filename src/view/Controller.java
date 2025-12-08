@@ -684,13 +684,27 @@ public class Controller
   }
 
   @FXML void addTadeOffer() {
-    Villager seller = (Villager) chooseTradeSeller.getValue();
-    String tradename = tradeName.getText();
-    int requiredpoints = Integer.parseInt(tradeRequiredPoints.getText());
-    String description = tradeDescription.getText();
-    TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints, description);
-    System.out.println("ADDING TRADE --> " + trade);
-    manager.addTrade(trade);
+    try{
+      if (!tradeName.getText().equals("") && !tradeDescription.getText().equals(""))
+      {
+        Villager seller = (Villager) chooseTradeSeller.getValue();
+        String tradename = tradeName.getText();
+        int requiredpoints = Integer.parseInt(tradeRequiredPoints.getText());
+        String description = tradeDescription.getText();
+        TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints, description);
+        System.out.println("ADDING TRADE --> " + trade);
+        manager.addTrade(trade);
+      }
+      else {
+        showAlert("Please enter a first name and a description to update villager");
+      }
+    }
+    catch (NumberFormatException event) {
+      showAlert("Points must be a number to add a trade!");
+    }
+    catch (IllegalArgumentException event) {
+      showAlert(event.getMessage());
+    }
 
     initialize();
   }
