@@ -3,27 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/web-style.css">
     <title>Catalogue of ideas</title>
 </head>
 <body>
+    <div class="topnav" id="myTopnav">
+        <a href="index.html">Backstory</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="green-goal.html" class="active">Green points</a>
+        <a href="trades.html">Trades</a>
+        <a href="about-us.html">About us</a> 
+    </div>
 
     <table id="greenTable" border="1">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Points</th>
-            <th>Date</th>
-        </tr>
-    </thead>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Points</th>
+                <th>Date</th>
+            </tr>
+        </thead>
 
-    <tbody id="tableBody">
-        <!-- JS will insert rows here -->
-    </tbody>
-</table>
+        <tbody id="tableBody">
+            <!-- JS will insert rows here -->
+        </tbody>
+    </table>
         
        
     </div>
-    <footer>
+    <footer id="footer">
         <p>&copy; 2025 Cloverville. All rights reserved. | Coordinated by Green Bob</p>
     </footer>
     <script src="js/web-code.js"> </script>

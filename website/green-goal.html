@@ -4,34 +4,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Green Points - Cloverville</title>
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/web-style.css">
 </head>
 <body>
-    <nav class="topnav" id="myTopnav">
-        <a href="index.html">Home</a>
-        <a href="about-us.html">Our Story</a>
-        <a href="catalogue.html">catalogue of ideas</a>
-        <a href="green-goal.html" class="active">Green goal</a>
+    <div class="topnav" id="myTopnav">
+        <a href="index.html">Backstory</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="green-goal.html" class="active">Green points</a>
         <a href="trades.html">Trades</a>
-    </nav>
+        <a href="about-us.html">About us</a> 
+    </div>
 
     <main class="points-page">
         <div class="points-header">
             <h1>Community Green Points</h1>
-            <div class="total-points-card">
-                <p class="points-label">Total Points</p>
-                <div class="points-circle">
-                    <span class="points-number" id="totalPoints">600</span>
-                </div>
+                <h2 class="total-points">Total Points</h2>
+            <div class="points-circle">
+                <span class="points-number" id="totalPoints">600</span>
             </div>
         </div>
 
         <div class="goals">
             <h2>Goals & Rewards</h2>
             <p class="goals-intro">Unlock amazing rewards by reaching these milestones!</p>
-        <div>
+            <img src="assets/plant.png" alt="">
+        </div>
+
+        <table id="output1" border="2">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>RequiredPoints</th>
+                <th>description</th>
+            </tr>
+        </thead>
+
+        <tbody id="tableBody1">
+            <!-- JS will insert rows here -->
+        </tbody>
+    </table>
     </main>
-    <footer>
+
+    <footer id="footer">
         <p>&copy; 2025 Cloverville. All rights reserved. | Coordinated by Green Bob</p>
     </footer>
 </body>

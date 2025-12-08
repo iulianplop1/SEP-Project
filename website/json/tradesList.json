@@ -1,5 +1,15 @@
 [
   {
+    "tradename": "peanut butter jelly sandwich",
+    "points": 35,
+    "seller": {
+      "firstname": "Iulian",
+      "lastname": "Plop",
+      "personalpoints": 111
+    },
+    "description": "yum yum"
+  },
+  {
     "tradename": "world famous hungarian pálinka",
     "points": 67,
     "seller": {
@@ -35,7 +45,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 47
+      "personalpoints": 104
     },
     "description": "just made this morning"
   },
@@ -45,7 +55,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 47
+      "personalpoints": 104
     },
     "description": "crafted with care"
   },
@@ -75,7 +85,7 @@
     "seller": {
       "firstname": "Mike",
       "lastname": "Lorenzen",
-      "personalpoints": 127
+      "personalpoints": 105
     },
     "description": "harvested from local hives"
   },
@@ -85,7 +95,7 @@
     "seller": {
       "firstname": "Iulian",
       "lastname": "Plop",
-      "personalpoints": 146
+      "personalpoints": 111
     },
     "description": "handmade for cold winters"
   },
@@ -95,7 +105,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 47
+      "personalpoints": 104
     },
     "description": "passed down from family"
   },
@@ -105,7 +115,7 @@
     "seller": {
       "firstname": "Mike",
       "lastname": "Lorenzen",
-      "personalpoints": 127
+      "personalpoints": 105
     },
     "description": "perfectly dried"
   },
@@ -125,7 +135,7 @@
     "seller": {
       "firstname": "Iulian",
       "lastname": "Plop",
-      "personalpoints": 146
+      "personalpoints": 111
     },
     "description": "great for journaling"
   },
@@ -135,18 +145,18 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 47
+      "personalpoints": 104
     },
     "description": "includes gloves, trowel, etc."
   },
   {
-    "tradename": "ballin",
-    "points": 1000,
+    "tradename": "handcrafted clay mug",
+    "points": 22,
     "seller": {
-      "firstname": "Bátor",
-      "lastname": "Gábora",
-      "personalpoints": 82
+      "firstname": "Mike",
+      "lastname": "Lorenzen",
+      "personalpoints": 105
     },
-    "description": "ball"
+    "description": "fired in my home kiln"
   }
 ]
