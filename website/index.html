@@ -7,7 +7,13 @@
     <title>Cloverville</title>
 
 
-    <div class="topnav" id="myTopnav">
+   
+
+</head>
+<body>
+
+     <div class="topnav" id="myTopnav">
+        <span class="Village">Cloverville</span>
         <a href="index.html">Backstory</a>
         <a href="catalogue.html">Catalogue</a>
         <a href="green-goal.html" class="active">Green points</a>
@@ -15,24 +21,51 @@
         <a href="about-us.html">About us</a> 
     </div>
 
-</head>
-<body>
-
-    <div id="Quote" >   
-    <p class="SmallQuotes" >Welcome to Green Bob's town</p>
-    <p id="BigQuote">Grow together, earn green points, and light up Cloverville. </p>
+   <div id="Quote">
+  <div class="hero__text">
+    <p class="SmallQuotes">Welcome to Green Bob's town</p>
+    <p id="BigQuote">Grow together, earn green points, and light up Cloverville.</p>
     <p id="MediumQuote">Track the invisible green work, celebrate shared wins, and unlock rewards that make our eco-town thrive.</p>
-    <img src="assets/image2.jpg">
+
+    <div class="hero__actions">
+      <a class="button primary" href="#activities">View this week's green work</a>
+      <a class="button ghost" href="#points">See rewards</a>
     </div>
+  </div>
+
+  <img src="assets/image2.jpg" alt="">
+</div>
     
     <div id="Description">
+        <div id="text2">
         <p class="SmallQuotes" >Backstory</p>
         <p id="BigQuote">The meadow town that chose green first.</p>
-    <p id="DescriptionJson">
-            <!-- JS will insert rows here -->
-    </p>
-
-        <img src="assets/image3.jpg">            
+    
+    <div id="DescriptionJson">
+        <p>
+            Name        <!-- JS will insert rows here -->
+        </p>
+    </div>    
+        </div>
+        <img src="assets/image3.png">     
+    </div>     
+    
+    <div id="Philosophies">
+        <p class="SmallQuotes" >Life philosophies</p>
+        <p id="BigQuote">Simple rules that guide our days </p>
+    <article class="card">
+                <h3>Visible care</h3>
+                <p>Log every act of green work so effort is seen, shared, and celebrated.</p>
+            </article>
+            <article class="card">
+                <h3>Collective momentum</h3>
+                <p>Points feed community rewards that everyone can unlock together.</p>
+            </article>
+            <article class="card">
+                <h3>Joyful learning</h3>
+                <p>We experiment with new habits, measure impact, and keep what works.</p>
+            </article>
+        </div>
     
 
     
@@ -41,6 +74,11 @@
 
     
 
+    
+
+
+
+    
 
 
 
@@ -51,7 +89,8 @@
 
 
 
-        <script src="js/web-code.js"></script>
+
+    <script src="js/web-code.js"></script>
 </body>
     <footer id="footer">
         <p>&copy; 2025 Cloverville. All rights reserved. | Coordinated by Green Bob</p>

@@ -1274,7 +1274,8 @@ public class Controller
     Village village = manager.getVillage();
     village.setActiveGreenGoal(selectedGoal);
     manager.saveVillage(village);
-
+    manager.loadSavedGreenGoalJson(selectedGoal);
+    manager.finishGreenGoal(selectedGoal);
     everything();
 
     showAlert("Green goal '" + selectedGoal.getGoalName() + "' is now active.");

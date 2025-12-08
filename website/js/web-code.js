@@ -48,38 +48,55 @@ async function loadTrades() {
 
 loadTrades();
 
-fetch('json/greenGoalList.json')
-    .then(response => response.json())
-    .then(data => {
-        const tbody = document.getElementById("tableBody1");
 
-        for (let i = 0; i < data.length; i++) {
+const gbody = document.getElementById("tableBody1");
+if (gbody) {
+    fetch('json/greenGoalList.json')
+        .then(response => response.json())
+        .then(data => {
+            for (let i = 0; i < 3; i++) {
+                const goal = data[i];
+                
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${goal.goalName}</td>
+                    <td>${goal.requiredPoints}</td>
+                    <td>${goal.greenDescriptions}</td>
+                `;
+                gbody.appendChild(row);
+            }
+        })
+        .catch(error => console.error('Error fetching JSON:', error));
+}
 
-            const goal = data[i];
-
-            // Format nested date object
-            const d = goal.description;
-
-            // Create table row
-            const row = document.createElement("tr");
-
-            row.innerHTML = `
-                <td>${goal.goalName}</td>
-                <td>${goal.RequiredPoints}</td>
-                <td>${goal.description}</td>
+// SAVED GREEN GOAL - Display on page (for SavedGreenGoalList.json)
+const savedGoalDiv = document.getElementById("savedGoal");
+if (savedGoalDiv) {
+    fetch('json/SavedGreenGoalList.json')
+        .then(response => response.json())
+        .then(data => {
+            const goal = data[0]; // Get the first (and only) item
+            
+            savedGoalDiv.innerHTML = `
+                <div class="saved-goal-display">
+                    <h3>Current Goal</h3>
+                    <p><strong>Goal:</strong> ${goal.goalName}</p>
+                    <p><strong>Required Points:</strong> ${goal.requiredPoints}</p>
+                    <p><strong>Description:</strong> ${goal.greenDescriptions}</p>
+                </div>
             `;
+        })
+        .catch(error => console.error('Error fetching saved goal:', error));
+}
 
-            t.appendChild(row);
-        }
-    })
-    .catch(error => console.error('Error fetching JSON:', error));
-    
 
 fetch('json/VillageDescription.json')
     .then(response => response.json())
     .then(data => {
-        // Assuming your JSON is a single object with a key like 'text'
-        const villageDescription = data.text; // Adjust based on actual JSON keys
-        document.getElementById("DescriptionJson").innerHTML = `<tr><td>${villageDescription}</td></tr>`;
+        //const villageDescription = data.text; // Assuming 'text' is the key
+        // Set the text content directly without table tags
+       // document.getElementById("DescriptionJson").innerHTML = villageDescription; 
+       const villageDescription = data[0];
+        document.getElementById("DescriptionJson").innerHTML = villageDescription;
     })
     .catch(error => console.error('Error fetching JSON:', error));

@@ -1,15 +1,5 @@
 [
   {
-    "tradename": "peanut butter jelly sandwich",
-    "points": 35,
-    "seller": {
-      "firstname": "Iulian",
-      "lastname": "Plop",
-      "personalpoints": 111
-    },
-    "description": "yum yum"
-  },
-  {
     "tradename": "world famous hungarian pálinka",
     "points": 67,
     "seller": {
@@ -45,7 +35,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 104
+      "personalpoints": 69
     },
     "description": "just made this morning"
   },
@@ -55,7 +45,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 104
+      "personalpoints": 69
     },
     "description": "crafted with care"
   },
@@ -95,7 +85,7 @@
     "seller": {
       "firstname": "Iulian",
       "lastname": "Plop",
-      "personalpoints": 111
+      "personalpoints": 146
     },
     "description": "handmade for cold winters"
   },
@@ -105,7 +95,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 104
+      "personalpoints": 69
     },
     "description": "passed down from family"
   },
@@ -135,7 +125,7 @@
     "seller": {
       "firstname": "Iulian",
       "lastname": "Plop",
-      "personalpoints": 111
+      "personalpoints": 146
     },
     "description": "great for journaling"
   },
@@ -145,7 +135,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 104
+      "personalpoints": 69
     },
     "description": "includes gloves, trowel, etc."
   },
@@ -158,5 +148,15 @@
       "personalpoints": 105
     },
     "description": "fired in my home kiln"
+  },
+  {
+    "tradename": "png cutting",
+    "points": 100,
+    "seller": {
+      "firstname": "Bátor",
+      "lastname": "Gábora",
+      "personalpoints": 104
+    },
+    "description": "removes mike\u0027s plant background"
   }
 ]

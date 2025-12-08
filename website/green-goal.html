@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="topnav" id="myTopnav">
-        <a href="index.html">Backstory</a>
+        <a href="index.html">Cloverville</a>
         <a href="catalogue.html">Catalogue</a>
         <a href="green-goal.html" class="active">Green points</a>
         <a href="trades.html">Trades</a>
@@ -23,13 +23,13 @@
                 <span class="points-number" id="totalPoints">600</span>
             </div>
         </div>
-
         <div class="goals">
             <h2>Goals & Rewards</h2>
             <p class="goals-intro">Unlock amazing rewards by reaching these milestones!</p>
-            <img src="assets/plant.png" alt="">
         </div>
-
+        <div id="savedGoal">
+            <!-- JS will insert saved goal here -->
+        </div>
         <table id="output1" border="2">
         <thead>
             <tr>
@@ -45,8 +45,14 @@
     </table>
     </main>
 
+    <img src="assets/leaves.png" id="leaves" alt="" class="leaves">
+    <img src="assets/leaves2.png" id="leaves2" alt="" class="leaves">
+    <img src="assets/leaves3.png" id="leaves3" alt="" class="leaves">
+    <img src="assets/leaves5.png" id="leaves4" alt="" class="leaves">
+
     <footer id="footer">
         <p>&copy; 2025 Cloverville. All rights reserved. | Coordinated by Green Bob</p>
     </footer>
+    <script src="js/web-code.js"></script>
 </body>
 </html>

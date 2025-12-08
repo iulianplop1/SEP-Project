@@ -1,44 +1,141 @@
-body{
-  padding: 10px;
-}
 
 /* Add a black background color to the top navigation */
 .topnav {
-  background-color: #ffffff;
-  overflow: hidden;
-  color: black;
-  border-radius: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the links */
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 22px 14px 140px; /* extra left padding so links don’t overlap brand */
+  background: beige;
+  border-bottom: 1px solid #235d2a;
+  top: 0;
+  z-index: 10;
+}
+
+.Village {
+  position: absolute;
+  left: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #235d2a;
+  font-size: 1.1rem;
+  white-space: nowrap;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
-  float: left;
-  display: block;
-  text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  color: #1f2a1b;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition:  0.2s ease, color 0.2s ease;
 }
 
 /* Change the color of links on hover */
-.topnav a:hover {
-  background-color: #ddd;
-  color: rgb(31, 213, 52);
+.topnav a:hover, .topnav a:focus-visible { 
+    background: #e1f1dd; 
+    color: #174c1c; 
 }
 
-/* Add an active class to highlight the current page */
-.topnav a.active {
-  background-color: rgb(3, 254, 3);
-}
+
+
 
 /* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
   display: none;
 }
 
-#footer{
-  position: absolute;
-  bottom: 0vh;
-  left: 20vw
+
+
+body {
+  margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: beige;
+  color: #1f2a1b;
+  line-height: 1.6;
 }
+img { max-width: 100%; display: block; border-radius: 12px; }
+h1,h2,h3 { margin: 0 0 12px; line-height: 1.2; color: #13210f; }
+p { margin: 0 0 12px; }
+
+.SmallQuotes { 
+    text-transform: uppercase; 
+    font-size: 0.8rem; 
+    letter-spacing: 0.08em;
+     color: #4e7f4f; 
+    }
+
+#BigQuote {
+     font-size: clamp(1.9rem, 3vw, 2.5rem);
+      font-weight: 700; 
+    }
+
+#MediumQuote { font-size: 1rem;
+     color: #2f3d2a; 
+    }
+
+#Quote {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+  align-items: center;
+  padding: 48px 22px;
+}   
+
+#text1 { display: flex; flex-direction: column; gap: 12px; }
+#Quote img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+#Description {
+  padding: 54px 22px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  align-items: center;
+  background: #eef5ea;
+}
+#text2 { display: flex; flex-direction: column; gap: 12px; }
+
+#Philosophies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  width: 100%;
+  padding: 54px 22px;
+  background: #f7f9f5;
+  padding: 54px 16px; box-sizing: border-box; 
+}
+
+#Philosophies > p {
+  flex: 1 1 100%; /* headings take full row */
+}
+
+
+ .card {
+ flex: 1 1 280px; min-width: 0;  /* grow to fill, wrap at ~280px */
+  background: #ffffff;
+  border: 1px solid #d7e5d2;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+  width: 100%; /* no fixed widths */
+}
+
+#footer {
+  margin: 0;
+  background: #1f2a1b;
+  color: #e9f1e6;
+  padding: 22px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+
 

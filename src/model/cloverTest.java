@@ -195,7 +195,7 @@ public class cloverTest
 
     cloverville.addResetPeriod(20);
     cloverville.checkReset();
-
+    cloverville.setActiveGreenGoal(goal3);
     //cloverville.setActiveGreenGoal(goal4);
 
     VillageModelManager manage = new VillageModelManager("village.bin");
