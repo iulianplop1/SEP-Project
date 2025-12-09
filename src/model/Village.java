@@ -17,6 +17,7 @@ public class Village implements Serializable
   private ArrayList<GreenGoal> goals;
   private GreenGoal activeGreenGoal;
   private int period;
+  private Date setdate;
   private String description;
 
   public Village()
@@ -235,11 +236,12 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
 
   public void addResetPeriod(int period) {
     this.period = period;
+    setdate = Date.today();
     System.out.println("PERIOD CHANGED --> " + period);
   }
   public int checkReset(){
     Date today = Date.today();
-    Date reset = today.copy();
+    Date reset = setdate.copy();
     reset.nextDay(period);        //reset day found
 
     if (today.equals(reset)) {

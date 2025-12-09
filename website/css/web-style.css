@@ -75,7 +75,7 @@ h1 {
 }
 
 #output{
-  padding: 10px;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -89,6 +89,7 @@ h1 {
    width: clamp(90px, 18vw, 190px);
   max-width: 190px;
   height: auto;
+  z-index: 9999;
 }
 #leaves2{
   position: absolute;
@@ -96,20 +97,23 @@ h1 {
   top: 5vh;
   transform: rotate(-120deg);
    width: clamp(90px, 18vw, 190px);
+   z-index: 9999;
 }
 #leaves3{
   position: absolute;
-  left: -5vw;
-  top: 65vh;
+  left: -3vw;
+  bottom: 0vh;
   transform: rotate(45deg);
-   width: clamp(90px, 18vw, 190px);
+   width: clamp(100px, 19vw, 200px);
+   z-index: 9999;
 }
 #leaves4{
   position: absolute;
-  right: -4.8vw;
-  top: 60vh;
+  right: -2.8vw;
+  bottom: 2vh;
   transform: rotate(-45deg);
-   width: clamp(90px, 18vw, 190px);
+   width: clamp(100px, 18vw, 190px);
+   z-index: 9999;
 }
 
 
@@ -121,17 +125,11 @@ h1 {
 }
 
 
-#output1
-{
-  text-align: center;
-  margin: 0 auto;
-  
-}
 
 .points-circle {
     background: #5b6e50;
-    width: 30vh;
-    height: auto;
+    width: 25vw;
+    height: 25vh;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -141,7 +139,7 @@ h1 {
 }
 
 .points-number {
-    font-size: 6rem;
+font-size: clamp(2vmin, 4vw, 6vmax);
     font-weight: bolder;
     color: white;
 }
@@ -153,7 +151,6 @@ h1 {
 
 .total-points {
     margin-bottom: 5vh;
-    color: #2a3e2f;
     
 }
 
@@ -163,7 +160,7 @@ h1 {
     padding: 3vh 1vw;
     margin: 3vh auto;
     max-width: 50vw;
-     box-shadow: 0 1.5vh 3.5vh rgba(91, 110, 80, 0.4);
+     box-shadow: 0 1.5vh 3.5vh rgba(91, 110, 80, 0.4)
 }
 
 .saved-goal-display h3 {
@@ -179,17 +176,18 @@ h1 {
 
 .goals-container {
     display: grid;
-     grid-template-columns: repeat(auto-fit, minmax(50vh, 1fr));
+     grid-template-columns: repeat(auto-fit, minmax(30vh, 1fr));
     gap: 3vh;
     max-width: 90vw;
     margin: 3vh auto;
+    justify-content: center;
 }
 
 .goal-box {
     border: 0.4vh solid #5b6e50;
     border-radius: 1.5vh;
     padding: 2.5vh 2vw;
-    box-shadow: 5vh
+    box-shadow: 0 1.5vh 3.5vh rgba(91, 110, 80, 0.4);
 }
 
 

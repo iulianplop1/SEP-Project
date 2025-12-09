@@ -28,16 +28,16 @@
     fetch('json/greenActivityList.json')
     .then(response => response.json())
     .then(data => {
-        const activityList = document.getElementById("activityList");
+        const activityList = document.querySelector('.activity-list');
 
         data.forEach(activity => {
-            const p = document.createElement("p"); // create a paragraph for each name
+            const p = document.createElement("p");
             p.textContent = activity.activityName;
+            p.classList.add('activity-item'); // optional: for extra styling
             activityList.appendChild(p);
         });
     })
     .catch(error => console.error('Error fetching JSON:', error));
-
 
 
 

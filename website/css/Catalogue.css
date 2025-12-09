@@ -12,6 +12,7 @@
   top: 0;
   z-index: 10;
    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+   
 }
 /* Style the links inside the navigation bar */
 .topnav a {
@@ -47,17 +48,9 @@
 /* Base */
 
 @import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap');
-.body {
-    
-    padding: 0;
+body {
+    background-color: beige;
     margin: 0;
-    background-color: #000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    background: beige;
-    font-size: 22px;
 }
 .main{
   position: relative;
@@ -66,6 +59,7 @@
   justify-content: center;
   align-items: center;
   background: white;
+  
   
 }
 .video {
@@ -77,13 +71,13 @@
     z-index: 1;
     object-fit: cover;
     overflow: hidden;
-    border-radius: 10px;
+    
 }
 
 h1{
     position: absolute !important;
     
-    z-index: 9999;
+    z-index: 9998;
     font-size: 10vw;
     font-weight: 400;
     display: flex;
@@ -91,7 +85,7 @@ h1{
     justify-content: center;
     text-transform: uppercase;
     color: white;
-    border-radius: 3px;
+    
     font-family: 'Saira Stencil One';
     padding: 5vh;
     margin: 0vh;
@@ -108,25 +102,66 @@ h1{
 .activity-container {
     text-align: center;             /* Center all content */
     font-family: 'Arial', sans-serif;
-    background-color: #f0f8ff;     /* Light blue background */
-    padding: 30px;
-    border-radius: 15px;
-    width: 60%;
-    margin: 50px auto;             /* Center the container */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    background-color: beige;        /* Background color */
+    padding: 5vh 2vw;               /* Padding relative to viewport */
+    width: 96%;
+    height: auto;                   /* Container height relative to viewport */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
 }
 
 .activity-title {
     color: #2c3e50;
-    font-size: 28px;
-    margin-bottom: 20px;
+    font-size: 5vh;                 /* Font size relative to viewport height */
+    margin-bottom: 3vh;
+    
 }
 
 .activity-list p {
     color: #34495e;
-    font-size: 20px;
-    margin: 8px 0;
+    font-size: 2.5vh;               /* Font size relative to viewport height */
+    margin: 1.5vh 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
 }
+
+#footer {
+  margin: 0;
+  background: #1f2a1b;
+  background-color: beige;
+  padding: 22px;
+  text-align: center;
+  font-size: 0.95rem;
+  
+}
+
+#leaves{
+  position: absolute;
+  left: 1.4vw;
+  top: 3vh;
+  transform: rotate(130deg);
+   width: clamp(90px, 18vw, 190px);
+  max-width: 190px;
+  height: auto;
+  z-index: 9999;
+  
+  left: 5%;
+}
+#leaves2{
+  position: absolute;
+  right: 2.7vw;
+  top: 5vh;
+  transform: rotate(-120deg);
+   width: clamp(90px, 18vw, 190px);
+     z-index: 9999;
+     
+     right: 6%;
+
+}
+
+
 
 
 
