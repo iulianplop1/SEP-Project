@@ -1,4 +1,4 @@
-fetch('json/greenActivityList.json')
+/*fetch('json/greenActivityList.json')
     .then(response => response.json())
     .then(data => {
         const tbody = document.getElementById("tableBody");
@@ -23,7 +23,21 @@ fetch('json/greenActivityList.json')
             tbody.appendChild(row);
         }
     })
+    .catch(error => console.error('Error fetching JSON:', error));*/
+
+    fetch('json/greenActivityList.json')
+    .then(response => response.json())
+    .then(data => {
+        const activityList = document.getElementById("activityList");
+
+        data.forEach(activity => {
+            const p = document.createElement("p"); // create a paragraph for each name
+            p.textContent = activity.activityName;
+            activityList.appendChild(p);
+        });
+    })
     .catch(error => console.error('Error fetching JSON:', error));
+
 
 
 

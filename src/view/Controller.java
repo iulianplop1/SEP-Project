@@ -19,6 +19,7 @@ public class Controller
   @FXML private TextArea listVillagers;
   @FXML private ComboBox chooseVillagers;
 
+  @FXML TextField searchBar;
 
 
   @FXML private TextField totalCounter;
@@ -140,6 +141,8 @@ public class Controller
     manager.loadGreenActivityListJson();
     manager.loadTradeOfferListJson();
     manager.loadGreenPoints();
+
+    searchBar.setPromptText("Search villager");
   }
 
   @FXML public void loadGoals() {
@@ -1309,6 +1312,32 @@ public class Controller
 
     showAlert("Green goal '" + selectedGoal.getGoalName() + "' is now active.");
   }
+
+
+  public void villageSearch(){
+    ArrayList<Villager> villagers = manager.getVillagers();
+    if(searchBar.isFocused()){
+      String search = searchBar.getText();
+      if(search != null && !search.isEmpty()){
+        listVillagers.clear();
+        for (Villager v : villagers) {
+          String firstname = v.getFirstname();
+          String lastname = v.getLastname();
+          String name = firstname + " " + lastname;
+          if (firstname.toLowerCase().startsWith(search.toLowerCase()) || lastname.toLowerCase().startsWith(search.toLowerCase())) {
+            listVillagers.appendText(name+"\n");
+          }
+        }
+      }
+      else{
+        loadVillagers();
+      }
+    }
+    else{
+      loadVillagers();
+    }
+  }
+
 
   public void showAlert(String input)
   {

@@ -63,8 +63,7 @@ body {
     text-decoration: none;
 }
 
-.email:hover,
-.email:focus-visible {
+.email:hover,.email:focus-visible {
   text-decoration: underline;
 }
 

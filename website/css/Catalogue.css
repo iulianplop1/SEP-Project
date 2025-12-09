@@ -56,7 +56,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    
+    background: beige;
     font-size: 22px;
 }
 .main{
@@ -65,6 +65,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: white;
   
 }
 .video {
@@ -76,28 +77,56 @@
     z-index: 1;
     object-fit: cover;
     overflow: hidden;
+    border-radius: 10px;
 }
 
 h1{
     position: absolute !important;
     
     z-index: 9999;
-    font-size: 13vw;
+    font-size: 10vw;
     font-weight: 400;
     display: flex;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
-    background-color: #fff;
+    color: white;
+    border-radius: 3px;
     font-family: 'Saira Stencil One';
     padding: 5vh;
     margin: 0vh;
     padding-top: 0;
     top: 50vh;
     left: 50%;
+    width: 96%;
+    height: 96%; 
     transform: translate(-50%, -50%);
-    mix-blend-mode: screen;
+    
     
 }
+
+.activity-container {
+    text-align: center;             /* Center all content */
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f8ff;     /* Light blue background */
+    padding: 30px;
+    border-radius: 15px;
+    width: 60%;
+    margin: 50px auto;             /* Center the container */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.activity-title {
+    color: #2c3e50;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.activity-list p {
+    color: #34495e;
+    font-size: 20px;
+    margin: 8px 0;
+}
+
 
 
