@@ -158,5 +158,15 @@
       "personalpoints": 105
     },
     "description": "fired in my home kiln"
+  },
+  {
+    "tradename": "bananas",
+    "points": 100,
+    "seller": {
+      "firstname": "Bátor",
+      "lastname": "Gábora",
+      "personalpoints": 104
+    },
+    "description": "2 pcs"
   }
 ]

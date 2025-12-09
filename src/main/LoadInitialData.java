@@ -4,6 +4,9 @@ import model.Village;
 import model.Villager;
 import utils.MyFileHandler;
 
+/**
+ * LoadInitialData class for loading in the initial data from the file cloverTest wrote to (.bin)
+ */
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

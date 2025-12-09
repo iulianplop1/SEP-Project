@@ -5,6 +5,9 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Village class for taking care of all ArrayLists and basically connecting everything in model
+ */
 
 public class Village implements Serializable
 {
@@ -20,6 +23,11 @@ public class Village implements Serializable
   private Date setdate;
   private String description;
 
+  /**
+   * no-argument constructor;
+   * that is meant to initialize all the data
+   * with greenpoints set to 0 and reset period set to 10;
+   */
   public Village()
   {
     this.villagers = new ArrayList<>();
@@ -32,6 +40,13 @@ public class Village implements Serializable
     this.greenActivities = new ArrayList<>();
   }
 
+
+  /**
+   * copies trades without their associated possiblebuyers
+   * @return toreturn - ArrayList<TradeOffer>
+   * goes through trades and uses the TradeOffer.copywithoutpos() for each trade and returns those values
+   * --> used for JSON
+   */
   public ArrayList<TradeOffer> copytradeswithoutpos(){
     ArrayList<TradeOffer> toreturn = new ArrayList<>();
     for(TradeOffer t : this.trades){
@@ -41,19 +56,37 @@ public class Village implements Serializable
     return toreturn;
   }
 
+  /**
+   * Gets the Village's greenPoints.
+   * @return the Village's greenPoints.
+   */
   public int getGreenpoints()
   {
     return greenpoints;
   }
 
+  /**
+   * Gets the Village's activeGreenGoal.
+   * @return the Village's activeGreenGoal.
+   */
   public GreenGoal getActiveGreenGoal()
   {
     return activeGreenGoal;
   }
-public void setActiveGreenGoal(GreenGoal activeGreenGoal)
-{
-  this.activeGreenGoal = activeGreenGoal;
-}
+  /**
+   * Sets the activeGreenGoal to this GreenGoal
+   * @param activeGreenGoal - the Village's activeGreenGoal
+   */
+  public void setActiveGreenGoal(GreenGoal activeGreenGoal)
+  {
+    this.activeGreenGoal = activeGreenGoal;
+  }
+  /**
+   * adds villager to village
+   * @param villager - what villager to add
+   * check if villager is inside the ArrayList of villagers
+   * if not --> add villager
+   */
   public void addVillager(Villager villager)
   {
     boolean in = false;
@@ -69,7 +102,12 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
       villagers.add(villager);
     }
   }
-
+  /**
+   * removes villager (and it's associated trades through the removeTradesWithVillager() helper method) from village
+   * @param villager - what villager to remove
+   * check if villager is inside the ArrayList of villagers
+   * if so --> remove villager and associated trades
+   */
   public void removeVillager(Villager villager)
   {
     boolean in = false;
@@ -86,7 +124,12 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
       villagers.remove(villager);
     }
   }
-
+  /**
+   * removes all trades associated with a villager
+   * @param villager - what villager's trades to remove
+   * checks every trade in ArrayList of trades and if the trade's seller is the villager it removes it from the list of active trades
+   * private helper method for removeVillager
+   */
   private void removeTradesWithVillager(Villager villager)
   {
     ArrayList<TradeOffer> toRemove = new ArrayList<>();
@@ -104,6 +147,11 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     }
   }
 
+  /**
+   * @param old - villager to edit
+   * @param villager - what to change it to
+   * finds villager (old) in ArrayList of villagers and changes its values to the new one's
+   */
   public void changeVillager(Villager old, Villager villager)
   {
     String first = villager.getFirstname();
@@ -121,27 +169,48 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     }
   }
 
+  /**
+   * @param description (String)
+   * sets description field
+   */
   public void setDescription(String description)
   {
     this.description = description;
     System.out.println("DESCRIPTION SET --> " + description);
   }
 
+  /**
+   * returns description of the village
+   * @return description field (String)
+   */
   public String getDescription()
   {
     return description;
   }
 
+  /**
+   * returns list of villagers in village
+   * @return villagers field (ArrayList<Villager>)
+   */
   public ArrayList<Villager> getVillagers()
   {
     return villagers;
   }
 
+  /**
+   * returns list of active trades
+   * @return trades field (ArrayList<TradeOffer>)
+   */
   public ArrayList<TradeOffer> getTrades()
   {
     return trades;
   }
 
+  /**
+   * @param - trade to add
+   * checks if trade is in ArrayList of trades and if not adds it
+   * also logs in console the ArrayList of possiblebuyers
+   */
   public void addTradeOffer(TradeOffer tradeOffer)
   {
     boolean in = false;
@@ -153,6 +222,7 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     if (!in)
     {
       trades.add(tradeOffer);
+
       System.out.println("TRADE OFFER ADDED --> " + tradeOffer);
       ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers(
           villagers);
@@ -165,11 +235,28 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
 
   }
 
+  /**
+   * @param tradeOffer - trade to remove
+   * checks if trade is in ArrayList of trades and if so removes it
+   */
   public void removeTradeOffer(TradeOffer tradeOffer)
   {
-    trades.remove(tradeOffer);
+    boolean in = false;
+    for (TradeOffer t : trades)
+    {
+      if (t.equals(tradeOffer))
+        in = true;
+    }
+    if (in){
+      trades.remove(tradeOffer);
+    }
   }
 
+  /**
+   * @param old - trade to edit
+   * @param trade - what to change it to
+   * finds trade (old) in ArrayList of trades and changes its values to the new one's
+   */
   public void editTradeOffer(TradeOffer old, TradeOffer trade)
   {
     String name = trade.getTradeName();
@@ -189,6 +276,12 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     }
   }
 
+  /**
+   * @param tradeOffer - trade to finish
+   * @param buyer - buyer to finish the trade
+   * finds trade in ArrayList of active trades and removes it
+   * finds buyer and seller villager in ArrayList of villagers and does the point exchange
+   */
   public void finishTradeOffer(TradeOffer tradeOffer, Villager buyer)
   {
     TradeOffer target = null;
@@ -225,7 +318,11 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     }
   }
 
-
+  /**
+   * return the average of the personalpoints of all villagers
+   * used in Villager clas to check if a villager is above or below average
+   * --> used in SharedTask class to check if a bonus is needed
+   */
   public int getAveragePoints(){
     int sum = 0;
     for(int i = 0; i < villagers.size(); i++){
@@ -233,22 +330,30 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     }
     return Math.round(sum/villagers.size());
   }
-
+  /**
+   * sets period to the period field (int)
+   * and also stores the day of the calling (using Date.today()) to the setdate field (Date)
+   */
   public void addResetPeriod(int period) {
     this.period = period;
     setdate = Date.today();
     System.out.println("PERIOD CHANGED --> " + period);
   }
+  /**
+   * checks if today is the day of the reset
+   * if it is --> it calls resetNow() and resets the villagers --> also returns -1
+   * if it isn't --> checks how many days are left until reset and returns the value
+   */
   public int checkReset(){
     Date today = Date.today();
     Date reset = setdate.copy();
-    reset.nextDay(period);        //reset day found
+    reset.nextDay(period);          //reset day found
 
     if (today.equals(reset)) {
       System.out.println("\nTODAY IS THE DAY OF THE RESET");
       resetnow();
 
-      return -1;        //returns -1 if reset happened
+      return -1;                    //returns -1 if reset happened
     }
     else{
       System.out.println("RESET ON ----------- " + reset);
@@ -258,9 +363,12 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
         today1.nextDay(1);
         counter++;
       }
-      return counter;       //returns days until reset if it did not happen
+      return counter;                //returns days until reset if it did not happen
     }
   }
+  /**
+   * adds the villagers' personal points to the green pool (greenpoints) and sets the personal points to 0
+   */
   public void resetnow(){
     for(int i = 0; i < villagers.size(); i++){
       greenpoints += villagers.get(i).getPoints();
@@ -268,7 +376,11 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     }
     System.out.println("GREENPOINTS: " + greenpoints);
   }
-
+  /**
+   * Add a greenGoal to the goals
+   * It also checks if the added goal is in the goals to make sure for no copies
+   * @param goal GreenGoal
+   */
   public void addGreenGoal(GreenGoal goal){
     boolean in = false;
     for(GreenGoal g : goals){
@@ -285,6 +397,14 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
   {
     return greenActivities;
   }
+
+  /**
+   * Add a greenActivity to CatalogueOfIdeas
+   * It also checks if the addedGreen activity is not in the catalogueOfIdeas
+   * The points of the activity are added to the GreenGoal
+   * @param greenactivity GreenActivity
+   */
+
   public void addGreenActivity(GreenActivity greenactivity) {
     System.out.println("GREEN ACTIVITY ADDED --> " + greenactivity);
     greenActivities.add(greenactivity);
@@ -297,14 +417,26 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     greenpoints += points;
     System.out.println("New"+greenpoints);
   }
+
+  /**
+   * Remove a greenActivity from the GreenActivityList and CatalogueOfIdeas
+   * It also checks if the addedGreen activity is in the catalogueOfIdeas and removes it if it is
+   * @param greenactivity GreenActivity
+   */
   public void removeGreenActivity(GreenActivity greenactivity) {
     String name = greenactivity.getActivityName();
     int points = greenactivity.getPoints();
     if (catalogueOfIdeas.contains(name)){
       catalogueOfIdeas.remove(name);
     }
-    greenpoints -= points;
   }
+
+  /**
+   * Edit a greenActivity from the GreenActivityList
+   * @param greenactivityOld GreenActivity
+   * @param greenactivityNew GreenActivity
+   *It takes the values of greenactivityNew and replace them with greenactivityOld
+   */
   public void editGreenActivity(GreenActivity greenactivityOld,  GreenActivity greenactivityNew) {
     String nameOld = greenactivityOld.getActivityName();
     String nameNew = greenactivityNew.getActivityName();
@@ -320,7 +452,11 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
 
     System.out.println("\nGREEN ACTIVTY EDITED --> from " + nameOld + " to " + nameNew + "\n");
   }
-
+  /**
+   * Adds or updates a SharedTask in the list.
+   * If a task with the same name already exists, its performers and pointsare updated instead of adding a duplicate entry.
+   * @param sharedtask the SharedTask to add or update
+   */
   public void addSharedTask(SharedTask sharedtask)
   {
     for (SharedTask existingTask : sharedTasks) {
@@ -342,6 +478,15 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     System.out.println("ADDING SHARED TASK --> " + sharedtask);
     sharedTasks.add(sharedtask);
   }
+
+  /**
+   * Finalizes a SharedTask by distributing its points among all performers.
+   * Each performer receives an equal share of the task's points, but those who are below the current average receive a 20% bonus.
+   * If the task has no performers, the method exits without making changes.
+   * @param sharedtask1 the SharedTask to finalize and award points for
+   */
+
+
   public void finishSharedTask(SharedTask sharedtask1){
     System.out.println("SHARED TASK HAPPENING --> " + sharedtask1);
 
@@ -361,23 +506,30 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     }
   }
 
+
+  /**
+   * Gets the ArrayList goals from Village
+   * @return the ArrayList goals
+   */
   public ArrayList<GreenGoal> getGoals()
   {
     return goals;
   }
 
+
+  /**
+   * Remove a GreenGoal from the goals
+   * @param greengoal GreenGoal
+   */
   public void removeGreenGoal(GreenGoal greengoal)
   {
     goals.remove(greengoal);
   }
-
-  public void finishGreenGoal(GreenGoal greengoalNew)
+  /**
+   * Sets the greenDescription of this GreenGoal
+   */
+  public void finishGreenGoal(GreenGoal greengoal)
   {
-    if (greengoalNew == null)
-    {
-      System.out.println("\nNEED A SECOND GOAL TO FINISH GREEN GOAL\n");
-      return;
-    }
     for (int i = 0; i < goals.size(); i++)
     {
       int required = goals.get(i).getRequiredPoints();
@@ -386,11 +538,9 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
       if (greenpoints >= goals.get(i).getRequiredPoints())
       {
         greenpoints = greenpoints - required;
-        goals.get(i++);
         System.out.println(
             "\nGOAL WAS FINISHED -->  required points: " + required
-                + " where subtracted from the greenpoints, and a new goal was set: "
-                + greengoalNew + "\n");
+                + " where subtracted from the greenpoints\n");
       }
       else
       {
@@ -398,11 +548,22 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
       }
     }
   }
-
+  /**
+   * Sets the greenpoints of this GreenGoal
+   * @param greenpoints the Village's greenPoints
+   */
   public void setGreenpoints(int greenpoints)
   {
     this.greenpoints = greenpoints;
   }
+
+
+  /**
+   * Finish a greenActivity from the GreenActivityList
+   * @param greenActivity GreenActivity's
+   * Adds the points to the GreenGoal
+   */
+
   public void finishGreenActivity(GreenActivity greenActivity) {
     if (greenActivity == null) {
       System.out.println("GREEN ACTIVITY IS NULL");
@@ -414,11 +575,11 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
 
 
 
-    System.out.println("OldCatalogue"+catalogueOfIdeas);
+    /*System.out.println("OldCatalogue"+catalogueOfIdeas);
     if (!catalogueOfIdeas.contains(name)) {
       catalogueOfIdeas.add(name);
       System.out.println("NewCatalogue"+catalogueOfIdeas);
-    }
+    }*/
 
 
     System.out.println("OldPoints"+greenpoints);
@@ -427,6 +588,21 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     System.out.println("FINISHED GREEN ACTIVITY → " + name
         + " | +" + points + " points");
   }
+
+  public ArrayList<SharedTask> getSharedTasks() {
+    return sharedTasks;
+  }
+
+  /**
+   *
+   * @return a string representation of Village
+   * It will return a string of the ArrayList of Villagers,
+   * return the total amount of greenPoints
+   * a string of the ArrayList of Trades,
+   * a string of the ArrayList of CatalogueOfIdeas
+   * a string of the ArrayList of SharedTask
+   * a string of the ArrayList of  AvailableGoals
+   */
   public String toString(){
     return "\nvillagers: " + villagers.toString() + "\ngreen points:" + greenpoints
         + "\ntrades:" + trades.toString() + "\ncatalogue of ideas:" + catalogueOfIdeas.toString()
@@ -434,7 +610,5 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
         + getAveragePoints() + "\ngreen goal: " + goals + "\n";
   }
 
-  public ArrayList<SharedTask> getSharedTasks() {
-    return sharedTasks;
-  }
+
 }

@@ -1,6 +1,9 @@
 package model;
 
-import model.VillageModelManager;
+/**
+ * cloverTest class for adding some default values to the village, primarily for testing and also writing to file (.bin)
+ * @author GaboraBrave
+ */
 
 public class cloverTest
 {
