@@ -21,8 +21,10 @@ public class MainApp extends Application {
 
             scene.getStylesheets().add("style.css");
 
+
             primaryStage.setTitle("CloverVille");
             primaryStage.setScene(scene);
+            primaryStage.resizableProperty().setValue(Boolean.FALSE);
             primaryStage.show();
 
         } catch (IOException e) {
