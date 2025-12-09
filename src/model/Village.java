@@ -108,7 +108,7 @@ public void setActiveGreenGoal(GreenGoal activeGreenGoal)
     String first = villager.getFirstname();
     String last = villager.getLastname();
     int points = villager.getPoints();
-    ;
+
     for (Villager v : villagers)
     {
       if (v.equals(old))

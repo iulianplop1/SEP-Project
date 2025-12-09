@@ -49,25 +49,20 @@ async function loadTrades() {
 loadTrades();
 
 
-const gbody = document.getElementById("tableBody1");
-if (gbody) {
-    fetch('json/greenGoalList.json')
-        .then(response => response.json())
-        .then(data => {
-            for (let i = 0; i < 3; i++) {
-                const goal = data[i];
-                
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${goal.goalName}</td>
-                    <td>${goal.requiredPoints}</td>
-                    <td>${goal.greenDescriptions}</td>
-                `;
-                gbody.appendChild(row);
-            }
-        })
-        .catch(error => console.error('Error fetching JSON:', error));
-}
+ fetch('json/greenGoalList.json')
+    .then(response => response.json())
+    .then(data => {
+        const goalsContainer = document.getElementById("goalsContainer");
+        
+        goalsContainer.innerHTML = data.map(goal => `
+            <div class="goal-box">
+                <h4>${goal.goalName}</h4>
+                <p><strong>Required Points:</strong> ${goal.requiredPoints}</p>
+                <p><strong>Description:</strong> ${goal.greenDescriptions}</p>
+            </div>
+        `).join('');
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
 
 // SAVED GREEN GOAL - Display on page (for SavedGreenGoalList.json)
 const savedGoalDiv = document.getElementById("savedGoal");
@@ -98,5 +93,16 @@ fetch('json/VillageDescription.json')
        // document.getElementById("DescriptionJson").innerHTML = villageDescription; 
        const villageDescription = data[0];
         document.getElementById("DescriptionJson").innerHTML = villageDescription;
+    })
+    .catch(error => console.error('Error fetching JSON:', error));
+
+    fetch('json/greenPoints.json')
+    .then(response => response.json())
+    .then(data => {
+        //const villageDescription = data.text; // Assuming 'text' is the key
+        // Set the text content directly without table tags
+       // document.getElementById("DescriptionJson").innerHTML = villageDescription; 
+       const TotalPoints = data[0];
+        document.getElementById("totalPoints").innerHTML = TotalPoints;
     })
     .catch(error => console.error('Error fetching JSON:', error));

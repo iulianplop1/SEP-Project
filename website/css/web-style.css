@@ -96,19 +96,6 @@ h1 {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 #output1
 {
   text-align: center;
@@ -118,30 +105,68 @@ h1 {
 
 .points-circle {
     background: #5b6e50;
-    width: 20vh;
+    width: 30vh;
     height: auto;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px auto;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    margin: 2vh auto;
+    box-shadow: 0 1.5vh 3vw rgba(0,0,0,0.3);
 }
 
 .points-number {
-    font-size: 4rem;
-    font-weight: bold;
+    font-size: 6rem;
+    font-weight: bolder;
     color: white;
 }
 
 .points-header {
     text-align: center;
-    margin-bottom: 40px;
-}
+    margin-bottom: 10vh;
+  }
 
 .total-points {
-    margin-bottom: 10px;
+    margin-bottom: 5vh;
     color: #2a3e2f;
+    
+}
+
+.saved-goal-display {
+    border: 0.5px solid #5b6e50;
+    border-radius: 1.5vh;
+    padding: 3vh 1vw;
+    margin: 3vh auto;
+    max-width: 50vw;
+     box-shadow: 0 1.5vh 3.5vh rgba(91, 110, 80, 0.4);
+}
+
+.saved-goal-display h3 {
+   color: #2a3e2f;
+    font-size: 4vh;
+    margin-top: 0;
+    margin-bottom: 2vh;
+    text-transform: uppercase;
+    border-bottom: 0.3vh solid #5b6e50;
+    padding-bottom: 1vh;
+
+}
+
+.goals-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3vh;
+    max-width: 90vw;
+    margin: 3vh auto;
+}
+
+.goal-box {
+    border: 0.4vh solid #5b6e50;
+    border-radius: 1.5vh;
+    padding: 2.5vh 2vw;
+    background: linear-gradient(135deg, #f5f5dc 0%, #e8e8d0 100%);
+    box-shadow: 0 1vh 2vh rgba(91, 110, 80, 0.3);
+    transition: transform 0.3s ease;
 }
 
 

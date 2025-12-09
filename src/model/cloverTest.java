@@ -93,8 +93,8 @@ public class cloverTest
     cloverville.addVillager(villager41);
     cloverville.addVillager(villager42);
 
-    TradeOffer trade1 = new TradeOffer(villager4, "peanut butter jelly sandwich", 35, "yum yum");
-    TradeOffer trade2 = new TradeOffer(villager3, "world famous hungarian pálinka", 67, "brought from home");
+    TradeOffer trade1 = new TradeOffer(villager3, "world famous hungarian pálinka", 67, "brought from home");
+    TradeOffer trade2 = new TradeOffer(villager4, "peanut butter jelly sandwich", 35, "yum yum");
     TradeOffer trade3 = new TradeOffer(villager3, "carrots", 35, "collected from the field");
     TradeOffer trade4 = new TradeOffer(villager3, "pears", 67, "a bit ripe");
     TradeOffer trade5 = new TradeOffer(villager1, "freshly baked bread", 25, "just made this morning");
@@ -172,7 +172,7 @@ public class cloverTest
     cloverville.addSharedTask(sharedtask9);
     cloverville.addSharedTask(sharedtask10);
 
-    GreenGoal goal1 = new GreenGoal("pizza night", 1500, "ballin");
+    GreenGoal goal1 = new GreenGoal("pizza night", 1500, "yeaaah");
     GreenGoal goal2 = new GreenGoal("4 electric bikes", 10000, "eco ride");
     GreenGoal goal3 = new GreenGoal("solar panel for the gym", 5000, "sun power");
     GreenGoal goal4 = new GreenGoal("flowers community garden", 1800, "green thumb");

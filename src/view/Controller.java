@@ -107,11 +107,7 @@ public class Controller
 
   public void initialize()
   {
-    manager.loadVillageDescription();
-    manager.loadSavedGreenGoalJson(null);
-    manager.loadGreenGoalListJson();
-    manager.loadGreenActivityListJson();
-    manager.loadTradeOfferListJson();
+
     everything();
     loadResetDay();
   }
@@ -137,6 +133,13 @@ public class Controller
     loadSharedTasks();
 
     loadInfoPage();
+
+    manager.loadVillageDescription();
+    manager.loadSavedGreenGoalJson(null);
+    manager.loadGreenGoalListJson();
+    manager.loadGreenActivityListJson();
+    manager.loadTradeOfferListJson();
+    manager.loadGreenPoints();
   }
 
   @FXML public void loadGoals() {
@@ -609,6 +612,7 @@ public class Controller
     {
       Villager villager = new Villager(first, last);
       manager.addVillager(villager);
+      showAlert1(villager + "\nhas been added to the village");
 
       initialize();
     }
@@ -637,22 +641,30 @@ public class Controller
         try{
           if (!firstName1.getText().equals("") && !lastName1.getText().equals(""))
           {
-            Villager newVillager = new Villager(firstName1.getText(),
-                lastName1.getText(), Integer.parseInt(personalPoints.getText()));
-            manager.changeVillager(selectedVillager, newVillager);
+            String newFirstName = firstName1.getText();
+            String newLastName = lastName1.getText();
+            int newPoints = Integer.parseInt(personalPoints.getText());
+            if(newPoints > 0){
+              Villager newVillager = new Villager(newFirstName, newLastName, newPoints);
+              showAlert1(selectedVillager + "\nhas been changed to\n" + newVillager);
+
+              manager.changeVillager(selectedVillager, newVillager);
+            }
+            else{
+              showAlert1("Please enter a positive number");
+            }
           }
           else {
             showAlert("Please enter a first name and a last name to update villager");
           }
         }
         catch (NumberFormatException event) {
-          showAlert("Points must be a number to update villager");
+          showAlert("Points must be a whole number to update villager");
         }
         catch (IllegalArgumentException event) {
           showAlert(event.getMessage());
         }
-      }
-      manager.saveVillage(village);
+      };
       everything();
     }
   }
@@ -664,15 +676,21 @@ public class Controller
         String first = firstName1.getText();
         String last = lastName1.getText();
         int points = Integer.parseInt(personalPoints.getText());
-        Villager villager = new Villager(first, last, points);
-        manager.removeVillager(villager);
+        if(points > 0){
+          Villager villager = new Villager(first, last, points);
+          manager.removeVillager(villager);
+          showAlert1(villager + "\nhas been removed from village");
+        }
+        else{
+          showAlert("Please enter a positive number");
+        }
       }
       else {
         showAlert("Please enter a first name, a last name, and personal points to remove villager");
       }
     }
     catch (NumberFormatException event) {
-      showAlert("Points must be a number to remove villager!");
+      showAlert("Points must be a whole number to remove villager!");
     }
     catch (IllegalArgumentException event) {
       showAlert(event.getMessage());
@@ -780,19 +798,25 @@ public class Controller
         String tradename = tradeName.getText();
         int requiredpoints = Integer.parseInt(tradeRequiredPoints.getText());
         String description = tradeDescription.getText();
-        TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints, description);
-        System.out.println("ADDING TRADE --> " + trade);
-        manager.addTrade(trade);
+        if(requiredpoints > 0){
+          TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints, description);
+          System.out.println("ADDING TRADE --> " + trade);
+          showAlert1(trade + "\nhas been added to catalogue of ideas!");
+          manager.addTrade(trade);
+        }
+        else{
+          showAlert("Please enter a positive number for required points");
+        }
       }
       else {
-        showAlert1("Please enter a trade name, a description, and a value to add trade offer");
+        showAlert("Please enter a trade name, a description, and a value to add trade offer");
       }
     }
     catch (NumberFormatException event) {
-      showAlert1("Points must be a number to add a trade!");
+      showAlert("Required points must be a whole number to add a trade!");
     }
     catch (IllegalArgumentException event) {
-      showAlert1(event.getMessage());
+      showAlert(event.getMessage());
     }
 
     initialize();
@@ -820,30 +844,34 @@ public class Controller
           String editedTradeName = tradeNameEdit.getText();
           int editedPoints = Integer.parseInt(tradeRequiredPointsEdit.getText());
           String editedDescription = tradeDescriptionEdit.getText();
-          if(e.getSource()==removeTrade){
-            TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
-            manager.removeTrade(toRemove);
+          if(editedPoints > 0){
+            if(e.getSource()==removeTrade){
+              TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
+              manager.removeTrade(toRemove);
+              showAlert1(toRemove + "\nhas been removed from the village!");
+            }
+            else if(e.getSource()==updateTrade){
+              TradeOffer newTrade = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
+              manager.changeTrade(selectedTrade, newTrade);
+              showAlert(selectedTrade + "\nhas been changed to\n" + newTrade);
+            }
           }
-          else if(e.getSource()==updateTrade){
-            TradeOffer newTrade = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
-            manager.changeTrade(selectedTrade, newTrade);
+          else{
+            showAlert("Please enter a positive number for required points");
           }
         }
         else {
-          showAlert1("Please enter a trade name, a description and a value to update or remove trade offer");
+          showAlert("Please enter a trade name, a description and a value to update or remove trade offer");
         }
       }
       catch (NumberFormatException event) {
-        showAlert1("Points must be a number to edit or remove a trade!");
+        showAlert("Points must be a whole number to edit or remove a trade!");
       }
       catch (IllegalArgumentException event) {
         showAlert(event.getMessage());
       }
 
-
-
-
-      initialize();
+      everything();
     }
   }
   @FXML void finishTradeOffer(ActionEvent e) {
@@ -863,8 +891,9 @@ public class Controller
     if (e.getSource()==finishTrade && finalbuyer != null)
     {
       manager.finishTrade(selectedTrade, finalbuyer);
+      showAlert1(selectedTrade + " has been finished!");
 
-      initialize();
+      everything();
     }
   }
 
@@ -1295,7 +1324,7 @@ public class Controller
     System.out.println(input);
 
     alert.setHeaderText(null);
-    alert.setTitle("");
+    alert.setTitle("Info");
     alert.setContentText(input);
     alert.showAndWait();
   }

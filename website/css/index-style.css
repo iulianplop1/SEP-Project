@@ -13,17 +13,6 @@
   top: 0;
   z-index: 10;
 }
-
-.Village {
-  position: absolute;
-  left: 22px;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #235d2a;
-  font-size: 1.1rem;
-  white-space: nowrap;
-}
-
 /* Style the links inside the navigation bar */
 .topnav a {
   text-decoration: none;
@@ -40,15 +29,19 @@
     color: #174c1c; 
 }
 
-
-
-
 /* Hide the link that should open and close the topnav on small screens */
 .topnav .icon {
   display: none;
 }
-
-
+.Village {
+  position: absolute;
+  left: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #235d2a;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
 
 body {
   margin: 0;
@@ -109,7 +102,7 @@ p { margin: 0 0 12px; }
   gap: 18px;
   width: 100%;
   padding: 54px 22px;
-  background: #f7f9f5;
+  background: beige;
   padding: 54px 16px; box-sizing: border-box; 
 }
 

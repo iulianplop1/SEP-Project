@@ -1,31 +1,48 @@
+/* Add a black background color to the top navigation */
 .topnav {
-  display: inline-flex;       /* only as wide as content */
-  justify-content: center;    /* center items inside */
-  padding: 0;                 /* remove extra padding */
-  font-size: 140%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center; /* center the links */
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 14px 22px 14px 140px; /* extra left padding so links don’t overlap brand */
+  background: beige;
+  border-bottom: 1px solid #235d2a;
+  top: 0;
+  z-index: 10;
+   font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
-
 /* Style the links inside the navigation bar */
 .topnav a {
-  color: rgb(226, 180, 29);
-  display: block;
-  text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
-  font-size: 17px;
+  color: #1f2a1b;
+  font-weight: 600;
+  padding: 8px 10px;
+  border-radius: 8px;
+  transition:  0.2s ease, color 0.2s ease;
 }
 
 /* Change the color of links on hover */
-.topnav a:hover {
-  color: rgb(227, 191, 14);
+.topnav a:hover, .topnav a:focus-visible { 
+    background: #e1f1dd; 
+    color: #174c1c; 
 }
-.main{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  
+
+/* Hide the link that should open and close the topnav on small screens */
+.topnav .icon {
+  display: none;
 }
+.Village {
+  position: absolute;
+  left: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #235d2a;
+  font-size: 1.1rem;
+  white-space: nowrap;
+}
+
 
 /* Base */
 
@@ -42,34 +59,45 @@
     
     font-size: 22px;
 }
-
+.main{
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
 .video {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    z-index: 1;
     object-fit: cover;
+    overflow: hidden;
 }
 
 h1{
-    position: absolute;
-    top: 0;
-    left: 0;
-    mix-blend-mode: screen;
-    width: 100%;
-    height: 100%;
-    margin: 0;
-    background-color: #fff;
-    font-size: 15vw;
+    position: absolute !important;
+    
+    z-index: 9999;
+    font-size: 13vw;
     font-weight: 400;
     display: flex;
     align-items: center;
     justify-content: center;
     text-transform: uppercase;
+    background-color: #fff;
     font-family: 'Saira Stencil One';
+    padding: 5vh;
+    margin: 0vh;
+    padding-top: 0;
+    top: 50vh;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    mix-blend-mode: screen;
     
-  
 }
 
 

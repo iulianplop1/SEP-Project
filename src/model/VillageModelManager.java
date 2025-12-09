@@ -82,20 +82,6 @@ public class VillageModelManager
   }
 
 
-  public void changeVillagerPoints(Villager villager, int points)
-  {
-    Village cloverville = getVillage();
-    ArrayList<Villager> villagers = cloverville.getVillagers();
-
-    for (int i = 0; i < villagers.size(); i++)
-    {
-      if (villagers.get(i) == villager){    // if we found our villager
-        villagers.get(i).setPoints(points);
-      }
-    }
-    saveVillage(cloverville);
-  }
-
 
   public ArrayList<SharedTask> getSharedTasks()
   {
@@ -393,6 +379,18 @@ public class VillageModelManager
       list.add(description);
       parser.toJsonFile(list, "website/json/VillageDescription.json");
       System.out.println("Village description written to JSON.");
+    } catch (ParserException e) {
+      e.printStackTrace();
+    }
+  }
+  public void loadGreenPoints() {
+    try {
+      Village cloverville = getVillage();
+      String greenpoints = String.valueOf(cloverville.getGreenpoints());
+      ArrayList<String> list = new ArrayList<>();
+      list.add(greenpoints);
+      parser.toJsonFile(list, "website/json/greenPoints.json");
+      System.out.println("Green points written to JSON.");
     } catch (ParserException e) {
       e.printStackTrace();
     }

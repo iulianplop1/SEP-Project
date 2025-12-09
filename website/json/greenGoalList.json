@@ -2,7 +2,7 @@
   {
     "requiredPoints": 1500,
     "goalName": "pizza night",
-    "greenDescriptions": "ballin"
+    "greenDescriptions": "yeaaah"
   },
   {
     "requiredPoints": 10000,
@@ -43,10 +43,5 @@
     "requiredPoints": 4000,
     "goalName": "reusable tote bags for everyone",
     "greenDescriptions": "less plastic"
-  },
-  {
-    "requiredPoints": 100,
-    "goalName": "b",
-    "greenDescriptions": "bbb"
   }
 ]
