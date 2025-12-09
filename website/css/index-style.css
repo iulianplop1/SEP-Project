@@ -136,6 +136,43 @@ p { margin: 0 0 12px; }
   text-align: center;
   font-size: 0.95rem;
 }
+.hero__actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
 
+.button {
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  border: 1px solid #235d2a;
+  color: #235d2a;
+  transition: transform 0.15s ease,  0.2s ease, color 0.2s ease;
+}
+
+.button.primary {
+  background: linear-gradient(135deg, #3c8c3e, #58ae55);
+  color: #f7fdf6;
+  border-color: transparent;
+}
+
+.button.ghost {
+  background: #f0f5ec;
+}
+
+.button:hover,
+.button:focus-visible {
+  transform: translateY(-1px);
+  background: #dff0d8;
+}
+
+.button.primary:hover,
+.button.primary:focus-visible {
+  background: linear-gradient(135deg, #357d38, #4d9b49);
+}
 
 
