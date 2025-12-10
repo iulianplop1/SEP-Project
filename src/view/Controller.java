@@ -1156,7 +1156,7 @@ public class Controller
       return;
     }
 
-  
+  // ✨ Prevent negative numbers
     if (points < 0) {
       alert.setHeaderText(null);
       alert.setTitle("Hoppá");
