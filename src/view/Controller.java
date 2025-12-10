@@ -686,8 +686,11 @@ public class Controller
         int points = Integer.parseInt(personalPoints.getText());
         if(points > 0){
           Villager villager = new Villager(first, last, points);
-          manager.removeVillager(villager);
-          showAlert1(villager + "\nhas been removed from village");
+          if(manager.removeVillager(villager)){
+            showAlert1(villager + "\nhas been removed from village");
+          }
+          showAlert1(villager + "\n is not in the village");
+          
         }
         else{
           showAlert("Please enter a positive number");
@@ -809,8 +812,13 @@ public class Controller
         if(requiredpoints > 0){
           TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints, description);
           System.out.println("ADDING TRADE --> " + trade);
-          showAlert1(trade + "\nhas been added to catalogue of ideas!");
-          manager.addTrade(trade);
+
+          if (manager.addTrade(trade)){
+            showAlert1(trade + "\nhas been added to list of active trades!");
+          }
+          else{
+            showAlert(trade + "\nis already in active trades!");
+          }
         }
         else{
           showAlert("Please enter a positive number for required points");
@@ -855,13 +863,21 @@ public class Controller
           if(editedPoints > 0){
             if(e.getSource()==removeTrade){
               TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
-              manager.removeTrade(toRemove);
-              showAlert1(toRemove + "\nhas been removed from the village!");
+              if (manager.removeTrade(toRemove)){
+                showAlert1(toRemove + "\nhas been removed from the village!");
+              }
+              else{
+                showAlert1(toRemove + "\nis not in the list of trades!");
+              }
             }
             else if(e.getSource()==updateTrade){
               TradeOffer newTrade = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
-              manager.changeTrade(selectedTrade, newTrade);
-              showAlert(selectedTrade + "\nhas been changed to\n" + newTrade);
+              if(manager.changeTrade(selectedTrade, newTrade)){
+                showAlert(selectedTrade + "\nhas been changed to\n" + newTrade);
+              }
+              else{
+                showAlert1(selectedTrade + "\nis not in the list of trades!");
+              }
             }
           }
           else{
@@ -1109,6 +1125,7 @@ public class Controller
     if (duplicateCount == 0) {
       SharedTask task = new SharedTask(name, points);
       manager.addSharedTask(task);
+      showAlert1("You succesfully added a shared task");
     }
 
 
@@ -1124,14 +1141,12 @@ public class Controller
     sharedTaskName1.setText(availableSharedTasks.getSelectionModel().getSelectedItem().getTaskName());
     pointsRequired1.setText(String.valueOf(availableSharedTasks.getSelectionModel().getSelectedItem().getPoints()));}
 
+
   @FXML
   public void updateSharedTask() {
     SharedTask selectedTask = availableSharedTasks.getSelectionModel().getSelectedItem();
     if (selectedTask == null) {
-      alert.setHeaderText(null);
-      alert.setTitle("Hoppá");
-      alert.setContentText("Please select a task to update!");
-      alert.showAndWait();
+     showAlert("Please select a task to update!");
       return;
     }
 
@@ -1179,6 +1194,7 @@ public class Controller
     SharedTask task = tasks.get(index);
     task.setTaskName(name);
     task.setPoints(points);
+    showAlert("Shared task has been updated!");
 
     manager.saveVillage(village);
     loadSharedTasks();
@@ -1212,6 +1228,7 @@ public class Controller
 
 
     tasks.remove(index);
+    showAlert("Shared task has been removed");
 
     manager.saveVillage(village);
     loadSharedTasks();
@@ -1308,6 +1325,7 @@ public class Controller
     }
 
     village.finishSharedTask(task);
+    showAlert("Shared task has been completed");
     manager.saveVillage(village);
 
     everything();

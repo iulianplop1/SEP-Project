@@ -106,11 +106,15 @@ public class VillageModelManager
    * @param villager Village villager
    * calls Village.removeVillager()
    */
-  public void removeVillager(Villager villager){
+  public boolean removeVillager(Villager villager){
+    boolean isitin = false;
     Village cloverville = getVillage();
     // Using Code 1 logic here as it delegates to the Village class
-    cloverville.removeVillager(villager);
+    if(cloverville.removeVillager(villager)){
+      isitin = true;
+    }
     saveVillage(cloverville);
+    return isitin;
   }
 
   /**
@@ -174,30 +178,35 @@ public class VillageModelManager
    * calls Village.addTradeOffer()
    * also reads from JSON and appends new trade to it and saves it
    */
-  public void addTrade(TradeOffer trade){
+  public boolean addTrade(TradeOffer trade){
     if (trade == null){
       throw new IllegalArgumentException("There is not an available trade");
     }
     else {
       Village cloverville = getVillage();
-      cloverville.addTradeOffer(trade);
-      saveVillage(cloverville);
+      if(cloverville.addTradeOffer(trade)){
+        saveVillage(cloverville);
 
-      trade = trade.copywithoutpos();
-      try {
-        ArrayList<TradeOffer> list;
+        trade = trade.copywithoutpos();
         try {
-          list = parser.fromJsonFile("docs/json/tradesList.json", ArrayList.class);
+          ArrayList<TradeOffer> list;
+          try {
+            list = parser.fromJsonFile("docs/json/tradesList.json", ArrayList.class);
+          }
+          catch (ParserException ex) {
+            list = new ArrayList<>();
+          }
+          list.add(trade);
+          parser.toJsonFile(list, "docs/json/tradesList.json");
+          System.out.println("finished and saved to tradesList.json.");
         }
-        catch (ParserException ex) {
-          list = new ArrayList<>();
+        catch (ParserException e) {
+          e.printStackTrace();
         }
-        list.add(trade);
-        parser.toJsonFile(list, "docs/json/tradesList.json");
-        System.out.println("finished and saved to tradesList.json.");
+        return true;
       }
-      catch (ParserException e) {
-        e.printStackTrace();
+      else{
+        return false;
       }
     }
   }
@@ -207,13 +216,17 @@ public class VillageModelManager
    * @param trade the trade that is Removed
    * calls Village.removeTrade()
    */
-  public void removeTrade(TradeOffer trade) {
+  public boolean removeTrade(TradeOffer trade) {
     if (trade == null){
       throw new IllegalArgumentException("trade offer is null");
     }
+    boolean isitin = false;
     Village cloverville = getVillage();
-    cloverville.removeTradeOffer(trade);
+    if(cloverville.removeTradeOffer(trade)){
+      isitin = true;
+    }
     saveVillage(cloverville);
+    return isitin;
   }
 
   /**
@@ -224,15 +237,17 @@ public class VillageModelManager
    * @param trade the trade after the changes
    * calls Village.editTradeOffer()
    */
-  public void changeTrade(TradeOffer old, TradeOffer trade){
+  public boolean changeTrade(TradeOffer old, TradeOffer trade){
     if(old == null || trade == null){
       throw new IllegalArgumentException("old trade or new trade is null");
     }
-    else{
-      Village cloverville = getVillage();
-      cloverville.editTradeOffer(old, trade);
-      saveVillage(cloverville);
-    }
+    boolean isitin = false;
+    Village cloverville = getVillage();
+    if(cloverville.editTradeOffer(old, trade)){
+      isitin = true;
+    };
+    saveVillage(cloverville);
+    return isitin;
   }
 
   /**

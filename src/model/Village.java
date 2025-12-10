@@ -110,7 +110,7 @@ public class Village implements Serializable
    * check if villager is inside the ArrayList of villagers
    * if so --> remove villager and associated trades
    */
-  public void removeVillager(Villager villager)
+  public boolean removeVillager(Villager villager)
   {
     boolean in = false;
     for (Villager v : villagers)
@@ -124,7 +124,9 @@ public class Village implements Serializable
     {
       removeTradesWithVillager(villager);
       villagers.remove(villager);
+      return true;
     }
+    return false;
   }
   /**
    * removes all trades associated with a villager
@@ -213,7 +215,7 @@ public class Village implements Serializable
    * checks if trade is in ArrayList of trades and if not adds it
    * also logs in console the ArrayList of possiblebuyers
    */
-  public void addTradeOffer(TradeOffer tradeOffer)
+  public boolean addTradeOffer(TradeOffer tradeOffer)
   {
     boolean in = false;
     for (TradeOffer t : trades)
@@ -229,10 +231,12 @@ public class Village implements Serializable
       ArrayList<Villager> possiblebuyers = tradeOffer.getPossibleBuyers(
           villagers);
       System.out.println("POSSIBLE BUYERS --> " + possiblebuyers);
+      return true;
     }
     else
     {
       System.out.println("already in list");
+      return false;
     }
 
   }
@@ -241,7 +245,7 @@ public class Village implements Serializable
    * @param tradeOffer - trade to remove
    * checks if trade is in ArrayList of trades and if so removes it
    */
-  public void removeTradeOffer(TradeOffer tradeOffer)
+  public boolean removeTradeOffer(TradeOffer tradeOffer)
   {
     boolean in = false;
     for (TradeOffer t : trades)
@@ -251,6 +255,10 @@ public class Village implements Serializable
     }
     if (in){
       trades.remove(tradeOffer);
+      return true;
+    }
+    else{
+      return false;
     }
   }
 
@@ -259,8 +267,9 @@ public class Village implements Serializable
    * @param trade - what to change it to
    * finds trade (old) in ArrayList of trades and changes its values to the new one's
    */
-  public void editTradeOffer(TradeOffer old, TradeOffer trade)
+  public boolean editTradeOffer(TradeOffer old, TradeOffer trade)
   {
+    boolean isitin = false;
     String name = trade.getTradeName();
     Villager seller = trade.getSeller();
     int points = trade.getPoints();
@@ -274,8 +283,10 @@ public class Village implements Serializable
         t.setSeller(seller);
         t.setPoints(points);
         t.setDescription(description);
+        isitin = true;
       }
     }
+    return isitin;
   }
 
   /**
