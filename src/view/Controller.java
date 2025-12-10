@@ -614,8 +614,13 @@ public class Controller
     if (!firstName.getText().equals("") && !lastName.getText().equals(""))
     {
       Villager villager = new Villager(first, last);
-      manager.addVillager(villager);
-      showAlert1(villager + "\nhas been added to the village");
+      if(manager.addVillager(villager)){
+        showAlert1(villager + "\nhas been added to the village");
+      }
+      else{
+        showAlert("Villager is already added!");
+      }
+
 
       initialize();
     }
@@ -1059,14 +1064,14 @@ public class Controller
     everything();
   }
 
-
-  @FXML public void addSharedTask() {
+  @FXML
+  public void addSharedTask() {
     String name = sharedTaskName.getText();
     int points;
+
     try {
-      points=  Integer.parseInt(pointsRequired.getText());
-    }  catch (NumberFormatException event) {
-      System.out.println("Points must be a NUMBER!");
+      points = Integer.parseInt(pointsRequired.getText());
+    } catch (NumberFormatException event) {
       alert.setHeaderText(null);
       alert.setTitle("Hoppá");
       alert.setContentText("Points must be a NUMBER and not EMPTY!");
@@ -1074,48 +1079,45 @@ public class Controller
       return;
     }
 
-    Village village = manager.getVillage();
-
-
-    SharedTask task = new SharedTask(name, points);
-    int j = 0;
-    for (int i = 0; i < manager.getSharedTasks().size(); i++) {
-
-      if (task.getTaskName().equals(manager.getSharedTasks().get(i).getTaskName()))
-        j++;
-    }
-
-
-    if (name.equals("")){
+    // negative numbers
+    if (points < 0) {
       alert.setHeaderText(null);
       alert.setTitle("Hoppá");
-      alert.setContentText("Name cant be empty");
+      alert.setContentText("Points cannot be negative!");
       alert.showAndWait();
       return;
-
     }
-    if (j == 0 && !name.equals("") ) {
+
+    // empty name
+    if (name.equals("")) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Name can't be empty");
+      alert.showAndWait();
+      return;
+    }
+
+    // same name
+    int duplicateCount = 0;
+    for (int i = 0; i < manager.getSharedTasks().size(); i++) {
+      if (name.equals(manager.getSharedTasks().get(i).getTaskName())) {
+        duplicateCount++;
+      }
+    }
+
+    // if unique
+    if (duplicateCount == 0) {
+      SharedTask task = new SharedTask(name, points);
       manager.addSharedTask(task);
     }
-
-
-
 
 
     loadSharedTasks();
     sharedTaskName.clear();
     pointsRequired.clear();
-
-
   }
-  @FXML public void updateSelectedTask(){
-    SharedTask task = (SharedTask) availableSharedTasks.getSelectionModel().getSelectedItem();
-    if (task == null) return;
-
-    sharedTaskName1.setText(availableSharedTasks.getSelectionModel().getSelectedItem().getTaskName());
-    pointsRequired1.setText(String.valueOf(availableSharedTasks.getSelectionModel().getSelectedItem().getPoints()));
-  }
-  @FXML public void updateSharedTask() {
+  @FXML
+  public void updateSharedTask() {
     SharedTask selectedTask = availableSharedTasks.getSelectionModel().getSelectedItem();
     if (selectedTask == null) {
       alert.setHeaderText(null);
@@ -1138,7 +1140,7 @@ public class Controller
     if (name.equals("")) {
       alert.setHeaderText(null);
       alert.setTitle("Hoppá");
-      alert.setContentText("Name cant be empty");
+      alert.setContentText("Name can't be empty");
       alert.showAndWait();
       return;
     }
@@ -1147,7 +1149,6 @@ public class Controller
     try {
       points = Integer.parseInt(pointsRequired1.getText());
     } catch (NumberFormatException event) {
-      System.out.println("Points must be a NUMBER!");
       alert.setHeaderText(null);
       alert.setTitle("Hoppá");
       alert.setContentText("Points must be a NUMBER and not EMPTY!");
@@ -1155,8 +1156,18 @@ public class Controller
       return;
     }
 
+  
+    if (points < 0) {
+      alert.setHeaderText(null);
+      alert.setTitle("Hoppá");
+      alert.setContentText("Points cannot be negative!");
+      alert.showAndWait();
+      return;
+    }
+
     Village village = manager.getVillage();
     ArrayList<SharedTask> tasks = village.getSharedTasks();
+
     SharedTask task = tasks.get(index);
     task.setTaskName(name);
     task.setPoints(points);
@@ -1167,6 +1178,7 @@ public class Controller
     sharedTaskName1.clear();
     pointsRequired1.clear();
   }
+
   @FXML public void removeSharedTask(){
     SharedTask selectedTask = availableSharedTasks.getSelectionModel().getSelectedItem();
     if (selectedTask == null) {

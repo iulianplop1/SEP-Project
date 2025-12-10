@@ -87,7 +87,7 @@ public class Village implements Serializable
    * check if villager is inside the ArrayList of villagers
    * if not --> add villager
    */
-  public void addVillager(Villager villager)
+  public boolean addVillager(Villager villager)
   {
     boolean in = false;
     for (Villager v : villagers)
@@ -100,7 +100,9 @@ public class Village implements Serializable
     if (!in)
     {
       villagers.add(villager);
+      return true;
     }
+    return false;
   }
   /**
    * removes villager (and it's associated trades through the removeTradesWithVillager() helper method) from village

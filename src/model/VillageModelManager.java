@@ -91,10 +91,14 @@ public class VillageModelManager
    * @param villager Village villager
    * calls Village.addVillager()
    */
-  public void addVillager(Villager villager) {
+  public boolean addVillager(Villager villager) {
+    boolean isitin = false;
     Village cloverville = getVillage();
-    cloverville.addVillager(villager);
+    if(cloverville.addVillager(villager)){
+      isitin = true;
+    }
     saveVillage(cloverville);
+    return isitin;
   }
 
   /**
@@ -183,13 +187,13 @@ public class VillageModelManager
       try {
         ArrayList<TradeOffer> list;
         try {
-          list = parser.fromJsonFile("website/json/tradesList.json", ArrayList.class);
+          list = parser.fromJsonFile("docs/json/tradesList.json", ArrayList.class);
         }
         catch (ParserException ex) {
           list = new ArrayList<>();
         }
         list.add(trade);
-        parser.toJsonFile(list, "website/json/tradesList.json");
+        parser.toJsonFile(list, "docs/json/tradesList.json");
         System.out.println("finished and saved to tradesList.json.");
       }
       catch (ParserException e) {
@@ -424,7 +428,7 @@ public class VillageModelManager
   public void loadGreenActivityListJson() {
     ArrayList<GreenActivity> greenActivityList = getActivities();
     try {
-      parser.toJsonFile(greenActivityList, "website/json/greenActivityList.json");
+      parser.toJsonFile(greenActivityList, "docs/json/greenActivityList.json");
       System.out.println("Green activity list written to JSON.");
       Village cloverville = getVillage();
       cloverville.getGreenActivities().clear();
@@ -443,7 +447,7 @@ public class VillageModelManager
     Village cloverville = getVillage();
     ArrayList<TradeOffer> tradesnopos = cloverville.copytradeswithoutpos();
     try {
-      parser.toJsonFile(tradesnopos, "website/json/tradesList.json");
+      parser.toJsonFile(tradesnopos, "docs/json/tradesList.json");
       System.out.println("Trade offers list written to JSON.");
     }
     catch (ParserException e) {
@@ -463,18 +467,18 @@ public class VillageModelManager
       XmlJsonParser parser = new XmlJsonParser();
       Village cloverville = getVillage();
       cloverville.finishGreenGoal(greenGoal);
-      System.out.println("website/json/greenGoalList.json");
+      System.out.println("docs/json/greenGoalList.json");
       saveVillage(cloverville);
       try {
         ArrayList<GreenGoal> list;
         try {
-          list = parser.fromJsonFile("website/json/greenGoalList.json", ArrayList.class);
+          list = parser.fromJsonFile("docs/json/greenGoalList.json", ArrayList.class);
         }
         catch (ParserException ex) {
           list = new ArrayList<>();
         }
         list.add(greenGoal);
-        parser.toJsonFile(list, "website/json/greenGoalList.json");
+        parser.toJsonFile(list, "docs/json/greenGoalList.json");
         System.out.println("Finished + saved updated JSON list.");
       }
       catch (ParserException e) {
@@ -489,7 +493,7 @@ public class VillageModelManager
   public void loadGreenGoalListJson() {
     ArrayList<GreenGoal> greenGoalList = getGoals();
     try {
-      parser.toJsonFile(greenGoalList, "website/json/greenGoalList.json");
+      parser.toJsonFile(greenGoalList, "docs/json/greenGoalList.json");
       System.out.println("Green goal list written to JSON.");
       Village cloverville = getVillage();
       cloverville.getGoals().clear();
@@ -517,7 +521,7 @@ public class VillageModelManager
           singleGoalList.add(allGoals.get(0));
         }
       }
-      parser.toJsonFile(singleGoalList, "website/json/SavedGreenGoalList.json");
+      parser.toJsonFile(singleGoalList, "docs/json/SavedGreenGoalList.json");
       Village cloverville = getVillage();
       cloverville.getGoals().clear();
       cloverville.getGoals().addAll(singleGoalList);
@@ -536,7 +540,7 @@ public class VillageModelManager
       String description = cloverville.getDescription();
       ArrayList<String> list = new ArrayList<>();
       list.add(description);
-      parser.toJsonFile(list, "website/json/VillageDescription.json");
+      parser.toJsonFile(list, "docs/json/VillageDescription.json");
       System.out.println("Village description written to JSON.");
     } catch (ParserException e) {
       e.printStackTrace();
@@ -552,7 +556,7 @@ public class VillageModelManager
       String greenpoints = String.valueOf(cloverville.getGreenpoints());
       ArrayList<String> list = new ArrayList<>();
       list.add(greenpoints);
-      parser.toJsonFile(list, "website/json/greenPoints.json");
+      parser.toJsonFile(list, "docs/json/greenPoints.json");
       System.out.println("Green points written to JSON.");
     } catch (ParserException e) {
       e.printStackTrace();
