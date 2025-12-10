@@ -4,7 +4,8 @@ body {
     background: beige;
     color: #1f2a1b;
     line-height: 1.6;
-    overflow-y: hidden;
+    overflow-x: hidden;
+
 }
 
 .topnav {
