@@ -867,7 +867,7 @@ public class Controller
                 showAlert1(toRemove + "\nhas been removed from the village!");
               }
               else{
-                showAlert1(toRemove + "\nis not in the list of trades!");
+                showAlert1( "trade is not in the list of trades!\n" + toRemove);
               }
             }
             else if(e.getSource()==updateTrade){

@@ -71,7 +71,7 @@ p {
      color: #4e7f4f; 
     }
 
-#BigQuote {
+.BigQuote {
      font-size: clamp(1.9rem, 3vw, 2.5rem);
       font-weight: 700; 
     }

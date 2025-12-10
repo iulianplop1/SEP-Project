@@ -1,15 +1,5 @@
 [
   {
-    "tradename": "world famous hungarian pálinka",
-    "points": 6,
-    "seller": {
-      "firstname": "Bátor",
-      "lastname": "Gábora",
-      "personalpoints": 104
-    },
-    "description": "brought from home"
-  },
-  {
     "tradename": "peanut butter jelly sandwich",
     "points": 35,
     "seller": {

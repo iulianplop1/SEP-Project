@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap');
+
+
+body {
+  background-color: beige;
+  margin: 0;
+}
+
 .topnav {
   position: relative;
   display: flex;
@@ -40,11 +48,6 @@
   white-space: nowrap;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Saira+Stencil+One&display=swap');
-body {
-    background-color: beige;
-    margin: 0;
-}
 .main{
   position: relative;
   height: 100vh;
