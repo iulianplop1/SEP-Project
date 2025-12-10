@@ -9,6 +9,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -359,7 +360,11 @@
                   <TextField fx:id="numberOfTrades" editable="false" layoutX="160.0" layoutY="255.0" prefHeight="26.0" prefWidth="61.0" />
                   <Text layoutX="15.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="date of reset:" />
                   <TextField fx:id="dateOfReset" editable="false" layoutX="160.0" layoutY="303.0" prefHeight="26.0" prefWidth="103.0" />
-                  <ImageView fx:id="viaImage" fitHeight="120.0" fitWidth="231.0" layoutX="370.0" layoutY="221.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fx:id="imageVIA" fitHeight="55.0" fitWidth="101.0" layoutX="492.0" layoutY="291.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../via.gif" />
+                     </image>
+                  </ImageView>
                </children>
             </AnchorPane>
         </content>

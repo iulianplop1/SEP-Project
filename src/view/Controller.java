@@ -100,8 +100,6 @@ public class Controller
   @FXML private TextField numberOfTrades;
   @FXML private TextField dateOfReset;
 
-  @FXML private ImageView imageVIA;
-
 
 
   Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -113,7 +111,6 @@ public class Controller
 
     everything();
     loadResetDay();
-    loadImage();
   }
   public void everything(){
     loadVillagerBox();
@@ -148,13 +145,6 @@ public class Controller
     searchBar.setPromptText("Search villager");
   }
 
-  @FXML public void loadImage(){
-    try {
-      imageVIA.setImage(new Image(getClass().getResourceAsStream(".../via.gif")));
-    } catch (NullPointerException e) {
-      System.err.println("via picture not loaded --> " + e.getMessage());
-    }
-  }
   @FXML public void loadGoals() {
     listGreenGoals.clear();
 
