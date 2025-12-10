@@ -1116,6 +1116,14 @@ public class Controller
     sharedTaskName.clear();
     pointsRequired.clear();
   }
+
+  @FXML public void updateSelectedTask(){
+    SharedTask task = (SharedTask) availableSharedTasks.getSelectionModel().getSelectedItem();
+    if (task == null) return;
+
+    sharedTaskName1.setText(availableSharedTasks.getSelectionModel().getSelectedItem().getTaskName());
+    pointsRequired1.setText(String.valueOf(availableSharedTasks.getSelectionModel().getSelectedItem().getPoints()));}
+
   @FXML
   public void updateSharedTask() {
     SharedTask selectedTask = availableSharedTasks.getSelectionModel().getSelectedItem();
@@ -1156,7 +1164,7 @@ public class Controller
       return;
     }
 
-  // ✨ Prevent negative numbers
+
     if (points < 0) {
       alert.setHeaderText(null);
       alert.setTitle("Hoppá");

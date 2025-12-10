@@ -86,11 +86,11 @@
                                           <content>
                                               <AnchorPane prefHeight="139.0" prefWidth="418.0">
                                                   <children>
-                                                      <TextField fx:id="sharedTaskName1" layoutX="238.0" layoutY="37.0" onAction="#updateSharedTask" />
+                                                      <TextField fx:id="sharedTaskName1" layoutX="238.0" layoutY="37.0" onAction="#updateSelectedTask" />
                                                       <TextField fx:id="pointsRequired1" layoutX="238.0" layoutY="74.0" />
                                                       <Text layoutX="33.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Task Name" />
                                                       <Text layoutX="33.0" layoutY="91.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Points Required" />
-                                                      <ComboBox fx:id="availableSharedTasks" layoutX="238.0" layoutY="1.0" onAction="#updateSharedTask" prefWidth="150.0" />
+                                                      <ComboBox fx:id="availableSharedTasks" layoutX="238.0" layoutY="1.0" onAction="#updateSelectedTask" prefWidth="150.0" />
                                                       <Text layoutX="33.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Shared Task" />
                                                       <Button fx:id="updateSharedTaskButton" layoutX="238.0" layoutY="116.0" mnemonicParsing="false" onAction="#updateSharedTask" prefHeight="25.0" prefWidth="148.0" text="Update" />
                                                       <Button fx:id="removeSharedTask" layoutX="33.0" layoutY="116.0" mnemonicParsing="false" onAction="#removeSharedTask" prefHeight="25.0" prefWidth="148.0" text="Remove" />
