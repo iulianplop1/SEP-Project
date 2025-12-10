@@ -141,6 +141,9 @@ public class cloverTest
     GreenActivity activity10 = new GreenActivity("avoiding single-use plastics", 30);
     GreenActivity activity11 = new GreenActivity("buying local produce", 20);
     GreenActivity activity12 = new GreenActivity("participating in clean-up drives", 50);
+    Date date1=new Date(1,12,2025);
+    GreenActivity activity13 = new GreenActivity("Test", 50,date1);
+
     cloverville.addGreenActivity(activity1);
     cloverville.addGreenActivity(activity2);
     cloverville.addGreenActivity(activity3);
@@ -153,6 +156,8 @@ public class cloverTest
     cloverville.addGreenActivity(activity10);
     cloverville.addGreenActivity(activity11);
     cloverville.addGreenActivity(activity12);
+    cloverville.addGreenActivity(activity13);
+
 
     SharedTask sharedtask1 = new SharedTask("cleaning grupperoom", 300);
     SharedTask sharedtask2 = new SharedTask("cooking dinner", 500);

@@ -1,16 +1,54 @@
-    fetch('json/greenActivityList.json')
+fetch('json/greenActivityList.json')
     .then(response => response.json())
     .then(data => {
         const activityList = document.querySelector('.activity-list');
+        const now = new Date();
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(now.getDate() - 7);
 
         data.forEach(activity => {
+            const { day, month, year } = activity.date;
+            const activityDate = new Date(year, month - 1, day);
+
+            if (activityDate < sevenDaysAgo) return;
+
+            let isDuplicate = false;
+            const items = activityList.querySelectorAll('.activity-item');
+
+            for (let i = 0; i < items.length; i++) {
+                const item = items[i];
+
+                const itemDay = parseInt(item.dataset.day);
+                const itemMonth = parseInt(item.dataset.month);
+                const itemYear = parseInt(item.dataset.year);
+
+                if (itemDay === day && itemMonth === month && itemYear === year) {
+                    if (item.dataset.name === activity.activityName) {
+                        isDuplicate = true;
+                        break;  
+                    }
+                }
+            }
+
+            // Skip if duplicate found
+            if (isDuplicate) return;
+
+            // --- ADD NEW ITEM ---
             const p = document.createElement("p");
             p.textContent = activity.activityName;
-            p.classList.add('activity-item'); // optional: for extra styling
+            p.classList.add('activity-item');
+
+            // Store name/date for future checks
+            p.dataset.name = activity.activityName;
+            p.dataset.day = day;
+            p.dataset.month = month;
+            p.dataset.year = year;
+
             activityList.appendChild(p);
         });
     })
     .catch(error => console.error('Error fetching JSON:', error));
+
 
 
 

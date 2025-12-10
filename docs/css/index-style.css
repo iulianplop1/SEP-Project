@@ -7,7 +7,7 @@
   justify-content: center; /* center the links */
   gap: 12px;
   flex-wrap: wrap;
-  padding: 14px 22px 14px 140px; /* extra left padding so links don’t overlap brand */
+  padding: 4px 2px 4px 110px; /* extra left padding so links don’t overlap brand */
   background: beige;
   border-bottom: 1px solid #235d2a;
   top: 0;

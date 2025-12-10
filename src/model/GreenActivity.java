@@ -1,7 +1,9 @@
 package model;
 
 import java.io.Serializable;
-
+/**
+ *  Class for modifying the GreenGoal class
+ */
 public class GreenActivity implements Serializable
 {
   private String activityName;
