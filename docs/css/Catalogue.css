@@ -4,6 +4,7 @@
 body {
   background-color: beige;
   margin: 0;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
 .topnav {
@@ -18,7 +19,6 @@ body {
   border-bottom: 1px solid #235d2a;
   top: 0;
   z-index: 10;
-   font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
    
 }
 .topnav a {
@@ -97,7 +97,6 @@ h1{
 
 .activity-container {
     text-align: center;             
-    font-family: 'Arial', sans-serif;
     background-color: beige;        
     padding: 5vh 2vw;               
     width: 96%;

@@ -247,19 +247,20 @@ public class Village implements Serializable
    */
   public boolean removeTradeOffer(TradeOffer tradeOffer)
   {
-    boolean in = false;
-    for (TradeOffer t : trades)
-    {
-      if (t.equals(tradeOffer))
-        in = true;
-    }
-    if (in){
-      trades.remove(tradeOffer);
-      return true;
-    }
-    else{
-      return false;
-    }
+//    boolean in = false;
+//    for (TradeOffer t : trades)
+//    {
+//      if (t.equals(tradeOffer))
+//        in = true;
+//    }
+//    if (in){
+//      trades.remove(tradeOffer);
+//      return true;
+//    }
+//    else{
+//      return false;
+//    }
+    return trades.remove(tradeOffer);
   }
 
   /**

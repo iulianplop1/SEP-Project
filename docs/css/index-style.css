@@ -12,6 +12,7 @@
   border-bottom: 1px solid #235d2a;
   top: 0;
   z-index: 10;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 /* Style the links inside the navigation bar */
 .topnav a {
