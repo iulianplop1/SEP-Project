@@ -652,7 +652,7 @@ public class Controller
             String newFirstName = firstName1.getText();
             String newLastName = lastName1.getText();
             int newPoints = Integer.parseInt(personalPoints.getText());
-            if(newPoints > 0){
+            if(newPoints >= 0){
               Villager newVillager = new Villager(newFirstName, newLastName, newPoints);
               showAlert1(selectedVillager + "\nhas been changed to\n" + newVillager);
 
@@ -684,7 +684,7 @@ public class Controller
         String first = firstName1.getText();
         String last = lastName1.getText();
         int points = Integer.parseInt(personalPoints.getText());
-        if(points > 0){
+        if(points >= 0){
           Villager villager = new Villager(first, last, points);
           if(manager.removeVillager(villager)){
             showAlert1(villager + "\nhas been removed from village");
@@ -809,7 +809,7 @@ public class Controller
         String tradename = tradeName.getText();
         int requiredpoints = Integer.parseInt(tradeRequiredPoints.getText());
         String description = tradeDescription.getText();
-        if(requiredpoints > 0){
+        if(requiredpoints >= 0){
           TradeOffer trade = new TradeOffer(seller, tradename, requiredpoints, description);
           System.out.println("ADDING TRADE --> " + trade);
 
@@ -860,7 +860,7 @@ public class Controller
           String editedTradeName = tradeNameEdit.getText();
           int editedPoints = Integer.parseInt(tradeRequiredPointsEdit.getText());
           String editedDescription = tradeDescriptionEdit.getText();
-          if(editedPoints > 0){
+          if(editedPoints >= 0){
             if(e.getSource()==removeTrade){
               TradeOffer toRemove = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
               if (manager.removeTrade(toRemove)){
