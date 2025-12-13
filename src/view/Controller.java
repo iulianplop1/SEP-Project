@@ -625,7 +625,7 @@ public class Controller
       initialize();
     }
     else {
-      showAlert("Please enter a first name and alast name to add villager");
+      showAlert("Please enter a first name and a last name to add villager");
     }
   }
   @FXML public void editVillager(ActionEvent e) {
