@@ -607,7 +607,7 @@ public class Controller
             initialize();
         }
         catch (NumberFormatException e) {
-            showAlert("Please enter a valid number for the reset day.");
+            showAlert("Please enter a valid number for the reset day");
         }
     }
   @FXML public void resetNow() {
