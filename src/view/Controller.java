@@ -596,11 +596,20 @@ public class Controller
     manager.saveVillage(cloverville);
     everything();
   }
-  @FXML public void saveResetDay() {
-    int days = Integer.parseInt(resetDayEdit.getText());
-    manager.addResetDay(days);
-    initialize();
-  }
+    @FXML public void saveResetDay() {
+        try {
+            int days = Integer.parseInt(resetDayEdit.getText());
+            if (days < 0) {
+                showAlert("Reset day cannot be negative.");
+                return;
+            }
+            manager.addResetDay(days);
+            initialize();
+        }
+        catch (NumberFormatException e) {
+            showAlert("Please enter a valid number for the reset day.");
+        }
+    }
   @FXML public void resetNow() {
     manager.resetNow();
     initialize();
@@ -608,8 +617,8 @@ public class Controller
 
 
   @FXML public void addVillager() {
-    String first = firstName.getText();
-    String last = lastName.getText();
+    String first = firstName.getText().trim();
+    String last = lastName.getText().trim();
 
     if (!firstName.getText().equals("") && !lastName.getText().equals(""))
     {
