@@ -422,13 +422,13 @@ public class VillageModelManager
       try {
         ArrayList<GreenActivity> list;
         try {
-          list = parser.fromJsonFile("website/json/greenActivityList.json", ArrayList.class);
+          list = parser.fromJsonFile("docs/json/greenActivityList.json", ArrayList.class);
         }
         catch (ParserException ex) {
           list = new ArrayList<>();
         }
         list.add(greenActivity);
-        parser.toJsonFile(list, "website/json/greenActivityList.json");
+        parser.toJsonFile(list, "docs/json/greenActivityList.json");
         System.out.println("Finished + saved updated JSON list.");
       }
       catch (ParserException e) {
@@ -525,26 +525,26 @@ public class VillageModelManager
    * Method puts in a JSON file just the active GreenGoal
    * @param activeGoal the GreenGoal to save
    */
-  public void loadSavedGreenGoalJson(GreenGoal activeGoal) {
+  public void loadSavedGreenGoalJson(GreenGoal activeGoal)
+  {
     try {
       ArrayList<GreenGoal> singleGoalList = new ArrayList<>();
+
       if (activeGoal != null) {
         singleGoalList.add(activeGoal);
       } else {
-        ArrayList<GreenGoal> allGoals = getGoals();
-        if (!allGoals.isEmpty()) {
-          singleGoalList.add(allGoals.get(0));
-        }
+        return;
       }
+
       parser.toJsonFile(singleGoalList, "docs/json/SavedGreenGoalList.json");
       Village cloverville = getVillage();
-      cloverville.getGoals().clear();
-      cloverville.getGoals().addAll(singleGoalList);
-      System.out.println("Green goal loaded: " + (singleGoalList.isEmpty() ? "none" : singleGoalList.get(0).getGoalName()));
+      cloverville.setActiveGreenGoal(activeGoal);
+
     } catch (ParserException e) {
       e.printStackTrace();
     }
   }
+
 
   /**
    * LoadsVillage Description to JSON

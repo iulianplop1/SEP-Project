@@ -9,7 +9,7 @@
     }
   },
   {
-    "activityName": "biodegradable kitchen waste",
+    "activityName": "eating vegan for a\nweek",
     "points": 40,
     "date": {
       "day": 16,
@@ -18,7 +18,7 @@
     }
   },
   {
-    "activityName": "planting trees",
+    "activityName": "switching to energy-efficient lighting,",
     "points": 30,
     "date": {
       "day": 16,
@@ -108,10 +108,19 @@
     }
   },
   {
-    "activityName": "Test",
+    "activityName": "installing solar panels at home",
     "points": 50,
     "date": {
       "day": 1,
+      "month": 12,
+      "year": 2025
+    }
+  },
+  {
+    "activityName": "dsadfdsfsdf",
+    "points": 444,
+    "date": {
+      "day": 16,
       "month": 12,
       "year": 2025
     }
