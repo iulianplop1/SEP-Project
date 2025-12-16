@@ -96,11 +96,11 @@ public class cloverTest
     cloverville.addVillager(villager41);
     cloverville.addVillager(villager42);
 
-    TradeOffer trade1 = new TradeOffer(villager3, "world famous hungarian pálinka", 67, "brought from home");
-    TradeOffer trade2 = new TradeOffer(villager4, "peanut butter jelly sandwich", 35, "yum yum");
-    TradeOffer trade3 = new TradeOffer(villager3, "carrots", 35, "collected from the field");
-    TradeOffer trade4 = new TradeOffer(villager3, "pears", 67, "a bit ripe");
-    TradeOffer trade5 = new TradeOffer(villager1, "freshly baked bread", 25, "just made this morning");
+    TradeOffer trade1 = new TradeOffer(villager3, "windows cleaned", 67, "cheap service");
+    TradeOffer trade2 = new TradeOffer(villager4, "mend goods or services", 35, "fixing stuff for you");
+    TradeOffer trade3 = new TradeOffer(villager3, "guided meditation", 35, "chill guided relaxation session");
+    TradeOffer trade4 = new TradeOffer(villager3, "carrots ", 67, "a bit ripe");
+    TradeOffer trade5 = new TradeOffer(villager1, "compost bin", 25, "just made this morning");
     TradeOffer trade6 = new TradeOffer(villager1, "homemade wooden spoon", 40, "crafted with care");
     TradeOffer trade7 = new TradeOffer(villager3, "basket of apples", 30, "picked from the village orchard");
     TradeOffer trade8 = new TradeOffer(villager3, "hand-knitted scarf", 55, "keeps you warm in winter");
@@ -130,8 +130,8 @@ public class cloverTest
     cloverville.addTradeOffer(trade16);
 
     GreenActivity activity1 = new GreenActivity("cycling to work", 50);
-    GreenActivity activity2 = new GreenActivity("biodegradable kitchen waste", 40);
-    GreenActivity activity3 = new GreenActivity("planting trees", 30);
+    GreenActivity activity2 = new GreenActivity("eating vegan for a\n" + "week", 40);
+    GreenActivity activity3 = new GreenActivity("switching to energy-efficient lighting,", 30);
     GreenActivity activity4 = new GreenActivity("using public transport", 20);
     GreenActivity activity5 = new GreenActivity("recycling plastic bottles", 25);
     GreenActivity activity6 = new GreenActivity("composting garden waste", 35);
@@ -142,7 +142,7 @@ public class cloverTest
     GreenActivity activity11 = new GreenActivity("buying local produce", 20);
     GreenActivity activity12 = new GreenActivity("participating in clean-up drives", 50);
     Date date1=new Date(1,12,2025);
-    GreenActivity activity13 = new GreenActivity("Test", 50,date1);
+    GreenActivity activity13 = new GreenActivity("installing solar panels at home", 50,date1);
 
     cloverville.addGreenActivity(activity1);
     cloverville.addGreenActivity(activity2);
@@ -159,10 +159,10 @@ public class cloverTest
     cloverville.addGreenActivity(activity13);
 
 
-    SharedTask sharedtask1 = new SharedTask("cleaning grupperoom", 300);
-    SharedTask sharedtask2 = new SharedTask("cooking dinner", 500);
-    SharedTask sharedtask3 = new SharedTask("watering plants", 150);
-    SharedTask sharedtask4 = new SharedTask("taking out trash", 200);
+    SharedTask sharedtask1 = new SharedTask("preparing food for communal\n" + "dinners", 300);
+    SharedTask sharedtask2 = new SharedTask("tidying the workshop", 500);
+    SharedTask sharedtask3 = new SharedTask("taking care of the shared outdoor areas", 150);
+    SharedTask sharedtask4 = new SharedTask("garden duties", 200);
     SharedTask sharedtask5 = new SharedTask("organizing books", 250);
     SharedTask sharedtask6 = new SharedTask("washing dishes", 180);
     SharedTask sharedtask7 = new SharedTask("cleaning windows", 220);
@@ -181,8 +181,8 @@ public class cloverTest
     cloverville.addSharedTask(sharedtask10);
 
     GreenGoal goal1 = new GreenGoal("pizza night", 1500, "yeaaah");
-    GreenGoal goal2 = new GreenGoal("4 electric bikes", 10000, "eco ride");
-    GreenGoal goal3 = new GreenGoal("solar panel for the gym", 5000, "sun power");
+    GreenGoal goal2 = new GreenGoal("rainwater collector", 10000, "collects rainwater");
+    GreenGoal goal3 = new GreenGoal("new communal wheelbarrow", 5000, "shared community tool");
     GreenGoal goal4 = new GreenGoal("flowers community garden", 1800, "green thumb");
     GreenGoal goal5 = new GreenGoal("compost bin", 2500, "reduce waste");
     GreenGoal goal6 = new GreenGoal("rainwater harvesting barrel", 2000, "save water");

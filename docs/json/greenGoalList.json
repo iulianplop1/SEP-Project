@@ -6,13 +6,13 @@
   },
   {
     "requiredPoints": 10000,
-    "goalName": "4 electric bikes",
-    "greenDescriptions": "eco ride"
+    "goalName": "rainwater collector",
+    "greenDescriptions": "collects rainwater"
   },
   {
     "requiredPoints": 5000,
-    "goalName": "solar panel for the gym",
-    "greenDescriptions": "sun power"
+    "goalName": "new communal wheelbarrow",
+    "greenDescriptions": "shared community tool"
   },
   {
     "requiredPoints": 1800,
@@ -43,5 +43,15 @@
     "requiredPoints": 4000,
     "goalName": "reusable tote bags for everyone",
     "greenDescriptions": "less plastic"
+  },
+  {
+    "requiredPoints": 432432,
+    "goalName": "cxzcx",
+    "greenDescriptions": "fdsfsd"
+  },
+  {
+    "requiredPoints": 432432,
+    "goalName": "cxzcxfdsfds",
+    "greenDescriptions": "fdsfsd"
   }
 ]
