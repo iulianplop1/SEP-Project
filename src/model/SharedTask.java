@@ -110,9 +110,7 @@ public class SharedTask implements Serializable {
   }
 
 
-  public SharedTask copy() {
-    return new SharedTask(taskName, points);
-  }
+
 
 
 
