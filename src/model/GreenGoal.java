@@ -100,10 +100,5 @@ public class GreenGoal implements Serializable
     return ""+goalName+" ["+ requiredPoints + "]" + greenDescriptions;
   }
 
-
-  public GreenGoal copy()
-  {
-    return new GreenGoal(goalName, requiredPoints, greenDescriptions);
-  }
 }
 
