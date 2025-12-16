@@ -6,13 +6,13 @@
   },
   {
     "requiredPoints": 10000,
-    "goalName": "rainwater collector",
-    "greenDescriptions": "collects rainwater"
+    "goalName": "4 electric bikes",
+    "greenDescriptions": "eco ride"
   },
   {
     "requiredPoints": 5000,
-    "goalName": "new communal wheelbarrow",
-    "greenDescriptions": "shared community tool"
+    "goalName": "solar panel for the gym",
+    "greenDescriptions": "sun power"
   },
   {
     "requiredPoints": 1800,

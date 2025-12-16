@@ -1,36 +1,36 @@
 [
   {
-    "tradename": "windows cleaned",
+    "tradename": "world famous hungarian pálinka",
     "points": 67,
     "seller": {
       "firstname": "Arsenie",
       "lastname": "Bilba",
       "personalpoints": 120
     },
-    "description": "cheap service"
+    "description": "brought from home"
   },
   {
-    "tradename": "mend goods or services",
+    "tradename": "peanut butter jelly sandwich",
     "points": 35,
     "seller": {
       "firstname": "Iulian",
       "lastname": "Plop",
       "personalpoints": 111
     },
-    "description": "fixing stuff for you"
+    "description": "yum yum"
   },
   {
-    "tradename": "guided meditation",
+    "tradename": "carrots",
     "points": 35,
     "seller": {
       "firstname": "Arsenie",
       "lastname": "Bilba",
       "personalpoints": 120
     },
-    "description": "chill guided relaxation session"
+    "description": "collected from the field"
   },
   {
-    "tradename": "carrots ",
+    "tradename": "pears",
     "points": 67,
     "seller": {
       "firstname": "Arsenie",
@@ -40,7 +40,7 @@
     "description": "a bit ripe"
   },
   {
-    "tradename": "compost bin",
+    "tradename": "freshly baked bread",
     "points": 25,
     "seller": {
       "firstname": "Bátor",
