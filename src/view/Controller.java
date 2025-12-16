@@ -282,7 +282,7 @@ public class Controller
 
     listTrades.setEditable(false);
   }
-  @FXML public void loadVillagerBox() {
+  public void loadVillagerBox() {
     chooseVillagers.getItems().clear();
 
     ArrayList<Villager> villagers = manager.getVillagers();
