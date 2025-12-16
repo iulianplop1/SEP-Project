@@ -130,7 +130,16 @@ public class TradeOffer implements Serializable {
    */
   public String toString()
   {
-    return tradename +  " '" + description + "' [" + points + "] by " + seller;
+//    return tradename +  " '" + description + "' [" + points + "] by " + seller;
+    return new StringBuilder()
+        .append(tradename)
+        .append(" '")
+        .append(description)
+        .append("' [")
+        .append(points)
+        .append("] by ")
+        .append(seller)
+        .toString();
   }
 
   /**

@@ -252,6 +252,7 @@ public class Village implements Serializable
 //    {
 //      if (t.equals(tradeOffer))
 //        in = true;
+//        break;
 //    }
 //    if (in){
 //      trades.remove(tradeOffer);
