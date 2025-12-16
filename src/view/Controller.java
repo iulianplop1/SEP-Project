@@ -102,7 +102,7 @@ public class Controller
 
 
 
-  Alert alert = new Alert(Alert.AlertType.INFORMATION);
+  private Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
   private VillageModelManager manager = new VillageModelManager("village.bin");
 
@@ -882,7 +882,7 @@ public class Controller
             else if(e.getSource()==updateTrade){
               TradeOffer newTrade = new TradeOffer(editedSeller, editedTradeName, editedPoints, editedDescription);
               if(manager.changeTrade(selectedTrade, newTrade)){
-                showAlert(selectedTrade + "\nhas been changed to\n" + newTrade);
+                showAlert1(selectedTrade + "\nhas been changed to\n" + newTrade);
               }
               else{
                 showAlert1(selectedTrade + "\nis not in the list of trades!");
