@@ -3,7 +3,9 @@ package utils;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
+/**
+ *  Class for writing and reading from files
+ */
 public class MyFileHandler
 {
   // Writes the given object to a file with the given file name

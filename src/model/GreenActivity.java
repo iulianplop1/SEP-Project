@@ -1,9 +1,12 @@
-package model;
 
+package model;
 import java.io.Serializable;
+
 /**
- *  Class for modifying the GreenGoal class
+ *  Class for modifying the Green Activities class
  */
+
+
 public class GreenActivity implements Serializable
 {
   private String activityName;

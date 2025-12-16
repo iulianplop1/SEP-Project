@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import parser.XmlJsonParser;
 import parser.ParserException;
 
-
-
+/**
+ *  Class for modifying village by adding villagers , shared tasks , trades ,green activites and modifying them
+ */
 public class VillageModelManager
 {
   private String fileName;
