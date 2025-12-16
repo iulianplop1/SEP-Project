@@ -8,6 +8,9 @@ import model.*;
 import javafx.event.*;
 
 import java.util.ArrayList;
+/**
+ *  Class for modifying the functionality of the GUI
+ */
 
 public class Controller
 {
