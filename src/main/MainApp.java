@@ -1,4 +1,4 @@
-package view;
+package main;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -36,6 +36,7 @@ public class MainApp extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+      LoadInitialData.main(args);
+      launch(args);
     }
 }
