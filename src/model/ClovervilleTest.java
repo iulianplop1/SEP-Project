@@ -4,6 +4,9 @@ public class ClovervilleTest
 {
   public static void main(String[] args)
   {
+    // This class is not strictly required.
+    // It is used only if the binary file cannot be loaded (we had this error when pulling from GitHub and we didn't know if WiseFlow has the same problem or not).
+    // In that case, run this class once to generate the data, and then MainApp will work normally.
     System.out.println("\nCLOVERVILLE");
     Village cloverville = new Village();
     Villager villager1= new Villager("Bátor", "Gábora", 104);

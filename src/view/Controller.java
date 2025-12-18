@@ -801,7 +801,6 @@ public class Controller
             + " green points");
     showAlert1("Green Goal '" + selectedGreenGoal.getGoalName()
         + "' has been completed.");
-    showAlert1("Select new green goal in settings!");
   }
 
   public void addTadeOffer() {
@@ -1346,7 +1345,6 @@ public class Controller
     village.setActiveGreenGoal(selectedGoal);
     manager.saveVillage(village);
     manager.loadSavedGreenGoalJson(selectedGoal);
-    manager.finishGreenGoal(selectedGoal);
     everything();
 
     showAlert("Green goal '" + selectedGoal.getGoalName() + "' is now active.");

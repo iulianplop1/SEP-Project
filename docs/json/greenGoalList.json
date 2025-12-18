@@ -1,28 +1,13 @@
 [
   {
-    "requiredPoints": 1500,
-    "goalName": "pizza night",
-    "greenDescriptions": "yeaaah"
-  },
-  {
-    "requiredPoints": 10000,
-    "goalName": "4 electric bikes",
+    "requiredPoints": 100004324,
+    "goalName": "4 electric bifdsfdsfd",
     "greenDescriptions": "eco ride"
-  },
-  {
-    "requiredPoints": 5000,
-    "goalName": "solar panel for the gym",
-    "greenDescriptions": "sun power"
   },
   {
     "requiredPoints": 1800,
     "goalName": "flowers community garden",
     "greenDescriptions": "green thumb"
-  },
-  {
-    "requiredPoints": 2500,
-    "goalName": "compost bin",
-    "greenDescriptions": "reduce waste"
   },
   {
     "requiredPoints": 2000,
@@ -43,5 +28,10 @@
     "requiredPoints": 4000,
     "goalName": "reusable tote bags for everyone",
     "greenDescriptions": "less plastic"
+  },
+  {
+    "requiredPoints": 432432,
+    "goalName": "432432",
+    "greenDescriptions": "fdsf"
   }
 ]
