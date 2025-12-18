@@ -140,7 +140,7 @@ public class ClovervilleTest
     GreenActivity activity11 = new GreenActivity("buying local produce", 20);
     GreenActivity activity12 = new GreenActivity("participating in clean-up drives", 50);
     Date date1=new Date(1,10,2025);
-    GreenActivity activity13 = new GreenActivity("Test", 50,date1);
+    GreenActivity activity13 = new GreenActivity("Installing Solar Panels", 50,date1);
 
     cloverville.addGreenActivity(activity1);
     cloverville.addGreenActivity(activity2);

@@ -1,13 +1,23 @@
 [
   {
     "tradename": "world famous hungarian pálinka",
-    "points": 432432,
+    "points": 67,
     "seller": {
-      "firstname": "Bátor",
-      "lastname": "Gábora",
-      "personalpoints": 104
+      "firstname": "Arsenie",
+      "lastname": "Bilba",
+      "personalpoints": 120
     },
     "description": "brought from home"
+  },
+  {
+    "tradename": "peanut butter jelly sandwich",
+    "points": 35,
+    "seller": {
+      "firstname": "Iulian",
+      "lastname": "Plop",
+      "personalpoints": 111
+    },
+    "description": "yum yum"
   },
   {
     "tradename": "carrots",
@@ -15,7 +25,7 @@
     "seller": {
       "firstname": "Arsenie",
       "lastname": "Bilba",
-      "personalpoints": 0
+      "personalpoints": 120
     },
     "description": "collected from the field"
   },
@@ -25,7 +35,7 @@
     "seller": {
       "firstname": "Arsenie",
       "lastname": "Bilba",
-      "personalpoints": 0
+      "personalpoints": 120
     },
     "description": "a bit ripe"
   },
@@ -35,7 +45,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 0
+      "personalpoints": 104
     },
     "description": "just made this morning"
   },
@@ -45,7 +55,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 0
+      "personalpoints": 104
     },
     "description": "crafted with care"
   },
@@ -55,7 +65,7 @@
     "seller": {
       "firstname": "Arsenie",
       "lastname": "Bilba",
-      "personalpoints": 0
+      "personalpoints": 120
     },
     "description": "picked from the village orchard"
   },
@@ -65,7 +75,7 @@
     "seller": {
       "firstname": "Arsenie",
       "lastname": "Bilba",
-      "personalpoints": 0
+      "personalpoints": 120
     },
     "description": "keeps you warm in winter"
   },
@@ -75,7 +85,7 @@
     "seller": {
       "firstname": "Mike",
       "lastname": "Lorenzen",
-      "personalpoints": 0
+      "personalpoints": 105
     },
     "description": "harvested from local hives"
   },
@@ -85,7 +95,7 @@
     "seller": {
       "firstname": "Iulian",
       "lastname": "Plop",
-      "personalpoints": 0
+      "personalpoints": 111
     },
     "description": "handmade for cold winters"
   },
@@ -95,7 +105,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 0
+      "personalpoints": 104
     },
     "description": "passed down from family"
   },
@@ -105,7 +115,7 @@
     "seller": {
       "firstname": "Mike",
       "lastname": "Lorenzen",
-      "personalpoints": 0
+      "personalpoints": 105
     },
     "description": "perfectly dried"
   },
@@ -115,7 +125,7 @@
     "seller": {
       "firstname": "Arsenie",
       "lastname": "Bilba",
-      "personalpoints": 0
+      "personalpoints": 120
     },
     "description": "made from rare mountain herbs"
   },
@@ -125,7 +135,7 @@
     "seller": {
       "firstname": "Iulian",
       "lastname": "Plop",
-      "personalpoints": 0
+      "personalpoints": 111
     },
     "description": "great for journaling"
   },
@@ -135,7 +145,7 @@
     "seller": {
       "firstname": "Bátor",
       "lastname": "Gábora",
-      "personalpoints": 0
+      "personalpoints": 104
     },
     "description": "includes gloves, trowel, etc."
   },
@@ -145,7 +155,7 @@
     "seller": {
       "firstname": "Mike",
       "lastname": "Lorenzen",
-      "personalpoints": 0
+      "personalpoints": 105
     },
     "description": "fired in my home kiln"
   }
