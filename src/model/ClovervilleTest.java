@@ -1,5 +1,5 @@
 package model;
-
+//This class
 public class ClovervilleTest
 {
   public static void main(String[] args)

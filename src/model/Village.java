@@ -343,6 +343,10 @@ public class Village implements Serializable
     for(int i = 0; i < villagers.size(); i++){
       sum += villagers.get(i).getPoints();
     }
+
+
+
+
     return Math.round(sum/villagers.size());
   }
   /**
